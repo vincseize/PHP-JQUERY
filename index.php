@@ -12,7 +12,7 @@ echo $host;
 
     <head>
 
-<title>.<?php echo TITLE_SITE;?></title>
+<title><?php echo TITLE_SITE;?></title>
 
 
         <meta charset="utf-8">
