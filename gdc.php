@@ -358,11 +358,8 @@ $images = getImages($directoryBIG,$directoryLOW,$dirVillageAttaque);
 $n_images = count($images);
 
 
+	// SCRIPTS JS
 
-
-// SCRIPTS JS
-
-include("js/script_select_battles_restantes.js");
 
 
 /*
@@ -396,6 +393,10 @@ echo "</script>";
 
 ?>
 
+
+
+
+<?php include("js/script_select_battles_restantes.js"); ?>
 
 
 
@@ -439,7 +440,7 @@ echo "</script>";
       
     </div>
 
-    <div name="navbarGDC" id="navbarGDC" style="margin: 0px; padding: 0px; position: absolute; left: 150px; top: 0px; width: 660px; height: 50px;z-index: 30000; background-color: #202020;display:block:"></div>
+    <div name="navbarGDC" id="navbarGDC" style="margin: 0px; padding: 0px; position: absolute; left: 150px; top: 0px; width: 660px; height: 50px;z-index: 30000; background-color: #202020;display:block;"></div>
 
 
 

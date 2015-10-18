@@ -1,11 +1,5 @@
 <script type='text/javascript'>
 
-/*function go_anchor(a){
-	$( ".navbarGDC" ).show();
-
-}*/
-
-
 function show_navbar(){
 	$( "#TOP_navbarGDC" ).show();
 }
@@ -161,17 +155,6 @@ function resetBattle(e){
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

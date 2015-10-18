@@ -139,7 +139,7 @@ body {
     bottom: 0px;
     /*left: 0px;*/
     right: 0px;
-    width:23%%;
+    width:23%;
     height: 42px;
     padding:2px;  
     /*background-color: #222;*/

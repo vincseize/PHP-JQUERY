@@ -53,7 +53,9 @@ echo $host;
 
 
 
-<script type="text/javascript"><!--
+<script type="text/javascript">
+			
+		
 
 
 
@@ -62,106 +64,106 @@ echo $host;
 
 
 
-$(document).ready(function () {  
+			$(document).ready(function () {  
 
 
 
-        $('.loadMenu').click(function(event) {
-          $("#content").load($(this).attr('href')); //load the data
-          event.preventDefault(); // prevent the browser from following the link
-        });
+					$('.loadMenu').click(function(event) {
+					  $("#content").load($(this).attr('href')); //load the data
+					  event.preventDefault(); // prevent the browser from following the link
+					});
 
-        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-            // alert('toto');
-            // gdc.php?X='+widthScreen+'&Y='+heightScreen+'
-/*            var widthScreen = window.screen.width; 
-            var heightScreen = window.screen.height;*/
-            document.location.href = 'gdc.php?X='+widthScreen+'&Y='+heightScreen;
-        }
-
-
-});
+					if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+						// alert('toto');
+						// gdc.php?X='+widthScreen+'&Y='+heightScreen+'
+			/*            var widthScreen = window.screen.width; 
+						var heightScreen = window.screen.height;*/
+						document.location.href = 'gdc.php?X='+widthScreen+'&Y='+heightScreen;
+					}
 
 
-
-
-function changeUInavbarGDC(page){ 
-
-$('#contentAdmin').hide();
-$('footer').hide();
-
-$('#content').show();
-$('#content').load(page); 
-
-$('#divLoading').show();
-
-$('#homeButton').css('background-color','#202020');
-$('#homeSIMU').css('background-color','#202020');
-$('#menuGDC').css('background-color','#19355E');
-
-
-
-}
-
-
-
-function changeUInavbarSIMU(page){ 
-
-$('#contentAdmin').hide();
-$('footer').hide();
-
-$('#content').show();
-$('#content').load(page); 
-
-$('#divLoading').show();
-
-$('#homeButton').css('background-color','#202020');
-$('#homeSIMU').css('background-color','#19355E');
-$('#menuGDC').css('background-color','#202020');
-
-
-
-}
-
-
-function changeUInavbarAdmin_1(page){ 
-
-$('#content').hide();$('#contentAdmin').show();
-$('footer').hide();
-
-$('#contentAdmin').load(page);
-
-$('#divLoading').show();
-
-$('#homeButton').css('background-color','#202020');
-$('#homeSIMU').css('background-color','#202020');
-$('#menuGDC').css('background-color','#202020');
-
-}
-
-
-
-function changeUInavbarAdmin_2(page){ 
-
-$('#content').hide();$('#contentAdmin').show();
-$('footer').hide();
-
-$('#contentAdmin').load(page);
-
-$('#divLoading').show();
-
-$('#homeButton').css('background-color','#202020');
-$('#homeSIMU').css('background-color','#202020');
-$('#menuGDC').css('background-color','#202020');
-
-}
+			});
 
 
 
 
+			function changeUInavbarGDC(page){ 
+
+				$('#contentAdmin').hide();
+				$('footer').hide();
+
+				$('#content').show();
+				$('#content').load(page); 
+
+				$('#divLoading').show();
+
+				$('#homeButton').css('background-color','#202020');
+				$('#homeSIMU').css('background-color','#202020');
+				$('#menuGDC').css('background-color','#19355E');
 
 
-// --></script>
+
+			}
+
+
+
+			function changeUInavbarSIMU(page){ 
+
+				$('#contentAdmin').hide();
+				$('footer').hide();
+
+				$('#content').show();
+				$('#content').load(page); 
+
+				$('#divLoading').show();
+
+				$('#homeButton').css('background-color','#202020');
+				$('#homeSIMU').css('background-color','#19355E');
+				$('#menuGDC').css('background-color','#202020');
+
+
+
+			}
+
+
+			function changeUInavbarAdmin_1(page){ 
+
+				$('#content').hide();$('#contentAdmin').show();
+				$('footer').hide();
+
+				$('#contentAdmin').load(page);
+
+				$('#divLoading').show();
+
+				$('#homeButton').css('background-color','#202020');
+				$('#homeSIMU').css('background-color','#202020');
+				$('#menuGDC').css('background-color','#202020');
+
+			}
+
+
+
+			function changeUInavbarAdmin_2(page){ 
+
+				$('#content').hide();$('#contentAdmin').show();
+				$('footer').hide();
+
+				$('#contentAdmin').load(page);
+
+				$('#divLoading').show();
+
+				$('#homeButton').css('background-color','#202020');
+				$('#homeSIMU').css('background-color','#202020');
+				$('#menuGDC').css('background-color','#202020');
+
+			}
+
+
+
+
+
+
+</script>
 
 
 <style type="text/css">

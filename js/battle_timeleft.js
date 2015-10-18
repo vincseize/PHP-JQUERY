@@ -53,7 +53,7 @@ countdownManager = {
   
   // Calcul la différence entre 2 dates, en jour/heure/minute/seconde
   dateDiff: function(date1, date2){
-    var diff = {}                           // Initialisation du retour
+    var diff = {}   ;                        // Initialisation du retour
     var tmp = date2 - date1;
 
     tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
