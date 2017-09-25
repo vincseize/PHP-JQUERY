@@ -12,7 +12,6 @@ if($host=='127.0.0.1'){
 	$host = '127.0.0.1';
 	$dbname='lesinvisible';	
 	$user='root';
-	// $passwd='aa161169';
 	$passwd='';
 }
 
@@ -23,23 +22,21 @@ if(	$host=='localhost'){
 	$passwd='';
 }
 
-if ($host=='www.vincseize.net'){
-	$host = 'db569638194.db.1and1.com';
-	$dbname='db569638194'; 
-	$user='dbo569638194';
-	//$passwd='zz161169';
+if ($host=='www.vincseize16.net'){
+	$host = 'db56963819416.db.1and1.com';
+	$dbname='db56963819416'; 
+	$user='dbo56963819416';
 	$passwd='lesinvisible';
 }
 
 if ($host=='vincseize.net'){
-	$host = 'db569638194.db.1and1.com';
-	$dbname='db569638194'; 
-	$user='dbo569638194';
-	//$passwd='zz161169';
+	$host = 'db569638194616.db.1and1.com';
+	$dbname='db56963819416'; 
+	$user='dbo56963819416';
 	$passwd='lesinvisible';
 }
 
-// $con=mysqli_connect("db569638194.db.1and1.com","dbo569638194","lesinvisible","db569638194");
+// $con=mysqli_connect("db56963819416.db.1and1.com","dbo56963819416","lesinvisible","db56963819416");
 
 // root admin webapp password
 $rootadmin = 'root';
