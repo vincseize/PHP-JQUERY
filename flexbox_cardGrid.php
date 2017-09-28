@@ -65,6 +65,10 @@ img {
 }
 
 
+.cards__item--row {
+  padding: 1rem;
+}
+
 .column {
   flex-basis: 100%;
 }
@@ -175,18 +179,69 @@ img {
   display:none;
 }
 
+
+/* pen styles */
+.container_menu_assets {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  height: 5vh;
+  width: 100%;
+  background-color: red;
+}
+
+.btn_menu_assets {
+  /* flexbox */
+  display: flex;
+
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  /* this can be anything */
+  height: 5vh;
+  width: 100%;
+
+  > .fa {
+    font-size: 1.5rem;
+  }
+}
+
+
+.container_cards{
+  width:100%;
+  padding-right:5px;
+  padding-left:5px;
+  background-color: blue;
+}
+
+  .highlight {
+    color: yellow;
+  }
+
 </style>
 
 <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
 
 </head>
 
 <body>
 
-<button id="bt_grid">grid</button>
-<button id="bt_list">list</button>
-<button id="bt_filter">filters</button>
+<div class="container_menu_assets">
+<button id="bt_grid_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button>
+<!-- <button id="bt_grid" class="btn_menu_assets secondary"><i class="fa fa-th"></i></button>
+<button id="bt_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button> -->
+<button id="bt_sort" class="btn_menu_assets secondary"><i class="fa fa-sort-alpha-asc"></i></button>
+<button id="bt_date" class="btn_menu_assets secondary"><i class="fa fa-calendar"></i></button>
+<button id="bt_filters" class="btn_menu_assets secondary">filters</button>
+<input type="search"></input>
+</div>
 
+<div class="container_cards">
 <ul id="cards" class="cards">
   <li class="cards__item columnX fiche">
     <div class="card">
@@ -230,7 +285,7 @@ img {
   </li>
 </ul>
 
-
+</div>
 
 <script>
 
@@ -238,28 +293,50 @@ img {
 
 $( document ).ready(function() {
 
-//
-// $('.fiche').removeClass('cards__item');
-// $('.fiche').addClass('column');
-// $('.image_fiche').addClass('card__image_row');
+    $( "#bt_sort" ).click(function() {
+        $(this).find('.fa').toggleClass('fa-sort-alpha-asc fa-sort-alpha-desc');
+    });
+
+    $.btgl = {};
+    $.btgl.switch = 2;
+    $( "#bt_grid_list" ).click(function() {
+        $(this).find('.fa').toggleClass('fa-th fa-align-justify');
+    		        if ($.btgl.switch === 1) {
+                        $('.image_fiche').removeClass('card__image_row');
+                        $('.fiche').removeClass('column');
+                        $('.fiche').addClass('cards__item');
+                        $.btgl.switch = 2;
+    	            }
+                    else {
+                        $('.fiche').removeClass('cards__item');
+                        $('.fiche').addClass('column');
+                        $('.image_fiche').addClass('card__image_row');
+                        $('.fiche').addClass('cards__item--row');
+    		            $.btgl.switch = 1;
+    		        }
 
 
-$(function() {
-      $("#bt_list").click( function()
-           {
-                $('.fiche').removeClass('cards__item');
-                $('.fiche').addClass('column');
-                $('.image_fiche').addClass('card__image_row');
-           }
-      );
-      $("#bt_grid").click( function()
-           {
-                $('.image_fiche').removeClass('card__image_row');
-                $('.fiche').removeClass('column');
-                $('.fiche').addClass('cards__item');
-           }
-      );
-});
+    });
+
+
+    $(function() {
+        //   $("#bt_list").click( function()
+        //        {
+        //             $('.fiche').removeClass('cards__item');
+        //             $('.fiche').addClass('column');
+        //             $('.image_fiche').addClass('card__image_row');
+        //             $('.fiche').addClass('cards__item--row');
+          //
+        //        }
+        //   );
+        //   $("#bt_grid").click( function()
+        //        {
+        //             $('.image_fiche').removeClass('card__image_row');
+        //             $('.fiche').removeClass('column');
+        //             $('.fiche').addClass('cards__item');
+        //        }
+        //   );
+    });
 
 
 });
