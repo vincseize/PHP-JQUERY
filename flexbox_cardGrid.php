@@ -3,11 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Flexbox Card Grid</title>
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"> -->
-  <!-- <link rel="stylesheet" href="../css/normalize/5.0.0/normalize.min.css"> -->
-
-      <!-- <link rel="stylesheet" href="css/style.css"> -->
-
 
 <style>
 *,
