@@ -62,6 +62,7 @@ img {
 
 .cards__item--row {
   padding: 1rem;
+  width: 100%;
 }
 
 .column {
@@ -260,7 +261,7 @@ img {
 
 <div class="container_cards">
 <ul id="cards" class="cards">
-  <li class="cards__item columnX fiche">
+  <li class="cards__item fiche">
     <div class="card">
       <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=82"></img>
       <div class="card__content">
