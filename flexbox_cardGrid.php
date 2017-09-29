@@ -175,13 +175,11 @@ img {
   margin-bottom: 1.25rem;
 }
 
-.hide_li_card{
+.card__li--hide{
   display:none;
 }
 
-
-/* pen styles */
-.container_menu_assets {
+.containerMenuAssets {
   display: flex;
   display: -webkit-flex;
   align-items: center;
@@ -194,14 +192,10 @@ img {
 }
 
 .btn_menu_assets {
-  /* flexbox */
   display: flex;
-
   align-items: center;
   flex-direction: column;
   justify-content: center;
-
-  /* this can be anything */
   height: 5vh;
   width: 100%;
 
@@ -210,7 +204,6 @@ img {
   }
 }
 
-
 .container_cards{
   width:100%;
   padding-right:5px;
@@ -218,9 +211,37 @@ img {
   background-color: blue;
 }
 
-  .highlight {
-    color: yellow;
-  }
+/*.search__box{
+  margin: 100px auto;
+  width: 300px;
+  height: 50px;
+}*/
+
+.search__div {
+  position: relative;
+  color: #aaa;
+  font-size: 16px;
+  height:100%;
+
+}
+.search__div input {
+  /*width: 250px;
+  height: 32px;*/
+  min-width: 1500px;
+  height:100%;
+  background: #fcfcfc;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+}
+
+.search__div input { text-indent: 32px;}
+
+.search__div .fa-search {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
 
 </style>
 
@@ -231,14 +252,22 @@ img {
 
 <body>
 
-<div class="container_menu_assets">
-<button id="bt_grid_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button>
-<!-- <button id="bt_grid" class="btn_menu_assets secondary"><i class="fa fa-th"></i></button>
-<button id="bt_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button> -->
-<button id="bt_sort" class="btn_menu_assets secondary"><i class="fa fa-sort-alpha-asc"></i></button>
-<button id="bt_date" class="btn_menu_assets secondary"><i class="fa fa-calendar"></i></button>
-<button id="bt_filters" class="btn_menu_assets secondary">filters</button>
-<input type="search"></input>
+<div class="containerMenuAssets">
+    <button id="bt_grid_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button>
+    <button id="bt_sort" class="btn_menu_assets secondary"><i class="fa fa-sort-alpha-asc"></i></button>
+    <button id="bt_date" class="btn_menu_assets secondary"><i class="fa fa-calendar"></i></button>
+    <button id="bt_filters" class="btn_menu_assets secondary">filters</button>
+
+
+
+<!-- <input placeholder="Search" id="box" type="text" /> -->
+<div class="search__div">
+  <span class="fa fa-search"></span>
+  <input placeholder="search" id="box" type="text" />
+</div>
+
+
+
 </div>
 
 <div class="container_cards">
@@ -292,6 +321,19 @@ img {
 
 
 $( document ).ready(function() {
+
+$('#box').keyup(function(){
+   var valThis = $(this).val().toLowerCase();
+    if(valThis == ""){
+        $('.cards > li').show();
+    } else {
+        $('.cards > li').each(function(){
+            var text = $(this).text().toLowerCase();
+            (text.indexOf(valThis) >= 0) ? $(this).show() : $(this).hide();
+        });
+   };
+});
+
 
     $( "#bt_sort" ).click(function() {
         $(this).find('.fa').toggleClass('fa-sort-alpha-asc fa-sort-alpha-desc');
