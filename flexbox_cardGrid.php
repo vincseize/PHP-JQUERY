@@ -251,7 +251,7 @@ img {
 <!-- <input placeholder="Search" id="box" type="text" /> -->
 <div class="search__div">
   <span class="fa fa-search"></span>
-  <input placeholder="search" id="input__searchAssets" type="text" />
+  <input placeholder="search" id="input__searchAssets" type="text"/>
 </div>
 
 
@@ -326,14 +326,6 @@ $( document ).ready(function() {
     $('#input__searchAssets').keyup(function(){
        var valThis = $(this).val().toLowerCase();
        input__searchAssets(valThis);
-    //     if(valThis == ""){
-    //         $('.cards > li').show();
-    //     } else {
-    //         $('.cards > li').each(function(){
-    //             var text = $(this).text().toLowerCase();
-    //             (text.indexOf(valThis) >= 0) ? $(this).show() : $(this).hide();
-    //         });
-    //    };
     });
 
     $( "#bt_sort" ).click(function() {
@@ -397,6 +389,17 @@ $( document ).ready(function() {
     $('#input__searchAssets').on('autocompleteselect', function (e, ui) {
         var optionSelected = ui.item.value;
         input__searchAssets(optionSelected.toLowerCase());
+    });
+
+    $('#input__searchAssets').on('keydown', function(e) {
+        if( !/[a-z]|[A-Z]/.test( String.fromCharCode( e.which ) ) )
+            return false;
+    });
+
+    $('#input__searchAssets').on('dblclick', function() {
+    //$('#input__searchAssets').on('click focusin', function() {
+        this.value = '';
+        input__searchAssets('');
     });
 
 });
