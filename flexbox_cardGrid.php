@@ -232,7 +232,9 @@ img {
 </style>
 
 <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 
@@ -249,7 +251,7 @@ img {
 <!-- <input placeholder="Search" id="box" type="text" /> -->
 <div class="search__div">
   <span class="fa fa-search"></span>
-  <input placeholder="search" id="box" type="text" />
+  <input placeholder="search" id="input__searchAssets" type="text" />
 </div>
 
 
@@ -308,8 +310,9 @@ img {
 
 $( document ).ready(function() {
 
-    $('#box').keyup(function(){
-       var valThis = $(this).val().toLowerCase();
+    document.getElementById("input__searchAssets").value = "";
+
+    function input__searchAssets(valThis){
         if(valThis == ""){
             $('.cards > li').show();
         } else {
@@ -318,6 +321,19 @@ $( document ).ready(function() {
                 (text.indexOf(valThis) >= 0) ? $(this).show() : $(this).hide();
             });
        };
+    }
+
+    $('#input__searchAssets').keyup(function(){
+       var valThis = $(this).val().toLowerCase();
+       input__searchAssets(valThis);
+    //     if(valThis == ""){
+    //         $('.cards > li').show();
+    //     } else {
+    //         $('.cards > li').each(function(){
+    //             var text = $(this).text().toLowerCase();
+    //             (text.indexOf(valThis) >= 0) ? $(this).show() : $(this).hide();
+    //         });
+    //    };
     });
 
     $( "#bt_sort" ).click(function() {
@@ -345,15 +361,43 @@ $( document ).ready(function() {
                         $('.fiche').addClass('cards__item--row');
     		            $.btgl.switch = 1;
     		        }
-
-
     });
 
 
-    $(function() {
-
+  $( function() {
+    var availableTagsSearchAssets = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Length",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "up"
+    ];
+    $( "#input__searchAssets" ).autocomplete({
+      source: availableTagsSearchAssets
     });
+  } );
 
+    $('#input__searchAssets').on('autocompleteselect', function (e, ui) {
+        var optionSelected = ui.item.value;
+        input__searchAssets(optionSelected.toLowerCase());
+    });
 
 });
 </script>
