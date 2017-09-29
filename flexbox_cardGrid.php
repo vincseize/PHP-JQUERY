@@ -148,100 +148,91 @@ img {
   }
 }
 .card__image--flowers {
-  background-image: url(https://unsplash.it/800/600?image=82);
+    background-image: url(https://unsplash.it/800/600?image=82);
 }
 .card__image--river {
-  background-image: url(https://unsplash.it/800/600?image=11);
+    background-image: url(https://unsplash.it/800/600?image=11);
 }
 .card__image--record {
-  background-image: url(https://unsplash.it/800/600?image=39);
+    background-image: url(https://unsplash.it/800/600?image=39);
 }
 .card__image--fence {
-  background-image: url(https://unsplash.it/800/600?image=59);
+    background-image: url(https://unsplash.it/800/600?image=59);
 }
 .card__title {
-  color: #696969;
-  font-size: 1.25rem;
-  font-weight: 300;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+    color: #696969;
+    font-size: 1.25rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 .card__text {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
 }
 
 .card__li--hide{
-  display:none;
+      display:none;
 }
 
 .containerMenuAssets {
-  display: flex;
-  display: -webkit-flex;
-  align-items: center;
-  -webkit-align-items: center;
-  justify-content: center;
-  -webkit-justify-content: center;
-  height: 5vh;
-  width: 100%;
-  background-color: red;
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      justify-content: center;
+      -webkit-justify-content: center;
+      height: 5vh;
+      width: 100%;
+      background-color: red;
 }
 
 .btn_menu_assets {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  height: 5vh;
-  width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      height: 5vh;
+      width: 100%;
 
-  > .fa {
-    font-size: 1.5rem;
-  }
+      > .fa {
+        font-size: 1.5rem;
+      }
 }
 
 .container_cards{
-  width:100%;
-  padding-right:5px;
-  padding-left:5px;
-  background-color: blue;
+      width:100%;
+      padding-right:5px;
+      padding-left:5px;
+      background-color: blue;
 }
-
-/*.search__box{
-  margin: 100px auto;
-  width: 300px;
-  height: 50px;
-}*/
 
 .search__div {
-  position: relative;
-  color: #aaa;
-  font-size: 16px;
-  height:100%;
-
+      position: relative;
+      color: #aaa;
+      font-size: 16px;
+      height:100%;
 }
 .search__div input {
-  /*width: 250px;
-  height: 32px;*/
-  min-width: 1500px;
-  height:100%;
-  background: #fcfcfc;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+      min-width: 150px;
+      height:100%;
+      background: #fcfcfc;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
 }
 
 .search__div input { text-indent: 32px;}
 
 .search__div .fa-search {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
 
 </style>
 
@@ -322,17 +313,17 @@ img {
 
 $( document ).ready(function() {
 
-$('#box').keyup(function(){
-   var valThis = $(this).val().toLowerCase();
-    if(valThis == ""){
-        $('.cards > li').show();
-    } else {
-        $('.cards > li').each(function(){
-            var text = $(this).text().toLowerCase();
-            (text.indexOf(valThis) >= 0) ? $(this).show() : $(this).hide();
-        });
-   };
-});
+    $('#box').keyup(function(){
+       var valThis = $(this).val().toLowerCase();
+        if(valThis == ""){
+            $('.cards > li').show();
+        } else {
+            $('.cards > li').each(function(){
+                var text = $(this).text().toLowerCase();
+                (text.indexOf(valThis) >= 0) ? $(this).show() : $(this).hide();
+            });
+       };
+    });
 
 
     $( "#bt_sort" ).click(function() {
@@ -362,22 +353,7 @@ $('#box').keyup(function(){
 
 
     $(function() {
-        //   $("#bt_list").click( function()
-        //        {
-        //             $('.fiche').removeClass('cards__item');
-        //             $('.fiche').addClass('column');
-        //             $('.image_fiche').addClass('card__image_row');
-        //             $('.fiche').addClass('cards__item--row');
-          //
-        //        }
-        //   );
-        //   $("#bt_grid").click( function()
-        //        {
-        //             $('.image_fiche').removeClass('card__image_row');
-        //             $('.fiche').removeClass('column');
-        //             $('.fiche').addClass('cards__item');
-        //        }
-        //   );
+
     });
 
 
