@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <title>Flexbox Card Grid</title>
 
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<link rel="stylesheet" href="../css/jquery-ui.css">
 <style>
 *,
 *::before,
@@ -232,10 +237,6 @@ img {
 
 </style>
 
-<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 
@@ -245,11 +246,16 @@ img {
     <button id="bt_grid_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button>
     <button id="bt_sort" class="btn_menu_assets secondary"><i class="fa fa-sort-alpha-asc"></i></button>
     <button id="bt_date" class="btn_menu_assets secondary"><i class="fa fa-calendar"></i></button>
-    <button id="bt_filters" class="btn_menu_assets secondary">filters</button>
+    <!-- <button id="bt_filters" class="btn_menu_assets secondary">filters</button> -->
 
+<select class="b-select" style="min-width:150px;">
+    <option disabled selected>Sort By</option>
+    <option data-sort="price:asc">Price Ascending</option>
+    <option data-sort="price:desc">Price Descending</option>
+    <option data-sort="length:asc">Length Ascending</option>
+    <option data-sort="length:desc">Length Descending</option>
+  </select>
 
-
-<!-- <input placeholder="Search" id="box" type="text" /> -->
 <div class="search__div">
   <span class="fa fa-search"></span>
   <input placeholder="search" id="input__searchAssets" type="text"/>
@@ -261,41 +267,57 @@ img {
 
 <div class="container_cards">
 <ul id="cards" class="cards">
-  <li class="cards__item fiche">
+  <li class="cards__item fiche" data-length="100" data-price="16">
     <div class="card">
       <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=82"></img>
       <div class="card__content">
         <div class="card__title">Flex</div>
+                <div class="details">
+                  <span class="length">100M</span>
+                  <span class="price">16€</span>
+                </div>
         <p class="card__text">This is the shorthand for flex-grow, flex-shrink and flex-basis combined. The second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto. </p>
         <button class="btn btn--block card__btn" style"width:25%;max-width:25%;">Button</button>
       </div>
     </div>
   </li>
-  <li class="cards__item fiche">
+  <li class="cards__item fiche" data-length="3" data-price="50">
     <div class="card">
       <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=11"></img>
       <div class="card__content">
         <div class="card__title">Flex Grow</div>
+                <div class="details">
+                  <span class="length">3M</span>
+                  <span class="price">50€</span>
+                </div>
         <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
         <button class="btn btn--block card__btn">Button</button>
       </div>
     </div>
   </li>
-  <li class="cards__item fiche">
+  <li class="cards__item fiche" data-length="123" data-price="70">
     <div class="card">
       <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=39"></img>
       <div class="card__content">
         <div class="card__title">Flex Shrink</div>
+                <div class="details">
+                  <span class="length">123M</span>
+                  <span class="price">70€</span>
+                </div>
         <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
         <button class="btn btn--block card__btn">Button</button>
       </div>
     </div>
   </li>
-  <li class="cards__item fiche">
+  <li class="cards__item fiche" data-length="130" data-price="6700">
     <div class="card">
       <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=59"></img>
       <div class="card__content">
         <div class="card__title">Flex Basis</div>
+                <div class="details">
+                  <span class="length">130M</span>
+                  <span class="price">6700€</span>
+                </div>
         <p class="card__text">This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The auto keyword means "look at my width or height property."</p>
         <button class="btn btn--block card__btn">Button</button>
       </div>
@@ -404,6 +426,48 @@ $( document ).ready(function() {
     });
 
 });
+
+// https://codepen.io/SitePoint/pen/jyJwXO
+(function($) {
+  "use strict";
+
+  $.fn.numericFlexboxSorting = function(options) {
+    const settings = $.extend({
+      elToSort: ".cards li"
+    }, options);
+
+    const $select = this;
+    const ascOrder = (a, b) => a - b;
+    const descOrder = (a, b) => b - a;
+
+    $select.on("change", () => {
+      const selectedOption = $select.find("option:selected").attr("data-sort");
+      sortColumns(settings.elToSort, selectedOption);
+    });
+
+    function sortColumns(el, opt) {
+      const attr = "data-" + opt.split(":")[0];
+      const sortMethod = (opt.includes("asc")) ? ascOrder : descOrder;
+      const sign = (opt.includes("asc")) ? "" : "-";
+
+      const sortArray = $(el).map((i, el) => $(el).attr(attr)).sort(sortMethod);
+
+      for (let i = 0; i < sortArray.length; i++) {
+        $(el).filter(`[${attr}="${sortArray[i]}"]`).css("order", sign + sortArray[i]);
+      }
+    }
+
+    return $select;
+  };
+})(jQuery);
+
+// call the plugin
+$(".b-select").numericFlexboxSorting();
+
+
+
+
+
 </script>
 
 
