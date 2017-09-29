@@ -320,9 +320,12 @@ $( document ).ready(function() {
        };
     });
 
-
     $( "#bt_sort" ).click(function() {
         $(this).find('.fa').toggleClass('fa-sort-alpha-asc fa-sort-alpha-desc');
+    });
+
+    $( "#bt_date" ).click(function() {
+        $(this).find('.fa').toggleClass('fa-calendar fa-calendar-times-o');
     });
 
     $.btgl = {};
