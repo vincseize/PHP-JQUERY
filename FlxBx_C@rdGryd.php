@@ -521,12 +521,12 @@ $( document ).ready(function() {
         input__searchAssets(optionSelected.toLowerCase());
     });
 
-    $('#input__searchAssets').on('keydown', function(e) {
-        if( !/[a-z]|[A-Z]/.test( String.fromCharCode( e.which ) ) )
-            return false;
-    });
+    // $('#input__searchAssets').on('keydown', function(e) {
+    //     if( !/[a-z]|[A-Z]/.test( String.fromCharCode( e.which ) ) )
+    //         return false;
+    // });
 
-    $('#input__searchAssets').on('dblclick', function() {
+    $('#input__searchAssets').on('dblclick focusin', function() {
     //$('#input__searchAssets').on('click focusin', function() {
         this.value = '';
         input__searchAssets('');
