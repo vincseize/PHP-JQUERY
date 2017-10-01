@@ -136,14 +136,15 @@ display:flex;
 .card__row {
     display: -webkit-flex;
     display:flex;
+    border-bottom: black solid 2px;
 }
 .div__cardImage--row {
     width:25vh;
 
 }
 .card__image_row {
-  width:25%;
-  height:25%;
+  /*width:25%;
+  height:25%;*/
   background-color:orange;
 }
 
@@ -260,6 +261,14 @@ display:flex;
     left: 10px;
 }
 
+.title-case {
+    width:100%;
+    /*height:1%;*/
+    background-color:black;
+    color:white;
+    font-size:0.8em;
+}
+
 </style>
 
 
@@ -268,11 +277,12 @@ display:flex;
 <body>
 
 <div class="containerMenuAssets">
+
+    <button id="bt_img" class="btn_menu_assets secondary"><i class="fa fa-picture-o"></i></button>
     <button id="bt_grid_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button>
     <button id="bt_sort" class="btn_menu_assets secondary"><i class="fa fa-sort-alpha-asc"></i></button>
     <button id="bt_date" class="btn_menu_assets secondary"><i class="fa fa-calendar"></i></button>
     <!-- <button id="bt_filters" class="btn_menu_assets secondary">filters</button> -->
-
 
 
 <select class="f-select" style="min-width:150px;height:100%;">
@@ -289,6 +299,8 @@ display:flex;
     <option data-sort="price:desc">Price Descending</option>
     <option data-sort="length:asc">Length Ascending</option>
     <option data-sort="length:desc">Length Descending</option>
+    <option data-sort="case:asc">Case Ascending</option>
+    <option data-sort="case:desc">Case Descending</option>
   </select>
 
 <div class="search__div">
@@ -303,12 +315,15 @@ display:flex;
 <div class="container_cards">
 
 <ul id="cards" class="cards">
-  <li class="cards__item fiche" data-length="100" data-price="16" styleX="width:100%;background-color:orange;">
-    <div class="card fiche_card card__rowX" >
-            <div class="div__cardImage div__cardImage--rowX" style="">
+  <li class="cards__item fiche" data-length="100" data-price="16" data-case="0001">
+    <div class="card fiche_card" >
+            <div class="div__cardImage">
                   <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=82"></img>
+                  <div class="title-case">Case 0001</div>
             </div>
-              <div class="card__content card__content--rowX">
+
+
+              <div class="card__content">
                 <div class="card__title">Flex</div>
                         <div class="details">
                           <span class="length">100M</span>
@@ -320,10 +335,11 @@ display:flex;
 
     </div>
   </li>
-  <li class="cards__item fiche" data-length="3" data-price="50">
+  <li class="cards__item fiche" data-length="3" data-price="50"  data-case="0010">
     <div class="card fiche_card">
         <div class="div__cardImage">
             <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=11"></img>
+            <div class="title-case">Case 0010</div>
         </div>
 
       <div class="card__content">
@@ -337,10 +353,11 @@ display:flex;
       </div>
     </div>
   </li>
-  <li class="cards__item fiche" data-length="123" data-price="70">
+  <li class="cards__item fiche" data-length="123" data-price="70"  data-case="0005">
     <div class="card fiche_card">
         <div class="div__cardImage">
             <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=39"></img>
+            <div class="title-case">Case 0005</div>
         </div>
       <div class="card__content">
         <div class="card__title">Flex Shrink</div>
@@ -353,10 +370,11 @@ display:flex;
       </div>
     </div>
   </li>
-  <li class="cards__item fiche" data-length="130" data-price="6700">
+  <li class="cards__item fiche" data-length="130" data-price="6700" data-case="0120">
     <div class="card fiche_card">
         <div class="div__cardImage">
             <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=59"></img>
+            <div class="title-case">Case 0120</div>
         </div>
       <div class="card__content">
         <div class="card__title">Flex Basis</div>
@@ -379,6 +397,8 @@ display:flex;
 
 $( document ).ready(function() {
 
+    // $('#bt_grid_list').trigger('click');
+
     document.getElementById("input__searchAssets").value = "";
 
     function input__searchAssets(valThis){
@@ -397,22 +417,23 @@ $( document ).ready(function() {
        input__searchAssets(valThis);
     });
 
-    $( "#bt_sort" ).click(function() {
+    $( "#bt_sort" ).click(function(e) {
         $(this).find('.fa').toggleClass('fa-sort-alpha-asc fa-sort-alpha-desc');
+        e.stopPropagation();
+        e.preventDefault();
     });
 
-    $( "#bt_date" ).click(function() {
+    $( "#bt_date" ).click(function(e) {
         $(this).find('.fa').toggleClass('fa-calendar fa-calendar-times-o');
+        e.stopPropagation();
+        e.preventDefault();
     });
 
     $.btgl = {};
     $.btgl.switch = 2;
-    $( "#bt_grid_list" ).click(function() {
+    $( "#bt_grid_list" ).click(function(e) {
         $(this).find('.fa').toggleClass('fa-th fa-align-justify');
     		        if ($.btgl.switch === 1) {
-                        // $('.image_fiche').removeClass('card__image_row');
-                        // $('.fiche').removeClass('column');
-                        // $('.fiche').addClass('cards__item');
 
                         $('.fiche_card').removeClass('card__row');
                         $('.fiche').removeClass('column');
@@ -426,10 +447,6 @@ $( document ).ready(function() {
                         $.btgl.switch = 2;
     	            }
                     else {
-                        // $('.fiche').removeClass('cards__item');
-                        // $('.fiche').addClass('column');
-                        // $('.image_fiche').addClass('card__image_row');
-                        // $('.fiche').addClass('cards__item--row');
 
                         $('.fiche').removeClass('cards__item');
                         $('.fiche_card').removeClass('card');
@@ -440,10 +457,26 @@ $( document ).ready(function() {
                         $('.image_fiche').addClass('div__cardImage--row');
                         $('.card__content').addClass('card__content--row');
 
-
-
     		            $.btgl.switch = 1;
     		        }
+        e.stopPropagation();
+        e.preventDefault();
+    });
+
+    $.btimg = {};
+    $.btimg.switch = 2;
+    $( "#bt_img" ).click(function(e) {
+        $(this).find('.fa').toggleClass('fa-th fa-align-justify');
+    		        if ($.btimg.switch === 1) {
+                        $('.card__content').show();
+                        $.btimg.switch = 2;
+    	            }
+                    else {
+                        $('.card__content').hide();
+    		            $.btimg.switch = 1;
+    		        }
+        e.stopPropagation();
+        e.preventDefault();
     });
 
 
