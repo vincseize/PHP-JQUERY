@@ -126,6 +126,8 @@ display:flex;
           flex-direction: column;
   padding: 1rem;
   background-color: yellow;
+
+  display: none;
 }
 
 .card__content--row {
@@ -447,8 +449,9 @@ $( document ).ready(function() {
                         $('.fiche_card').addClass('card');
 
                         $("#bt_img").prop("disabled",false);
+                        $('.card__content').hide();
 
-                        $.btimg.switch = 2;
+                        $.btimg.switch = 1;
                         $.btgl.switch = 2;
     	            }
                     else {
@@ -465,7 +468,7 @@ $( document ).ready(function() {
                         $("#bt_img").prop("disabled",true);
                         $('.card__content').show();
 
-                        $.btimg.switch = 1;
+                        $.btimg.switch = 2;
     		            $.btgl.switch = 1;
     		        }
         e.stopPropagation();
