@@ -36,16 +36,19 @@ img {
   max-width: 100%;
   vertical-align: middle;
 }
-.btn {
+/*.btn {
   background-color: white;
   border: 1px solid #cccccc;
   color: #696969;
   padding: 0.5rem;
   text-transform: lowercase;
-}
-.btn--block {
-  display: block;
-  width: 100%;
+}*/
+
+.btn-editCard{
+    /*width:25%;
+    max-width:25%;*/
+    background: none;
+    border: 0 none;
 }
 
 .cards {
@@ -177,7 +180,7 @@ display:flex;
     padding-top: 66.6%;
   }
 }
-.card__image--flowers {
+/*.card__image--flowers {
     background-image: url(https://unsplash.it/800/600?image=82);
 }
 .card__image--river {
@@ -188,7 +191,7 @@ display:flex;
 }
 .card__image--fence {
     background-image: url(https://unsplash.it/800/600?image=59);
-}
+}*/
 .card__title {
     color: #696969;
     font-size: 1.25rem;
@@ -267,7 +270,6 @@ display:flex;
 
 .title-case {
     width:100%;
-    /*height:1%;*/
     background-color:black;
     color:white;
     font-size:0.8em;
@@ -305,6 +307,8 @@ display:flex;
     <option data-sort="length:desc">Length Descending</option>
     <option data-sort="case:asc">Case Ascending</option>
     <option data-sort="case:desc">Case Descending</option>
+    <option data-sort="date:asc">Date Ascending</option>
+    <option data-sort="date:desc">Date Descending</option>
   </select>
 
 <div class="search__div">
@@ -319,7 +323,7 @@ display:flex;
 <div class="container_cards">
 
 <ul id="cards" class="cards">
-  <li class="LI-cards__item fiche" data-length="100" data-price="16" data-case="0001" >
+  <li class="LI-cards__item fiche" data-length="100" data-price="16" data-case="0001"  data-date="20171216">
     <div class="card fiche_card">
             <div class="div__cardImage">
                   <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=82"></img>
@@ -332,14 +336,15 @@ display:flex;
                         <div class="details">
                           <span class="length">100M</span>
                           <span class="price">16€</span>
+                          <span class="date">2017-12-16</span>
                         </div>
                 <p class="card__text">This is the shorthand for fe second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto. </p>
-                <button class="btn btn--block card__btn" style"width:25%;max-width:25%;">Button</button>
+                <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
               </div>
 
     </div>
   </li>
-  <li class="LI-cards__item fiche" data-length="3" data-price="50"  data-case="0010">
+  <li class="LI-cards__item fiche" data-length="3" data-price="50"  data-case="0010" data-date="19990216">
     <div class="card fiche_card">
         <div class="div__cardImage">
             <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=11"></img>
@@ -351,13 +356,14 @@ display:flex;
                 <div class="details">
                   <span class="length">3M</span>
                   <span class="price">50€</span>
+                  <span class="date">1999-02-16</span>
                 </div>
         <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
-        <button class="btn btn--block card__btn">Button</button>
+        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
       </div>
     </div>
   </li>
-  <li class="LI-cards__item fiche" data-length="123" data-price="70"  data-case="0005">
+  <li class="LI-cards__item fiche" data-length="123" data-price="70"  data-case="0005" data-date="20180216">
     <div class="card fiche_card">
         <div class="div__cardImage">
             <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=39"></img>
@@ -368,13 +374,14 @@ display:flex;
                 <div class="details">
                   <span class="length">123M</span>
                   <span class="price">70€</span>
+                  <span class="date">2018-02-16</span>
                 </div>
         <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
-        <button class="btn btn--block card__btn">Button</button>
+        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
       </div>
     </div>
   </li>
-  <li class="LI-cards__item fiche" data-length="130" data-price="6700" data-case="0120">
+  <li class="LI-cards__item fiche" data-length="130" data-price="6700" data-case="0120" data-date="20170216">
     <div class="card fiche_card">
         <div class="div__cardImage">
             <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=59"></img>
@@ -385,9 +392,10 @@ display:flex;
                 <div class="details">
                   <span class="length">130M</span>
                   <span class="price">6700€</span>
+                  <span class="date">2017-02-16</span>
                 </div>
         <p class="card__text">This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The auto keyword means "look at my width or height property."</p>
-        <button class="btn btn--block card__btn">Button</button>
+        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
       </div>
     </div>
   </li>
@@ -400,8 +408,6 @@ display:flex;
 
 
 $( document ).ready(function() {
-
-    // $('#bt_grid_list').trigger('click');
 
     document.getElementById("input__searchAssets").value = "";
 
@@ -451,7 +457,7 @@ $( document ).ready(function() {
                         $("#bt_img").prop("disabled",false);
                         $('.card__content').hide();
 
-                        $.btimg.switch = 1;
+                        $.btimg.switch = 2;
                         $.btgl.switch = 2;
     	            }
                     else {
@@ -468,7 +474,7 @@ $( document ).ready(function() {
                         $("#bt_img").prop("disabled",true);
                         $('.card__content').show();
 
-                        $.btimg.switch = 2;
+                        $.btimg.switch = 1;
     		            $.btgl.switch = 1;
     		        }
         e.stopPropagation();
@@ -479,13 +485,13 @@ $( document ).ready(function() {
     $.btimg.switch = 2;
     $( "#bt_img" ).click(function(e) {
         $(this).find('.fa').toggleClass('fa-th fa-align-justify');
-    		        if ($.btimg.switch === 1) {
+    		        if ($.btimg.switch === 2) {
                         $('.card__content').show();
-                        $.btimg.switch = 2;
+                        $.btimg.switch = 1;
     	            }
                     else {
                         $('.card__content').hide();
-    		            $.btimg.switch = 1;
+    		            $.btimg.switch = 2;
     		        }
         e.stopPropagation();
         e.preventDefault();
