@@ -58,7 +58,7 @@ img {
   margin: 0;
   padding: 0;
 }
-.cards__item {
+.LI-cards__item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -68,7 +68,7 @@ img {
 }
 
 
-.cards__item--row {
+.LI-cards__item--row {
   padding: 1rem;
   /*width: 100%;*/
 display: -webkit-flex;
@@ -81,15 +81,16 @@ display:flex;
 
 .column {
   flex-basis: 100%;
+  padding:0;
 }
 
 @media (min-width: 40rem) {
-  .cards__item {
+  .LI-cards__item {
     width: 50%;
   }
 }
 @media (min-width: 56rem) {
-  .cards__item {
+  .LI-cards__item {
     /*width: 33.3333%;*/
 	width: 25%;
   }
@@ -136,7 +137,7 @@ display:flex;
 .card__row {
     display: -webkit-flex;
     display:flex;
-    border-bottom: black solid 2px;
+    border-bottom: #ccc solid 1px;
 }
 .div__cardImage--row {
     width:25vh;
@@ -145,7 +146,7 @@ display:flex;
 .card__image_row {
   /*width:25%;
   height:25%;*/
-  background-color:orange;
+  background-color:black;
 }
 
 .card__image {
@@ -233,9 +234,10 @@ display:flex;
 
 .container_cards{
       width:100%;
-      padding-right:5px;
-      padding-left:5px;
+      /*padding-right:5px;
+      padding-left:5px;*/
       background-color: blue;
+      padding: 0;
 }
 
 .search__div {
@@ -315,8 +317,8 @@ display:flex;
 <div class="container_cards">
 
 <ul id="cards" class="cards">
-  <li class="cards__item fiche" data-length="100" data-price="16" data-case="0001">
-    <div class="card fiche_card" >
+  <li class="LI-cards__item fiche" data-length="100" data-price="16" data-case="0001" >
+    <div class="card fiche_card">
             <div class="div__cardImage">
                   <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=82"></img>
                   <div class="title-case">Case 0001</div>
@@ -324,7 +326,7 @@ display:flex;
 
 
               <div class="card__content">
-                <div class="card__title">Flex</div>
+                <div class="card__title">yellow</div>
                         <div class="details">
                           <span class="length">100M</span>
                           <span class="price">16€</span>
@@ -335,7 +337,7 @@ display:flex;
 
     </div>
   </li>
-  <li class="cards__item fiche" data-length="3" data-price="50"  data-case="0010">
+  <li class="LI-cards__item fiche" data-length="3" data-price="50"  data-case="0010">
     <div class="card fiche_card">
         <div class="div__cardImage">
             <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=11"></img>
@@ -343,7 +345,7 @@ display:flex;
         </div>
 
       <div class="card__content">
-        <div class="card__title">Flex Grow</div>
+        <div class="card__title">GREEN</div>
                 <div class="details">
                   <span class="length">3M</span>
                   <span class="price">50€</span>
@@ -353,14 +355,14 @@ display:flex;
       </div>
     </div>
   </li>
-  <li class="cards__item fiche" data-length="123" data-price="70"  data-case="0005">
+  <li class="LI-cards__item fiche" data-length="123" data-price="70"  data-case="0005">
     <div class="card fiche_card">
         <div class="div__cardImage">
             <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=39"></img>
             <div class="title-case">Case 0005</div>
         </div>
       <div class="card__content">
-        <div class="card__title">Flex Shrink</div>
+        <div class="card__title">BLUE</div>
                 <div class="details">
                   <span class="length">123M</span>
                   <span class="price">70€</span>
@@ -370,14 +372,14 @@ display:flex;
       </div>
     </div>
   </li>
-  <li class="cards__item fiche" data-length="130" data-price="6700" data-case="0120">
+  <li class="LI-cards__item fiche" data-length="130" data-price="6700" data-case="0120">
     <div class="card fiche_card">
         <div class="div__cardImage">
             <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=59"></img>
             <div class="title-case">Case 0120</div>
         </div>
       <div class="card__content">
-        <div class="card__title">Flex Basis</div>
+        <div class="card__title">RED</div>
                 <div class="details">
                   <span class="length">130M</span>
                   <span class="price">6700€</span>
@@ -441,14 +443,16 @@ $( document ).ready(function() {
                         $('.image_fiche').removeClass('div__cardImage--row');
                         $('.card__content').removeClass('card__content--row');
 
-                        $('.fiche').addClass('cards__item');
+                        $('.fiche').addClass('LI-cards__item');
                         $('.fiche_card').addClass('card');
+
+                        $("#bt_img").prop("disabled",false);
 
                         $.btgl.switch = 2;
     	            }
                     else {
 
-                        $('.fiche').removeClass('cards__item');
+                        $('.fiche').removeClass('LI-cards__item');
                         $('.fiche_card').removeClass('card');
 
                         $('.fiche_card').addClass('card__row');
@@ -456,6 +460,8 @@ $( document ).ready(function() {
                         $('.div__cardImage').addClass('card__image_row');
                         $('.image_fiche').addClass('div__cardImage--row');
                         $('.card__content').addClass('card__content--row');
+
+                        $("#bt_img").prop("disabled",true);
 
     		            $.btgl.switch = 1;
     		        }
