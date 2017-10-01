@@ -448,6 +448,7 @@ $( document ).ready(function() {
 
                         $("#bt_img").prop("disabled",false);
 
+                        $.btimg.switch = 2;
                         $.btgl.switch = 2;
     	            }
                     else {
@@ -462,7 +463,9 @@ $( document ).ready(function() {
                         $('.card__content').addClass('card__content--row');
 
                         $("#bt_img").prop("disabled",true);
+                        $('.card__content').show();
 
+                        $.btimg.switch = 1;
     		            $.btgl.switch = 1;
     		        }
         e.stopPropagation();
