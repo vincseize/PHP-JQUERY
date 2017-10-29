@@ -49,6 +49,7 @@ img {
     max-width:25%;*/
     background: none;
     border: 0 none;
+    opacity:0.4;
 }
 
 .cards {
@@ -128,14 +129,24 @@ display:flex;
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 1rem;
-  background-color: yellow;
+  /*background-color: yellow;*/
+
+    height:100px;
+    /*max-height:100px;*/
 
   display: none;
 }
 
+/*.card__content li {background-color: orange;}
+.card__content li:nth-child(2n) {background-color: yellow;}*/
+
+/*#cards li {background-color: orange;}
+#cards li:nth-child(2n) {background-color: yellow;}*/
+
 .card__content--row {
     -webkit-flex: 1;
     flex:1;
+    height:100%;
 
 }
 
@@ -199,6 +210,7 @@ display:flex;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+
 .card__text {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
@@ -214,15 +226,20 @@ display:flex;
 
 .containerMenuAssets {
       display: flex;
+
       display: -webkit-flex;
+	  flex-wrap: wrap;
+
       align-items: center;
       -webkit-align-items: center;
       justify-content: center;
       -webkit-justify-content: center;
       height: 5vh;
-      width: 100%;
+      /*width: 100%;*/
       background-color: red;
 }
+
+
 
 .btn_menu_assets {
       display: flex;
@@ -230,15 +247,27 @@ display:flex;
       flex-direction: column;
       justify-content: center;
       height: 5vh;
-      width: 100%;
+      width: 5vh;
+      /*width: 100%;*/
 
       > .fa {
         font-size: 1.5rem;
       }
 }
 
+.btn_menu_assets:active {
+      background-color: blue;
+}
+.btn_menu_assets:hover {
+      background-color: blue;
+}
+.btn_menu_assets_clicked {
+  		background-color: blue;
+}
+
 .container_cards{
-      width:100%;
+      /*width:100%;*/
+	  min-width:100%;
       /*padding-right:5px;
       padding-left:5px;*/
       background-color: blue;
@@ -250,10 +279,18 @@ display:flex;
       color: #aaa;
       font-size: 16px;
       height:100%;
+	  flex-grow: 1; /* default 0 */
+	  min-width: 100%;
 }
 .search__div input {
-      min-width: 150px;
-      height:100%;
+      /*min-width: 150px;*/
+      /*min-width: 100%;*/
+      /*width:33vh;*/
+      /*height:100%;*/
+	  min-width: 100%;
+	  flex-grow: 1; /* default 0 */
+
+      height:5vh;
       background: #fcfcfc;
       border: 1px solid #aaa;
       border-radius: 5px;
@@ -266,6 +303,7 @@ display:flex;
     position: absolute;
     top: 10px;
     left: 10px;
+	flex-grow: 1; /* default 0 */
 }
 
 .title-case {
@@ -275,6 +313,24 @@ display:flex;
     font-size:0.8em;
 }
 
+.select_containerMenuAssets{
+    min-width: 33vh;
+    /*width:33vh;*/
+    height:5vh;
+	flex-grow: 1; /* default 0 */
+}
+
+.container_MenuAssetscardsAndCards{
+	background-color: black;
+	border: 5px solid black;
+	min-height: 10vh;
+}
+
+.flex_wrap    {
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
 </style>
 
 
@@ -282,124 +338,212 @@ display:flex;
 
 <body>
 
-<div class="containerMenuAssets">
-
-    <button id="bt_img" class="btn_menu_assets secondary"><i class="fa fa-picture-o"></i></button>
-    <button id="bt_grid_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button>
-    <button id="bt_sort" class="btn_menu_assets secondary"><i class="fa fa-sort-alpha-asc"></i></button>
-    <button id="bt_date" class="btn_menu_assets secondary"><i class="fa fa-calendar"></i></button>
-    <!-- <button id="bt_filters" class="btn_menu_assets secondary">filters</button> -->
+<div class="container_MenuAssetscardsAndCards" styleX="display:inline-block;">
 
 
-<select class="f-select" style="min-width:150px;height:100%;">
-    <option disabled selected>Filters</option>
-    <option >Blue</option>
-    <option >Red</option>
-    <option >Yellow</option>
-    <option >Green</option>
-  </select>
+	<div class="containerMenuAssets flex_wrap" style="width:100%;">
 
-<select class="b-select" style="min-width:150px;height:100%;">
-    <option disabled selected>Sort By</option>
-    <option data-sort="price:asc">Price Ascending</option>
-    <option data-sort="price:desc">Price Descending</option>
-    <option data-sort="length:asc">Length Ascending</option>
-    <option data-sort="length:desc">Length Descending</option>
-    <option data-sort="case:asc">Case Ascending</option>
-    <option data-sort="case:desc">Case Descending</option>
-    <option data-sort="date:asc">Date Ascending</option>
-    <option data-sort="date:desc">Date Descending</option>
-  </select>
-
-<div class="search__div">
-  <span class="fa fa-search"></span>
-  <input placeholder="search" id="input__searchAssets" type="text"/>
-</div>
+	    <button id="bt_img" class="btn_menu_assets secondary"><i class="fa fa-address-card-o"></i></button>
+	    <button id="bt_grid_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button>
+	    <button id="bt_sort" class="btn_menu_assets secondary"><i class="fa fa-sort-alpha-asc"></i></button>
+	    <button id="bt_date" class="btn_menu_assets secondary"><i class="fa fa-calendar"></i></button>
+	    <button id="bt_folder_tree" class="btn_menu_assets secondary"><i class="fa fa-sitemap"></i></button>
 
 
+		<select class="select_containerMenuAssets f-select" style="min-width:100px;">
+		    <option disabled selected>Filters</option>
+		    <option >Blue</option>
+		    <option >Red</option>
+		    <option >Yellow</option>
+		    <option >Green</option>
+		</select>
 
-</div>
+		<select class="select_containerMenuAssets b-select" style="min-width:150px;">
+		    <option disabled selected>Sort By</option>
+		    <option data-sort="price:asc">Price Ascending</option>
+		    <option data-sort="price:desc">Price Descending</option>
+		    <option data-sort="length:asc">Length Ascending</option>
+		    <option data-sort="length:desc">Length Descending</option>
+		    <option data-sort="case:asc">Case Ascending</option>
+		    <option data-sort="case:desc">Case Descending</option>
+		    <option data-sort="date:asc">Date Ascending</option>
+		    <option data-sort="date:desc">Date Descending</option>
+		  </select>
 
-<div class="container_cards">
+		<div class="select_containerMenuAssetsX search__div">
+		  <span class="fa fa-search"></span>
+		  <input placeholder="search" id="input__searchAssets" type="text"/>
+		</div>
 
-<ul id="cards" class="cards">
+<style>
+/*#cards li {background-color: orange;}
+#cards li:nth-child(2n) {background-color: yellow;}*/
+</style>
+
+<ul id="cards" class="cards  flex_wrapX">
   <li class="LI-cards__item fiche" data-length="100" data-price="16" data-case="0001"  data-date="20171216">
-    <div class="card fiche_card">
-            <div class="div__cardImage">
-                  <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=82"></img>
-                  <div class="title-case">Case 0001</div>
-            </div>
+	<div class="card fiche_card">
+			<div class="div__cardImage">
+				  <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=82"></img>
+				  <div class="title-case">Case 0001</div>
+			</div>
+			  <div class="card__content">
+				<div class="card__title">yellow</div>
+						<div class="details">
+						  <span class="length">100M</span>
+						  <span class="price">16€</span>
+						  <span class="date">2017-12-16</span>
+						</div>
+				<p class="card__text">This is the shorthand for fe second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto. </p>
+				<button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+			  </div>
 
-
-              <div class="card__content">
-                <div class="card__title">yellow</div>
-                        <div class="details">
-                          <span class="length">100M</span>
-                          <span class="price">16€</span>
-                          <span class="date">2017-12-16</span>
-                        </div>
-                <p class="card__text">This is the shorthand for fe second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto. </p>
-                <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
-              </div>
-
-    </div>
+	</div>
   </li>
   <li class="LI-cards__item fiche" data-length="3" data-price="50"  data-case="0010" data-date="19990216">
-    <div class="card fiche_card">
-        <div class="div__cardImage">
-            <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=11"></img>
-            <div class="title-case">Case 0010</div>
-        </div>
+	<div class="card fiche_card">
+		<div class="div__cardImage">
+			<img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=11"></img>
+			<div class="title-case">Case 0010</div>
+		</div>
 
-      <div class="card__content">
-        <div class="card__title">GREEN</div>
-                <div class="details">
-                  <span class="length">3M</span>
-                  <span class="price">50€</span>
-                  <span class="date">1999-02-16</span>
-                </div>
-        <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
-        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
-      </div>
-    </div>
+	  <div class="card__content">
+		<div class="card__title">GREEN</div>
+				<div class="details">
+				  <span class="length">3M</span>
+				  <span class="price">50€</span>
+				  <span class="date">1999-02-16</span>
+				</div>
+		<p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
+		<button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+	  </div>
+	</div>
   </li>
   <li class="LI-cards__item fiche" data-length="123" data-price="70"  data-case="0005" data-date="20180216">
-    <div class="card fiche_card">
-        <div class="div__cardImage">
-            <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=39"></img>
-            <div class="title-case">Case 0005</div>
-        </div>
-      <div class="card__content">
-        <div class="card__title">BLUE</div>
-                <div class="details">
-                  <span class="length">123M</span>
-                  <span class="price">70€</span>
-                  <span class="date">2018-02-16</span>
-                </div>
-        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
-        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
-      </div>
-    </div>
+	<div class="card fiche_card">
+		<div class="div__cardImage">
+			<img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=39"></img>
+			<div class="title-case">Case 0005</div>
+		</div>
+	  <div class="card__content">
+		<div class="card__title">BLUE</div>
+				<div class="details">
+				  <span class="length">123M</span>
+				  <span class="price">70€</span>
+				  <span class="date">2018-02-16</span>
+				</div>
+		<p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
+		<button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+	  </div>
+	</div>
   </li>
   <li class="LI-cards__item fiche" data-length="130" data-price="6700" data-case="0120" data-date="20170216">
-    <div class="card fiche_card">
-        <div class="div__cardImage">
-            <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=59"></img>
-            <div class="title-case">Case 0120</div>
-        </div>
-      <div class="card__content">
-        <div class="card__title">RED</div>
-                <div class="details">
-                  <span class="length">130M</span>
-                  <span class="price">6700€</span>
-                  <span class="date">2017-02-16</span>
-                </div>
-        <p class="card__text">This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The auto keyword means "look at my width or height property."</p>
-        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
-      </div>
-    </div>
+	<div class="card fiche_card">
+		<div class="div__cardImage">
+			<img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=59"></img>
+			<div class="title-case">Case 0120</div>
+		</div>
+	  <div class="card__content">
+		<div class="card__title">RED</div>
+				<div class="details">
+				  <span class="length">130M</span>
+				  <span class="price">6700€</span>
+				  <span class="date">2017-02-16</span>
+				</div>
+		<p class="card__text">This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The auto keyword means "look at my width or height property."</p>
+		<button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+	  </div>
+	</div>
   </li>
 </ul>
+
+
+
+	</div>
+
+<!-- </div> -->
+<!-- <br><br><br><br> -->
+	<div class="container_cards" style="width:100%;padding-top:1px;">
+
+			<!-- <ul id="cards" class="cards  flex_wrapX">
+			  <li class="LI-cards__item fiche" data-length="100" data-price="16" data-case="0001"  data-date="20171216">
+			    <div class="card fiche_card"i>
+			            <div class="div__cardImage">
+			                  <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=82"></img>
+			                  <div class="title-case">Case 0001</div>
+			            </div>
+			              <div class="card__content">
+			                <div class="card__title">yellow</div>
+			                        <div class="details">
+			                          <span class="length">100M</span>
+			                          <span class="price">16€</span>
+			                          <span class="date">2017-12-16</span>
+			                        </div>
+			                <p class="card__text">This is the shorthand for fe second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto. </p>
+			                <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+			              </div>
+
+			    </div>
+			  </li>
+			  <li class="LI-cards__item fiche" data-length="3" data-price="50"  data-case="0010" data-date="19990216">
+			    <div class="card fiche_card">
+			        <div class="div__cardImage">
+			            <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=11"></img>
+			            <div class="title-case">Case 0010</div>
+			        </div>
+
+			      <div class="card__content">
+			        <div class="card__title">GREEN</div>
+			                <div class="details">
+			                  <span class="length">3M</span>
+			                  <span class="price">50€</span>
+			                  <span class="date">1999-02-16</span>
+			                </div>
+			        <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
+			        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+			      </div>
+			    </div>
+			  </li>
+			  <li class="LI-cards__item fiche" data-length="123" data-price="70"  data-case="0005" data-date="20180216">
+			    <div class="card fiche_card">
+			        <div class="div__cardImage">
+			            <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=39"></img>
+			            <div class="title-case">Case 0005</div>
+			        </div>
+			      <div class="card__content">
+			        <div class="card__title">BLUE</div>
+			                <div class="details">
+			                  <span class="length">123M</span>
+			                  <span class="price">70€</span>
+			                  <span class="date">2018-02-16</span>
+			                </div>
+			        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
+			        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+			      </div>
+			    </div>
+			  </li>
+			  <li class="LI-cards__item fiche" data-length="130" data-price="6700" data-case="0120" data-date="20170216">
+			    <div class="card fiche_card">
+			        <div class="div__cardImage">
+			            <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=59"></img>
+			            <div class="title-case">Case 0120</div>
+			        </div>
+			      <div class="card__content">
+			        <div class="card__title">RED</div>
+			                <div class="details">
+			                  <span class="length">130M</span>
+			                  <span class="price">6700€</span>
+			                  <span class="date">2017-02-16</span>
+			                </div>
+			        <p class="card__text">This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The auto keyword means "look at my width or height property."</p>
+			        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+			      </div>
+			    </div>
+			  </li>
+			</ul> -->
+
+	<!-- </div> -->
+
 
 </div>
 
@@ -410,6 +554,23 @@ display:flex;
 $( document ).ready(function() {
 
     document.getElementById("input__searchAssets").value = "";
+
+	$(".btn_menu_assets").click(function() {
+		$(".btn_menu_assets").removeClass('btn_menu_assets_clicked');
+	  	$(this).addClass('btn_menu_assets_clicked');
+		// $('#cards li:nth-child(2n)').css("background", "none");
+
+	  	//console.log('click');
+	});
+
+	function modulo_list_cards(){
+		$('.cards > li').css("background-color", "yellow");
+		$('#cards li:nth-child(2n)').css("background-color", "orange");
+	}
+
+	function modulo_list_cards_remove(){
+		$('.cards > li').css("background", "none");
+	}
 
     function input__searchAssets(valThis){
         if(valThis == ""){
@@ -434,7 +595,8 @@ $( document ).ready(function() {
     });
 
     $( "#bt_date" ).click(function(e) {
-        $(this).find('.fa').toggleClass('fa-calendar fa-calendar-times-o');
+        // $(this).find('.fa').toggleClass('fa-calendar fa-calendar-times-o');
+		//$(this).find('.fa').toggleClass('fa-calendar fa-calendar');
         e.stopPropagation();
         e.preventDefault();
     });
@@ -443,6 +605,9 @@ $( document ).ready(function() {
     $.btgl.switch = 2;
     $( "#bt_grid_list" ).click(function(e) {
         $(this).find('.fa').toggleClass('fa-th fa-align-justify');
+        $( "#bt_img" ).find('.fa').removeClass('fa-picture-o');
+        $( "#bt_img" ).find('.fa').addClass('fa-address-card-o');
+
     		        if ($.btgl.switch === 1) {
 
                         $('.fiche_card').removeClass('card__row');
@@ -457,8 +622,11 @@ $( document ).ready(function() {
                         $("#bt_img").prop("disabled",false);
                         $('.card__content').hide();
 
+						modulo_list_cards_remove();
+
                         $.btimg.switch = 2;
                         $.btgl.switch = 2;
+
     	            }
                     else {
 
@@ -474,9 +642,13 @@ $( document ).ready(function() {
                         $("#bt_img").prop("disabled",true);
                         $('.card__content').show();
 
+						modulo_list_cards();
+
                         $.btimg.switch = 1;
     		            $.btgl.switch = 1;
+
     		        }
+
         e.stopPropagation();
         e.preventDefault();
     });
@@ -484,12 +656,15 @@ $( document ).ready(function() {
     $.btimg = {};
     $.btimg.switch = 2;
     $( "#bt_img" ).click(function(e) {
-        $(this).find('.fa').toggleClass('fa-th fa-align-justify');
+        $(this).find('.fa').toggleClass('fa-address-card-o fa-picture-o');
+
     		        if ($.btimg.switch === 2) {
+						//$(this).find('.fa').toggleClass('fa-address-card-o fa-picture-o');
                         $('.card__content').show();
                         $.btimg.switch = 1;
     	            }
                     else {
+						//$(this).find('.fa').toggleClass('fa-picture-o fa-address-card-o');
                         $('.card__content').hide();
     		            $.btimg.switch = 2;
     		        }
@@ -563,6 +738,11 @@ $( document ).ready(function() {
     $select.on("change", () => {
       const selectedOption = $select.find("option:selected").attr("data-sort");
       sortColumns(settings.elToSort, selectedOption);
+	  // modulo_list_cards_remove();
+			// 		$('.cards > li').css("background", "none");
+			// 		$('.cards > li').css("background-color", "yellow");
+			// 		$('#cards li:nth-child(2n)').css("background-color", "orange");
+
     });
 
     function sortColumns(el, opt) {
@@ -589,6 +769,362 @@ $(".b-select").numericFlexboxSorting();
 
 
 </script>
+
+
+
+
+<br>
+
+<style>
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border: 1px solid silver;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  clear: both !important;
+}
+.wrap    {
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.wrap li {
+  background: gold;
+  clear: both !important;
+}
+
+.flex-item {
+flex-grow: 1; /* default 0 */
+flex-shrink: 1; /* default 1 */
+display:inline-block;
+clear: both !important;
+}
+
+.flex-itemOLD {
+  background: tomato;
+  padding: 5px;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+
+  line-height: 100px;
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+}
+
+#flexShell {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+.select-wrapper {
+    background-color: #eee;
+    border: 1px solid #aaa;
+    color: #aaa;
+    cursor: pointer;
+    float: left;
+    overflow: hidden;
+    padding-right: 3em;
+    position: relative;
+    width: 100%;
+}
+.f-select2 {
+    /*-webkit-appearance: none;*/
+    background-color: #eee;
+    border-width: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    float: left;
+
+    width: 100%;
+    width: calc(100% + 2em);
+    &:focus {
+        outline: none;
+    }
+}
+</style>
+
+<!--
+
+<ul class="flex-container wrap" style="">
+  <li class="flex-item"><button id="bt_img" class="btn_menu_assets secondary"><i class="fa fa-address-card-o"></i></button></li>
+  <li class="flex-item"><button id="bt_img" class="btn_menu_assets secondary"><i class="fa fa-address-card-o"></i></button></li>
+  <li class="flex-item"><button id="bt_img" class="btn_menu_assets secondary"><i class="fa fa-address-card-o"></i></button></li>
+  <li class="flex-item"><button id="bt_img" class="btn_menu_assets secondary"><i class="fa fa-address-card-o"></i></button></li>
+  <li class="flex-item"><button id="bt_img" class="btn_menu_assets secondary"><i class="fa fa-address-card-o"></i></button></li>
+  <li class="flex-item"  style="">
+	  <div class="select-wrapper">
+	  <select class="select_containerMenuAssets f-selectX f-select2" style="">
+  		    <option disabled selected>Filters</option>
+  		    <option >Blue</option>
+  		    <option >Red</option>
+  		    <option >Yellow</option>
+  		    <option >Green</option>
+  		</select>
+		<div>
+	</li>
+  	<li class="flex-item">
+		<div class="select-wrapper">
+		<select class="select_containerMenuAssets b-selectX f-select2" style="">
+		    <option disabled selected>Sort By</option>
+		    <option data-sort="price:asc">Price Ascending</option>
+		    <option data-sort="price:desc">Price Descending</option>
+		    <option data-sort="length:asc">Length Ascending</option>
+		    <option data-sort="length:desc">Length Descending</option>
+		    <option data-sort="case:asc">Case Ascending</option>
+		    <option data-sort="case:desc">Case Descending</option>
+		    <option data-sort="date:asc">Date Ascending</option>
+		    <option data-sort="date:desc">Date Descending</option>
+		  </select>
+	  </div>
+	</li>
+  	<li class="flex-item f-select2" style="">
+	  <div class="select_containerMenuAssets search__div">
+  		  <span class="fa fa-search"></span>
+  		  <input placeholder="search" id="input__searchAssets" type="text" style="" />
+  	  </div>
+	</li>
+
+</ul>
+
+ -->
+
+
+
+
+<style>
+.outer1 {
+    background-color: orange;
+    padding: 0px;
+	margin: 0px;
+}
+
+.outer0 {
+    background-color: green;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+}
+
+.container
+{
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    background-color: rgba(0, 0, 255, 0.5);
+    margin: 0px;
+
+}
+
+.item
+{
+    flex-grow: 1;
+    -webkit-flex-grow: 1;
+    background-color: rgba(255, 0, 0, 0.5);
+    widthX: 100px;
+    padding: 0px;
+    margin: 0px;
+
+    text-align: center;
+    color: white;
+}
+
+
+</style>
+
+
+
+
+<!--
+
+<div class="outer1">
+    <div class="outer0">
+        <div class="container">
+
+            <div class="item"><button id="bt_img" class="btn_menu_assets secondary"><i class="fa fa-address-card-o"></i></button></div>
+            <div class="item"><button id="bt_grid_list" class="btn_menu_assets secondary"><i class="fa fa-align-justify"></i></button></div>
+            <div class="item"><button id="bt_sort" class="btn_menu_assets secondary"><i class="fa fa-sort-alpha-asc"></i></button></div>
+            <div class="item"><button id="bt_date" class="btn_menu_assets secondary"><i class="fa fa-calendar"></i></button></div>
+            <div class="item"><button id="bt_folder_tree" class="btn_menu_assets secondary"><i class="fa fa-sitemap"></i></button></div>
+
+            <div class="item" style="width:30%;">
+				<select  class="select_containerMenuAssets f-select" style="width:100%;">
+		  		    <option disabled selected>Filters</option>
+		  		    <option >Blue</option>
+		  		    <option >Red</option>
+		  		    <option >Yellow</option>
+		  		    <option >Green</option>
+  				</select>
+			</div>
+            <div class="item"style="width:30%;">
+					<select class="select_containerMenuAssets b-select" style="100%">
+					    <option disabled selected>Sort By</option>
+					    <option data-sort="price:asc">Price Ascending</option>
+					    <option data-sort="price:desc">Price Descending</option>
+					    <option data-sort="length:asc">Length Ascending</option>
+					    <option data-sort="length:desc">Length Descending</option>
+					    <option data-sort="case:asc">Case Ascending</option>
+					    <option data-sort="case:desc">Case Descending</option>
+					    <option data-sort="date:asc">Date Ascending</option>
+					    <option data-sort="date:desc">Date Descending</option>
+					  </select>
+			</div>
+            <div class="item" style="width:30%;">
+				  <div class="select_containerMenuAssetsX search__divX">
+			  		  <span class="fa fa-search"></span>
+			  		  <input placeholder="search" id="input__searchAssets" type="text" style="" />
+			  	  </div>
+			</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<ul id="cards" class="cards">
+			  <li class="LI-cards__item fiche flex-item" data-length="100" data-price="16" data-case="0001"  data-date="20171216">
+			    <div class="card fiche_card"i>
+			            <div class="div__cardImage">
+			                  <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=82"></img>
+			                  <div class="title-case">Case 0001</div>
+			            </div>
+			              <div class="card__content">
+			                <div class="card__title">yellow</div>
+			                        <div class="details">
+			                          <span class="length">100M</span>
+			                          <span class="price">16€</span>
+			                          <span class="date">2017-12-16</span>
+			                        </div>
+			                <p class="card__text">This is the shorthand for fe second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto. </p>
+			                <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+			              </div>
+
+			    </div>
+			  </li>
+			  <li class="LI-cards__item fiche flex-item" data-length="3" data-price="50"  data-case="0010" data-date="19990216">
+			    <div class="card fiche_card">
+			        <div class="div__cardImage">
+			            <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=11"></img>
+			            <div class="title-case">Case 0010</div>
+			        </div>
+
+			      <div class="card__content">
+			        <div class="card__title">GREEN</div>
+			                <div class="details">
+			                  <span class="length">3M</span>
+			                  <span class="price">50€</span>
+			                  <span class="date">1999-02-16</span>
+			                </div>
+			        <p class="card__text">This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
+			        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+			      </div>
+			    </div>
+			  </li>
+			  <li class="LI-cards__item fiche flex-item" data-length="123" data-price="70"  data-case="0005" data-date="20180216">
+			    <div class="card fiche_card">
+			        <div class="div__cardImage">
+			            <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=39"></img>
+			            <div class="title-case">Case 0005</div>
+			        </div>
+			      <div class="card__content">
+			        <div class="card__title">BLUE</div>
+			                <div class="details">
+			                  <span class="length">123M</span>
+			                  <span class="price">70€</span>
+			                  <span class="date">2018-02-16</span>
+			                </div>
+			        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
+			        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+			      </div>
+			    </div>
+			  </li>
+			  <li class="LI-cards__item fiche flex-item" data-length="130" data-price="6700" data-case="0120" data-date="20170216">
+			    <div class="card fiche_card">
+			        <div class="div__cardImage">
+			            <img class="card__image card__image--fence image_fiche" src="https://unsplash.it/800/600?image=59"></img>
+			            <div class="title-case">Case 0120</div>
+			        </div>
+			      <div class="card__content">
+			        <div class="card__title">RED</div>
+			                <div class="details">
+			                  <span class="length">130M</span>
+			                  <span class="price">6700€</span>
+			                  <span class="date">2017-02-16</span>
+			                </div>
+			        <p class="card__text">This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The auto keyword means "look at my width or height property."</p>
+			        <button class="btn-editCard"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></button>
+			      </div>
+			    </div>
+			  </li>
+			</ul>
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
