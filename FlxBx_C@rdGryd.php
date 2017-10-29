@@ -10,6 +10,14 @@
 <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <link rel="stylesheet" href="../css/jquery-ui.css">
+
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<script src="../js/bootstrap.min.js"></script>
+
+
+
+
+
 <style>
 *,
 *::before,
@@ -350,13 +358,61 @@ display:flex;
 	    <button id="bt_folder_tree" class="btn_menu_assets secondary"><i class="fa fa-sitemap"></i></button>
 
 
-		<select class="select_containerMenuAssets f-select" style="min-width:100px;">
+		<!-- <select class="select_containerMenuAssets f-select" style="min-width:100px;">
 		    <option disabled selected>Filters</option>
 		    <option >Blue</option>
 		    <option >Red</option>
 		    <option >Yellow</option>
 		    <option >Green</option>
-		</select>
+		</select> -->
+
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
+
+
+
+<div class="row">
+       <div class="col-lg-12">
+     <div class="button-group">
+        <button type="button" class="btn btn-default btn-sm dropdown-toggle btn_menu_assets secondary" data-toggle="dropdown"><span class="fa fa-filter"></span>&nbsp;<span class="fa fa-chevron-down"></span></button>
+<ul class="dropdown-menu">
+  <li><a href="#" class="small" data-value="blue" tabIndex="-1"><input type="checkbox"/>&nbsp;Blue</a></li>
+  <li><a href="#" class="small" data-value="red" tabIndex="-1"><input type="checkbox"/>&nbsp;Red</a></li>
+  <li><a href="#" class="small" data-value="yellow" tabIndex="-1"><input type="checkbox"/>&nbsp;Yellow</a></li>
+  <li><a href="#" class="small" data-value="green" tabIndex="-1"><input type="checkbox"/>&nbsp;Green</a></li>
+
+</ul>
+  </div>
+</div>
+  </div>
+
+<script>
+var options = [];
+
+$( '.dropdown-menu a' ).on( 'click', function( event ) {
+
+   var $target = $( event.currentTarget ),
+       val = $target.attr( 'data-value' ),
+       $inp = $target.find( 'input' ),
+       idx;
+
+   if ( ( idx = options.indexOf( val ) ) > -1 ) {
+      options.splice( idx, 1 );
+      setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+   } else {
+      options.push( val );
+      setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+   }
+
+   $( event.target ).blur();
+
+   console.log( options );
+   return false;
+});
+</script>
 
 		<select class="select_containerMenuAssets b-select" style="min-width:150px;">
 		    <option disabled selected>Sort By</option>
