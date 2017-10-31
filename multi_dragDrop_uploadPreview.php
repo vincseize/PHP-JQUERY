@@ -300,7 +300,7 @@ https://codepen.io/nomack/pen/hFbEm?page=1&
 
     <!-- <script src="https://swisnl.github.io/jQuery-contextMenu/js/main.js" type="text/javascript"></script> -->
 <style>
-/*.context-menu-one{
+/*.contextMenuCase{
     background-color: red;
     z-index: 9999;
 }*/
@@ -308,7 +308,7 @@ https://codepen.io/nomack/pen/hFbEm?page=1&
 <script>
     $(function() {
         $.contextMenu({
-            selector: '.context-menu-one',
+            selector: '.contextMenuCase',
             callback: function(key, options) {
                 var m = "clicked: " + key;
                 window.console && console.log(m) || alert(m);
@@ -326,16 +326,16 @@ https://codepen.io/nomack/pen/hFbEm?page=1&
             }
         });
 
-        $('.context-menu-one').on('click', function(e){
+        $('.contextMenuCase').on('click', function(e){
             console.log('clicked', this);
         })
     });
 
 </script>
 
-<!-- <span class="context-menu-one btn btn-neutral">right click me</span>
+<!-- <span class="contextMenuCase btn btn-neutral">right click me</span>
 <br><br>
-<span class="context-menu-one">right click me</span>
+<span class="contextMenuCase">right click me</span>
 
 
 
@@ -362,7 +362,7 @@ https://codepen.io/nomack/pen/hFbEm?page=1&
 
 
 
-<div id="div_case_0001" class="div_case context-menu-one" droppable="true">
+<div id="div_case_0001" class="div_case contextMenuCase" droppable="true">
     <div class="div_input">
         <input type='file' class="input_case" name="case_0001_bg" onchange="uploadIMG(this);" />
     </div>
@@ -376,7 +376,7 @@ https://codepen.io/nomack/pen/hFbEm?page=1&
 
 <br><br>
 
-<div id="div_case_0002" class="div_case" droppable="true">
+<div id="div_case_0002" class="div_case contextMenuCase" droppable="true">
     <div class="div_input">
         <input type='file'  class="input_case" name="case_0002_bg" onchange="uploadIMG(this);"/>
     </div>
@@ -500,7 +500,7 @@ document.getElementById(caseName+"_progressPercent").textContent=percentLoaded +
 }
 
 // upload JPEG files
-function UploadFile(file,name,size,type,server,progressPercent,progressBar) {
+function UploadFile(file,name,size,type,server,progressPercent,progressBar,url_upload) {
     console.log('-----------------');
 console.log(name);
 console.log(progressPercent);
@@ -542,13 +542,13 @@ function uploadIMG(input) {
             // $(this).addClass('div_case_hover');
 
             if (input.files && input.files[0]) {
-                var file    = input.files[0];
-                var name    = input.name;
-                var size    = file.size;
-                var type    = file.type;
-                var server  = 'upload_case_bg.php';
+                var file        = input.files[0];
+                var name        = input.name;
+                var size        = file.size;
+                var type        = file.type;
 
-;
+                var url_upload  = 'tmp/cases/';
+                var server      = 'upload_case_bg.php?url_upload='+url_upload;
 
                 var progressPercent = document.querySelector('.percent');
                 var progressBar = document.querySelector('.progressBar');
@@ -561,7 +561,7 @@ function uploadIMG(input) {
 
                     preview = "#"+input.name;
                     $(preview).attr('src', e.target.result);
-                    UploadFile(file,name,size,type,server,progressPercent,progressBar);
+                    UploadFile(file,name,size,type,server,progressPercent,progressBar,url_upload);
 
                     e.stopPropagation(); // Stops some browsers from redirecting.
                     e.preventDefault();
@@ -582,77 +582,77 @@ function uploadIMG(input) {
 
 
 <script>
-
-var ctxmenu = {
-  container: null
-
-  // Initialize and add the div#ctxmenu container in the body
-  ,init: function() {
-    // hide the old ctxmenu
-    this.hide();
-
-    this.container = document.createElement('div');
-    this.container.setAttribute('id', 'ctxmenu');
-    // autohide
-    this.container.className = 'ctxmenu hidden';
-
-    document.body.appendChild(this.container);
-  }
-
-  // Setting the configuration of the ctxmenu
-  ,set: function() {
-    this.init();
-
-    // override the default settings
-    var settings = _.extend({
-      content: null
-      ,posX: 0
-      ,posY: 0
-    }, arguments[0] || {});
-
-    // adding the content
-    this.container.innerHTML = settings.content;
-
-    // positionning
-    this.container.style.left = settings.posX + 'px';
-    this.container.style.top = settings.posY + 'px';
-  }
-
-  // Showing the ctxmenu
-  ,show: function() {
-    if(undefined !== arguments[0]) {
-       this.set(arguments[0]);
-    }
-
-    this.container.className = 'ctxmenu';
-  }
-
-  // Hide the ctxmenu
-  ,hide: function() {
-    if(this.container) {
-      this.container.remove();
-      this.container = null;
-    }
-  }
-};
-
-[].forEach.call(document.querySelectorAll('.with-ctxmenu'), function(el) {
-  el.addEventListener('contextmenu', function(e) {
-    // prevent the right click default action
-    e.preventDefault();
-    // prevent the auto kill
-    e.stopPropagation();
-
-    ctxmenu.show({
-      content: document.getElementById('ctxmenu-tpl').innerHTML
-      ,posX: e.clientX
-      ,posY: e.clientY
-    });
-  });
-});
-
-// hide the contextmenu on left/right click
-document.addEventListener('click', function() { ctxmenu.hide(); }, false);
-document.addEventListener('contextmenu', function() { ctxmenu.hide(); }, false);
+//
+// var ctxmenu = {
+//   container: null
+//
+//   // Initialize and add the div#ctxmenu container in the body
+//   ,init: function() {
+//     // hide the old ctxmenu
+//     this.hide();
+//
+//     this.container = document.createElement('div');
+//     this.container.setAttribute('id', 'ctxmenu');
+//     // autohide
+//     this.container.className = 'ctxmenu hidden';
+//
+//     document.body.appendChild(this.container);
+//   }
+//
+//   // Setting the configuration of the ctxmenu
+//   ,set: function() {
+//     this.init();
+//
+//     // override the default settings
+//     var settings = _.extend({
+//       content: null
+//       ,posX: 0
+//       ,posY: 0
+//     }, arguments[0] || {});
+//
+//     // adding the content
+//     this.container.innerHTML = settings.content;
+//
+//     // positionning
+//     this.container.style.left = settings.posX + 'px';
+//     this.container.style.top = settings.posY + 'px';
+//   }
+//
+//   // Showing the ctxmenu
+//   ,show: function() {
+//     if(undefined !== arguments[0]) {
+//        this.set(arguments[0]);
+//     }
+//
+//     this.container.className = 'ctxmenu';
+//   }
+//
+//   // Hide the ctxmenu
+//   ,hide: function() {
+//     if(this.container) {
+//       this.container.remove();
+//       this.container = null;
+//     }
+//   }
+// };
+//
+// [].forEach.call(document.querySelectorAll('.with-ctxmenu'), function(el) {
+//   el.addEventListener('contextmenu', function(e) {
+//     // prevent the right click default action
+//     e.preventDefault();
+//     // prevent the auto kill
+//     e.stopPropagation();
+//
+//     ctxmenu.show({
+//       content: document.getElementById('ctxmenu-tpl').innerHTML
+//       ,posX: e.clientX
+//       ,posY: e.clientY
+//     });
+//   });
+// });
+//
+// // hide the contextmenu on left/right click
+// document.addEventListener('click', function() { ctxmenu.hide(); }, false);
+// document.addEventListener('contextmenu', function() { ctxmenu.hide(); }, false);
 
 </script>
