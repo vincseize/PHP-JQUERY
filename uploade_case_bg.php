@@ -1,6 +1,8 @@
 <?php
 $str =file_get_contents('php://input');
-$dir = 'tmp/cases/';
+//$dir = 'tmp/cases/';
+
+$url_upload = $_GET['url_upload'];
 
 
 $ext = $_SERVER['HTTP_X_FILE_TYPE'];
@@ -13,12 +15,17 @@ $filename = $name.'.'.$ext;
 $e = explode("_",$filename);
 $dir_case = $e[0].'_'.$e[1];
 
-if (!file_exists($dir.$dir_case)) {
-    mkdir($dir.$dir_case, 0777, true);
+if (!file_exists($url_upload.$dir_case)) {
+    mkdir($url_upload.$dir_case, 0777, true);
 }
 
-$path = $dir.$dir_case.'/'.$filename;
+$path = $url_upload.$dir_case.'/'.$filename;
 file_put_contents($path,$str);
 
-echo $path;
+// echo $path;
+
+// $myfile = fopen($url_upload."newfile.txt", "w") or die("Unable to open file!");
+// $txt = $url_upload."\n";
+// fwrite($myfile, $txt);
+
 ?>
