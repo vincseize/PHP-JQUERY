@@ -373,7 +373,7 @@ display:flex;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
 
 
-
+<!-- // https://codepen.io/elmahdim/pen/hlmri   todo better -->
 <div class="row">
        <div class="col-lg-12">
      <div class="button-group">
@@ -436,7 +436,7 @@ $( '.dropdown-menu a' ).on( 'click', function( event ) {
 #cards li:nth-child(2n) {background-color: yellow;}*/
 </style>
 
-<ul id="cards" class="cards  flex_wrapX">
+<ul id="cards" class="cards flex_wrapX">
   <li class="LI-cards__item fiche" data-length="100" data-price="16" data-case="0001"  data-date="20171216">
 	<div class="card fiche_card">
 			<div class="div__cardImage">
@@ -644,11 +644,38 @@ $( document ).ready(function() {
        input__searchAssets(valThis);
     });
 
+
+    function a(){ console.log("a"); $(".cards li").sort(sort_case_asc_alphabetical).appendTo('.cards');}
+    function z(){ console.log("b"); $(".cards li").sort(sort_case_desc_alphabetical).appendTo('.cards');}
+
+    function sort_case_asc_alphabetical(a, b) {
+      console.log('sort_case_asc_alphabetical');
+      return ($(b).data('case')) < ($(a).data('case')) ? 1 : -1 ;
+    }
+    function sort_case_desc_alphabetical(a, b) {
+      console.log('sort_case_desc_alphabetical');
+      return ($(b).data('case')) < ($(a).data('case')) ? -1 : 1 ;
+    }
+
+    var az = [a,z];
     $( "#bt_sort" ).click(function(e) {
         $(this).find('.fa').toggleClass('fa-sort-alpha-asc fa-sort-alpha-desc');
+        az.reverse()[1]();
         e.stopPropagation();
         e.preventDefault();
     });
+
+
+
+
+
+    // function sort_case_alphabetical(order){
+    //     console.log(order);
+    //     $(".cards li").sort(sort_case_desc_alphabetical).appendTo('.cards');
+    // }
+
+
+
 
     $( "#bt_date" ).click(function(e) {
         // $(this).find('.fa').toggleClass('fa-calendar fa-calendar-times-o');
@@ -820,7 +847,55 @@ $( document ).ready(function() {
 // call the plugin
 $(".b-select").numericFlexboxSorting();
 
+// ###########  filters
 
+    function options_filters(){ // todo
+        console.log('toto');
+    }
+
+var options_filters = [];
+
+$( '.dropdown-menu a' ).on( 'click', function( event ) {
+
+
+
+
+   var $target = $( event.currentTarget ),
+       val = $target.attr( 'data-value' ),
+       $inp = $target.find( 'input' ),
+       idx;
+
+   if ( ( idx = options_filters.indexOf( val ) ) > -1 ) {
+      options_filters.splice( idx, 1 );
+      setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+   } else {
+      options_filters.push( val );
+      setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+   }
+
+   $( event.target ).blur();
+
+   console.log( options_filters );
+
+            $('.cards > li').each(function(){$(this).hide();});
+            $('.cards > li').each(function(){
+                var text = $(this).text().toLowerCase();
+                for(var i= 0; i < options_filters.length; i++){
+                    if ( text.indexOf(options_filters[i]) >= 0 ) {
+                        $(this).show();
+                    }
+                }
+                if (options_filters.length === 0) {
+                    $('.cards > li').each(function(){$(this).show();});
+                }
+            });
+
+
+
+
+
+   return false;
+});
 
 
 
