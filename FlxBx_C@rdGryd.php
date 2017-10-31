@@ -676,10 +676,23 @@ $( document ).ready(function() {
 
 
 
+    function da(){ console.log("a"); $(".cards li").sort(sort_date_asc_alphabetical).appendTo('.cards');}
+    function dz(){ console.log("b"); $(".cards li").sort(sort_date_desc_alphabetical).appendTo('.cards');}
 
+    function sort_date_asc_alphabetical(a, b) {
+      console.log('sort_date_asc_alphabetical');
+      return ($(b).data('date')) < ($(a).data('date')) ? 1 : -1 ;
+    }
+    function sort_date_desc_alphabetical(a, b) {
+      console.log('sort_date_desc_alphabetical');
+      return ($(b).data('date')) < ($(a).data('date')) ? -1 : 1 ;
+    }
+
+    var daz = [da,dz];
     $( "#bt_date" ).click(function(e) {
         // $(this).find('.fa').toggleClass('fa-calendar fa-calendar-times-o');
 		//$(this).find('.fa').toggleClass('fa-calendar fa-calendar');
+        daz.reverse()[1]();
         e.stopPropagation();
         e.preventDefault();
     });
