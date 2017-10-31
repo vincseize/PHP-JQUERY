@@ -1,3 +1,9 @@
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<!-- contextMenu sample1 -->
+<!-- <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script src="http://cdn.jsdelivr.net/modernizr/2.8.3/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script> -->
+<!-- fin sample1 -->
 <style>
 
 :root {
@@ -112,18 +118,251 @@
   }
 </style>
 
+<!--
+contextMenu sample2
+https://codepen.io/maheshambure21/pen/pbYxGK?page=1&
+-->
+<!--
+contextMenu sample1
+https://codepen.io/nomack/pen/hFbEm?page=1&
+-->
+<style>
+/*.with-ctxmenu {
+  width: 200px;
+  margin: 80px auto;
+  padding: 10px;
+  text-align: center;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background: #789;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+.ctxmenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #333;
+}
+  .ctxmenu-menu {
+    list-style: none;
+    padding: 1px;
+    margin: 0;
+    border: 1px solid #888;
+    background: #fefefe;
+    border-radius: 2px;
+    box-shadow: 2px 2px 3px #333;
+  }
+    .ctxmenu-menu li {
+      position: relative;
+    }
+      .ctxmenu-menu a,
+      .ctxmenu-menu a:visited {
+        display: block;
+        white-space: nowrap;
+        padding: 3px 20px 3px 5px;
+        border: 1px solid transparent;
+        background: transparent;
+        border-radius: 3px;
+        color: #333;
+        text-decoration: none;
+      }
+      .ctxmenu-menu a:hover {
+        border-color: #0065a5;
+        background: #7daac7;
+      }
+  .ctxmenu-menu .ctxmenu-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: none;
+  }
+    .ctxmenu-menu li:hover > .ctxmenu-menu {
+      display: block;
+    }*/
+
+</style>
+
+
+
+<!-- <div class="with-ctxmenu">
+  Right click me !
+</div>
+
+<div class="with-ctxmenu">
+  Right click me !
+</div>
+
+<div class="hidden">
+  <div id="ctxmenu-tpl">
+    <ul class="ctxmenu-menu">
+      <li>
+        <a href="">Link with menu</a>
+
+        <ul class="ctxmenu-menu">
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link again</a></li>
+          <li><a href="#">And again</a></li>
+          <li><a href="#">The last one</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#">Link with menu</a>
+
+        <ul class="ctxmenu-menu">
+          <li><a href="#">First link</a></li>
+          <li><a href="#">Second link</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#">Link without menu</a>
+      </li>
+
+      <li>
+        <a href="">Link without menu</a>
+      </li>
+    </ul>
+  </div>
+</div> -->
+<!-- fin sample1 -->
+
+
+<!-- <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script> -->
+    <!-- <script src="js/contextMenu-bin.min.js"></script>
+    <link rel="stylesheet" href="css/contextMenu-bin.min.css">
+    <script>
+      $(function() {
+        $('#mythingy').contextPopup({
+          title: 'My Popup Menu',
+          items: [
+            {label:'Some Item',     icon:'icons/shopping-basket.png',             action:function() { alert('clicked 1') } },
+            {label:'Another Thing', icon:'icons/receipt-text.png',                action:function() { alert('clicked 2') } },
+            {label:'Blah Blah',     icon:'icons/book-open-list.png',              action:function() { alert('clicked 3') } },
+            null, // divider
+            {label:'Sheep',         icon:'icons/application-monitor.png',         action:function() { alert('clicked 4') } },
+            {label:'Cheese',        icon:'icons/bin-metal.png',                   action:function() { alert('clicked 5') } },
+            {label:'Bacon',         icon:'icons/magnifier-zoom-actual-equal.png', action:function() { alert('clicked 6') } },
+            null, // divider
+            {label:'Onwards',       icon:'icons/application-table.png',           action:function() { alert('clicked 7') } },
+            {label:'Flutters',      icon:'icons/cassette.png',                    action:function() { alert('clicked 8') } }
+          ]
+        });
+      });
+    </script> -->
+
+
+
+    <!-- <div id="mythingy" class="" style="border:2px solid #666666;">
+      right click in this box to show custom context menu
+    </div>
+<br><br>
+    <div id="mythingy2" class="" style="border:2px solid #666666;">
+      right click in this box to show custom context menu
+    </div>
+<br><br> -->
 
 
 
 
-<script type='text/javascript' src='js/jquery-1.9.1.js'></script>
 
 
 
 
 
 
-<div id="div_case_0001" class="div_case" droppable="true">
+
+<!-- view-source:https://swisnl.github.io/jQuery-contextMenu/demo.html -->
+
+    <!-- <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/screen.css" type="text/css"/>
+    <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/theme.css" type="text/css"/>
+    <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/theme-fixes.css" type="text/css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <link href="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+     -->
+    <!-- <link href="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.css" rel="stylesheet" type="text/css" /> -->
+    <link href="css/contextMenuBinCases.css" rel="stylesheet" type="text/css" />
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+    <!-- <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.contextMenu.js" type="text/javascript"></script> -->
+
+    <script src="js/contextMenuBinCases.js" type="text/javascript"></script>
+
+    <!-- <script src="https://swisnl.github.io/jQuery-contextMenu/dist/jquery.ui.position.min.js" type="text/javascript"></script> -->
+    <script src="js/jquery.ui.position.min.js" type="text/javascript"></script>
+
+
+    <!-- <script src="https://swisnl.github.io/jQuery-contextMenu/js/main.js" type="text/javascript"></script> -->
+<style>
+/*.context-menu-one{
+    background-color: red;
+    z-index: 9999;
+}*/
+</style>
+<script>
+    $(function() {
+        $.contextMenu({
+            selector: '.context-menu-one',
+            callback: function(key, options) {
+                var m = "clicked: " + key;
+                window.console && console.log(m) || alert(m);
+            },
+            items: {
+                "edit": {name: "Edit", icon: "edit"},
+                "cut": {name: "Cut", icon: "cut"},
+               copy: {name: "Copy", icon: "copy"},
+                "paste": {name: "Paste", icon: "paste"},
+                "delete": {name: "Delete", icon: "delete"},
+                "sep1": "---------",
+                "quit": {name: "Quit", icon: function(){
+                    return 'context-menu-icon context-menu-icon-quit';
+                }}
+            }
+        });
+
+        $('.context-menu-one').on('click', function(e){
+            console.log('clicked', this);
+        })
+    });
+
+</script>
+
+<!-- <span class="context-menu-one btn btn-neutral">right click me</span>
+<br><br>
+<span class="context-menu-one">right click me</span>
+
+
+
+
+<br><br>
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="div_case_0001" class="div_case context-menu-one" droppable="true">
     <div class="div_input">
         <input type='file' class="input_case" name="case_0001_bg" onchange="uploadIMG(this);" />
     </div>
@@ -309,11 +548,16 @@ function uploadIMG(input) {
                 var type    = file.type;
                 var server  = 'upload_case_bg.php';
 
+;
+
                 var progressPercent = document.querySelector('.percent');
                 var progressBar = document.querySelector('.progressBar');
 
                 var reader  = new FileReader();
                 reader.onload = function (e) {
+
+
+      console.log(size + "is my file's size");
 
                     preview = "#"+input.name;
                     $(preview).attr('src', e.target.result);
@@ -333,5 +577,82 @@ function uploadIMG(input) {
                 reader.readAsDataURL(file);
             }
         }
+
+</script>
+
+
+<script>
+
+var ctxmenu = {
+  container: null
+
+  // Initialize and add the div#ctxmenu container in the body
+  ,init: function() {
+    // hide the old ctxmenu
+    this.hide();
+
+    this.container = document.createElement('div');
+    this.container.setAttribute('id', 'ctxmenu');
+    // autohide
+    this.container.className = 'ctxmenu hidden';
+
+    document.body.appendChild(this.container);
+  }
+
+  // Setting the configuration of the ctxmenu
+  ,set: function() {
+    this.init();
+
+    // override the default settings
+    var settings = _.extend({
+      content: null
+      ,posX: 0
+      ,posY: 0
+    }, arguments[0] || {});
+
+    // adding the content
+    this.container.innerHTML = settings.content;
+
+    // positionning
+    this.container.style.left = settings.posX + 'px';
+    this.container.style.top = settings.posY + 'px';
+  }
+
+  // Showing the ctxmenu
+  ,show: function() {
+    if(undefined !== arguments[0]) {
+       this.set(arguments[0]);
+    }
+
+    this.container.className = 'ctxmenu';
+  }
+
+  // Hide the ctxmenu
+  ,hide: function() {
+    if(this.container) {
+      this.container.remove();
+      this.container = null;
+    }
+  }
+};
+
+[].forEach.call(document.querySelectorAll('.with-ctxmenu'), function(el) {
+  el.addEventListener('contextmenu', function(e) {
+    // prevent the right click default action
+    e.preventDefault();
+    // prevent the auto kill
+    e.stopPropagation();
+
+    ctxmenu.show({
+      content: document.getElementById('ctxmenu-tpl').innerHTML
+      ,posX: e.clientX
+      ,posY: e.clientY
+    });
+  });
+});
+
+// hide the contextmenu on left/right click
+document.addEventListener('click', function() { ctxmenu.hide(); }, false);
+document.addEventListener('contextmenu', function() { ctxmenu.hide(); }, false);
 
 </script>
