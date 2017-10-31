@@ -121,13 +121,14 @@
 
 
 
-<form action="" id="myForm" name="frmupload" method="post" enctype="multipart/form-data">
+
 
 <div id="div_case_0001" class="div_case" droppable="true">
     <div class="div_input">
-        <input type='file' class="input_case" name="case_0001_bg" onchange="readURL(this);" />
+        <input type='file' class="input_case" name="case_0001_bg" onchange="uploadIMG(this);" />
     </div>
     <div class="div_img_case">
+        <!-- grey img -->
         <img id="case_0001_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
         <div id="case_0001_progressBar" class="progressBar"><div id="case_0001_progressPercent" class="percent">0%</div></div>
     </div>
@@ -138,7 +139,7 @@
 
 <div id="div_case_0002" class="div_case" droppable="true">
     <div class="div_input">
-        <input type='file'  class="input_case" name="case_0002_bg" onchange="readURL(this);"/>
+        <input type='file'  class="input_case" name="case_0002_bg" onchange="uploadIMG(this);"/>
     </div>
     <div class="div_img_case">
         <img id="case_0002_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
@@ -297,7 +298,7 @@ console.log('-----------------');
 
 // https://stackoverflow.com/questions/12502482/creating-progress-bar-for-uploading-files-using-jquery-and-ajax
 
-function readURL(input) {
+function uploadIMG(input) {
 
             // $(this).addClass('div_case_hover');
 
@@ -308,27 +309,26 @@ function readURL(input) {
                 var type    = file.type;
                 var server  = 'upload_case_bg.php';
 
-//console.log(name);
-
-    var progressPercent = document.querySelector('.percent');
-    var progressBar = document.querySelector('.progressBar');
+                var progressPercent = document.querySelector('.percent');
+                var progressBar = document.querySelector('.progressBar');
 
                 var reader  = new FileReader();
                 reader.onload = function (e) {
 
-   // reader.onerror = errorHandler;
-   //  reader.onprogress = updateProgress;
-   //  reader.onabort = function(e) {
-   //    alert('File read cancelled');
-   //  };
-
-                      e.stopPropagation(); // Stops some browsers from redirecting.
-                      e.preventDefault();
-
                     preview = "#"+input.name;
                     $(preview).attr('src', e.target.result);
                     UploadFile(file,name,size,type,server,progressPercent,progressBar);
+
+                    e.stopPropagation(); // Stops some browsers from redirecting.
+                    e.preventDefault();
+
                 };
+
+                //  reader.onerror = errorHandler;
+                //  reader.onprogress = updateProgress;
+                //  reader.onabort = function(e) {
+                //    alert('File read cancelled');
+                //  };
 
                 reader.readAsDataURL(file);
             }
