@@ -553,28 +553,34 @@ function uploadIMG(input) {
                 var progressPercent = document.querySelector('.percent');
                 var progressBar = document.querySelector('.progressBar');
 
+                if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+
                 var reader  = new FileReader();
-                reader.onload = function (e) {
+
+                        reader.onload = function (e) {
 
 
-      console.log(size + "is my file's size");
+                            console.log(size + "is my file's size");
 
-                    preview = "#"+input.name;
-                    $(preview).attr('src', e.target.result);
-                    UploadFile(file,name,size,type,server,progressPercent,progressBar,url_upload);
+                            preview = "#"+input.name;
+                            $(preview).attr('src', e.target.result);
+                            UploadFile(file,name,size,type,server,progressPercent,progressBar,url_upload);
 
-                    e.stopPropagation(); // Stops some browsers from redirecting.
-                    e.preventDefault();
+                            e.stopPropagation(); // Stops some browsers from redirecting.
+                            e.preventDefault();
 
-                };
+                        };
 
-                //  reader.onerror = errorHandler;
-                //  reader.onprogress = updateProgress;
-                //  reader.onabort = function(e) {
-                //    alert('File read cancelled');
-                //  };
+                        //  reader.onerror = errorHandler;
+                        //  reader.onprogress = updateProgress;
+                        //  reader.onabort = function(e) {
+                        //    alert('File read cancelled');
+                        //  };
 
-                reader.readAsDataURL(file);
+                        reader.readAsDataURL(file);
+                    }
+                    else{alert('only jpg|jpeg|png|gif')}
+
             }
         }
 
