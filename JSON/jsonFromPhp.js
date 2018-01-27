@@ -22,6 +22,7 @@ $.ajax({
         type: "GET", 
         url: url, 
         // data: form_data,
+        dataType: "json", //set to JSON 
         success: function(response)
         {
             /*response = '[{"Language":"jQuery","ID":"1"},{"Language":"C#","ID":"2"},
@@ -41,7 +42,6 @@ $.ajax({
             output+="</ul>";
             
             $('span').html(output);
-        },
-        dataType: "json"//set to JSON    
+        }   
 }) 
 </script>
