@@ -12,6 +12,30 @@ $json = '[{"Language":"jQuery","ID":"1"},{"Language":"C#","ID":"2"},
                            {"Language":"Python","ID":"5"},{"Language":"Perl","ID":"6"},
                            {"Language":"C++","ID":"7"},{"Language":"ASP","ID":"8"},
                            {"Language":"Ruby","ID":"9"}]';
+// construct json SampLE
+$json = array();
+foreach ($IDS_CHAINED_NODES as $id) {
+// echo '<pre>' . $id . '</pre>';
+		foreach($json_data as $v){
+			$i = $v['data']['id'];
+			if($i == $id){
+				// find classes, cases or sequences
+				$classes = $v['classes'];
+				//echo '<pre>' . $classes . '</pre>';
+				// find extension
+				$bg_path = "cases/case_".$id."/case_".$id."_bg.*";
+				$ext = get_bg_ext($bg_path);
+				//echo '<pre>' . $ext . '</pre>';
+			}
+		}
+		$node = [];
+		$node[] = $classes;
+		$node[] = $id;
+		$node[] = $ext;
+		$json2[] = $node;
+}
+$json2 = [["cases","7","jpg"],["cases","6","jpg"],["cases","9","jpg"],["cases","3","png"],["cases","2","jpg"]];
+
 echo json_encode($json);
 ?>
 
@@ -20,13 +44,13 @@ echo json_encode($json);
 var url = "json.php";
 
 function myFunction() {
-    getJson(function(j) {
+    getJson(function(json_obj) {
         //processing the data
-        // console.log(j);
-        var json_obj = $.parseJSON(j);//parse JSON
+        // console.log(json_obj);
+        var json_obj = $.parseJSON(json_obj);//parse JSON
         for (var i in json_obj) 
             {
-
+		// console.log(json_obj[i]); if json2
                 console.log(json_obj[i].classes + ",  " + json_obj[i].id + ",  " + json_obj[i].ext);
                 var id = json_obj[i].id;
                 var ext = json_obj[i].ext;
