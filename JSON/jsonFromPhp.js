@@ -18,6 +18,47 @@ echo json_encode($json);
 <script>
 // json.js
 var url = "json.php";
+
+function myFunction() {
+    getJson(function(j) {
+        //processing the data
+        // console.log(j);
+        var json_obj = $.parseJSON(j);//parse JSON
+        for (var i in json_obj) 
+            {
+
+                console.log(json_obj[i].classes + ",  " + json_obj[i].id + ",  " + json_obj[i].ext);
+                var id = json_obj[i].id;
+                var ext = json_obj[i].ext;
+
+		        var imageUrl = 'cases/case_'+id+'/case_'+id+'_bg.'+ext+'';
+				var id_div = "#case_"+id;
+		        $(id_div).css('background-image', 'url(' + imageUrl + ')');
+
+            }
+
+    });
+}
+
+
+function getJson(callback) {
+    var data;
+    $.ajax({
+        url: url,
+        dataType: "json", //set to JSON
+        success: function (resp) {
+            data = resp;
+            callback(data);
+        },
+        error: function () {}
+    }); // ajax asynchronus request 
+    //the following line wouldn't work, since the function returns immediately
+    //return data; // return data from the ajax request
+}
+
+myFunction_DES(); // if you want to use response in external function
+
+
 $.ajax({
         type: "GET", 
         url: url, 
