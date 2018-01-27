@@ -50,7 +50,7 @@ function myFunction() {
         var json_obj = $.parseJSON(json_obj);//parse JSON
         for (var i in json_obj) 
             {
-		// console.log(json_obj[i]); if json2
+		// console.log(json_obj[i]); if json2 ["cases","7","jpg"]
                 console.log(json_obj[i].classes + ",  " + json_obj[i].id + ",  " + json_obj[i].ext);
                 var id = json_obj[i].id;
                 var ext = json_obj[i].ext;
