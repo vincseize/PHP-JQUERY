@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 28d4ae0a9019eba3f2b72cc873f4d19e19b250a2
 <!DOCTYPE html>
 <html lang="en">
 
@@ -501,3 +505,511 @@
 </body>
 
 </html>
+<<<<<<< HEAD
+=======
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Card Uploader</title>
+
+
+	<!--   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'> -->
+	<link rel='stylesheet' href='css/font-awesome.min.css'>
+	<link rel="stylesheet" href="css/styles_Kcard.css">
+
+	<style type="text/css">
+
+/*		@import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,700);*/
+
+		*, *::before, *::after {
+		  box-sizing: border-box;
+		}
+
+		html {
+		  min-height: 100%;
+		}
+
+		body {
+		  margin: 20px;
+		  color: #435757;
+		  background:
+		    linear-gradient(40deg, transparent 40%, #9ab593),
+		    linear-gradient(-40deg, #ba7461 20%, #593e4e 90%);
+		  font: 1.2em/1 'Noto Sans', sans-serif;
+		}
+
+
+		:root {
+
+
+
+
+		  --wrapper_Kcard-width: 400px;
+		  --wrapper_Kcard-height: auto;
+		  --wrapper_Kcard-padding: 5px; /*cf border*/
+		  --wrapper_Kcard-bgColor: yellow;
+
+
+		  --Kcard_layers-zIndex: 98;
+
+
+		  --Kcard_header-position: relative;
+		  --Kcard_header-width: 100%;
+		  --Kcard_header-height: 30px;
+		  --Kcard_header-color: white;
+		  --Kcard_header-bgColor: black;
+		  --Kcard_header-display: block;
+
+		  --Kcard_stick-position: absolute;
+		  --Kcard_stick-position-top: 30px;
+		  --Kcard_stick-position-right: 0;
+		  --Kcard_stick-zIndex: var(--Kcard_layers-zIndex);
+		  --Kcard_stick-width: 50%;
+		  --Kcard_stick-height: 40px;
+		  --Kcard_stick-color: white;
+		  --Kcard_stick-bgColor: green;
+		  --Kcard_stick-opacity: 0.9;
+		  --Kcard_stick-display: block;
+
+		  --Kcard_label-position: absolute;
+		  --Kcard_label-position-top: 0;
+		  --Kcard_label-position-left: 0;
+		  --Kcard_label-zIndex: var(--Kcard_layers-zIndex);
+		  --Kcard_label-width: 55px;
+		  --Kcard_label-height: 75px;
+		  --Kcard_label-color: white;
+		  --Kcard_label-bgColor: red;
+		  --Kcard_label-opacity: 0.8;
+		  --Kcard_label-display: block;
+
+		  --Kcard_menu-position: absolute;
+		  --Kcard_menu-position-left: 0px;
+		  --Kcard_menu-position-right: 0px;
+		  --Kcard_menu-zIndex: var(--Kcard_layers-zIndex);
+		  --Kcard_menu-width: 100%;
+		  --Kcard_menu-height: 60px;
+		  /*!important after var height*/
+		/*  --Kcard_menu-position-top: calc(var(--Kcard_header-height) + var(--Kcard_img-height) - var(--Kcard_menu-height)); */
+		  --Kcard_menu-color: white;
+		  --Kcard_menu-bgColor: blue;
+		  --Kcard_menu-display: none;
+
+		  --Kcard_img-position: relative;
+		  --Kcard_img-width: 100%;
+		  --Kcard_img-height: 260px;
+		  --Kcard_img-color: white;
+		  --Kcard_img-bgColor: grey;
+		  --Kcard_img-display: block;
+
+		  --Kcard_content-position: relative;
+		  --Kcard_content-width: 100%;
+		  --Kcard_content-height: 160px;
+		  --Kcard_content-color: white;
+		  --Kcard_content-color-hover: white;
+		  --Kcard_content-bgColor: 	#696969;
+		  --Kcard_content-bgColor-hover: grey;
+		  --Kcard_content-display: block;
+
+		  --Kcard_footer-position: relative;
+		  --Kcard_footer-width: 100%;
+		  --Kcard_footer-height: 30px;
+		  --Kcard_footer-color: white;
+		  --Kcard_footer-bgColor: black;
+		  --Kcard_footer-display: block;
+
+
+		}
+
+
+			.wrapper_Kcard{
+				position:relative;
+				display: table-cell;
+			    width: var(--wrapper_Kcard-width);
+			    height: var(--wrapper_Kcard-height);
+				/*padding: var(--wrapper_Kcard-padding);*/
+			    background: var(--wrapper_Kcard-bgColor);
+			    /*z-index: 1;*/
+
+				-webkit-border-radius: 0px 0px 14px 14px;
+				-moz-border-radius: 0px 0px 14px 14px;
+				border-radius: 0px 0px 14px 14px;
+
+				overflow: hidden;
+				-webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
+				      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
+
+			}
+
+
+
+			.Kcard_header{
+			  	position: var(--Kcard_header-position);
+			    width: var(--Kcard_header-width);
+			    height: var(--Kcard_header-height);
+			    color: var(--Kcard_header-color);
+			    background: var(--Kcard_header-bgColor);
+			    display: var(--Kcard_footer-display);
+			    padding-left: 10px;
+			}
+
+
+
+			.Kcard_stick{
+			  	position: var(--Kcard_stick-position);
+			  	top: var(--Kcard_stick-position-top);
+			  	right: var(--Kcard_stick-position-right);
+			  	z-index: var(--Kcard_stick-zIndex);
+			    width: var(--Kcard_stick-width);
+			    height: var(--Kcard_stick-height);
+			    color: var(--Kcard_stick-color);
+			    background: var(--Kcard_stick-bgColor);
+			    opacity: var(--Kcard_stick-opacity);
+			    display: var(--Kcard_stick-display);
+			}
+			.Kcard_label{
+			  	position: var(--Kcard_label-position);
+			  	top: var(--Kcard_label-position-top);
+			  	left: var(--Kcard_label-position-left);
+			  	z-index: var(--Kcard_label-zIndex);
+			    width: var(--Kcard_label-width);
+			    height: var(--Kcard_label-height);
+			    color: var(--Kcard_label-color);
+			    background: var(--Kcard_label-bgColor);
+			    opacity: var(--Kcard_label-opacity);
+			    display: var(--Kcard_label-display);
+			}
+
+
+
+			.Kcard_menu{
+			  	position: var(--Kcard_menu-position);
+			  	/*top: var(--Kcard_menu-position-top);*/
+			  	top: calc(0px - var(--Kcard_menu-height));
+			  	/*top: 0px;*/
+			  	right: var(--Kcard_menu-position-right);
+			  	left: var(--Kcard_menu-position-left);
+			  	z-index: var(--Kcard_menu-zIndex);
+			    width: var(--Kcard_menu-width);
+			    height: var(--Kcard_menu-height);
+			    color: var(--Kcard_menu-color);
+			    background: var(--Kcard_menu-bgColor);
+			    display: var(--Kcard_menu-display);
+			    /*slide menu*/
+			    /*display: block;
+				transform: translateY(var(--Kcard_menu-height));
+				transition: transform 0.2s cubic-bezier(0, 0, 0.1, 1);*/
+			}
+			#Kcard_openMenu {
+				appearance: none;
+			}
+			#Kcard_openMenu:checked ~ .Kcard_menu {
+				display: block;
+				/*slide menu*/
+				/*z-index:var(--Kcard_layers-zIndex);
+				transform: translateY(0);*/
+			}
+			.Kcard_openMenu_label {
+				position:absolute;
+				z-index: var(--Kcard_layers-zIndex);
+				top:-10px;
+				right:10px;
+				margin:0px;
+				padding: 0px;
+				font-size: 1.6em;
+				font-weight: bold;
+			}
+			.Kcard_openMenu_label:hover {
+			  cursor: pointer;
+			}
+
+
+
+			.Kcard_img{
+			  	position: var(--Kcard_img-position);
+			    width: var(--Kcard_img-width);
+			    height: var(--Kcard_img-height);
+			    color: var(--Kcard_img-color);
+			    background: var(--Kcard_img-bgColor);
+			    background: url(img/card_img.jpg) center/cover no-repeat;
+			    display: var(--Kcard_footer-display);
+			}
+
+
+
+			.Kcard_content{
+			  	position: var(--Kcard_content-position);
+			    width: var(--Kcard_content-width);
+			    height: var(--Kcard_content-height);
+			    color: var(--Kcard_content-color);
+			    background: var(--Kcard_content-bgColor);
+			    display: var(--Kcard_footer-display);
+			}
+			.Kcard_content:hover{
+				background: var(--Kcard_content-bgColor-hover);
+				color: var(--Kcard_content-color-hover);
+				/*slide menu*/
+				/*opacity:0.5;
+				z-index: 99px;*/
+			}
+
+			.Kcard_content-title{
+					padding-left: 10px;
+					padding-right: 10px;
+					font-size: 1em;
+					font-weight: bold;
+			}
+			.Kcard_content-content{
+					padding-left: 10px;
+					padding-right: 10px;
+					/*font-size: 0.8em;*/
+					font-weight: normal;
+			}
+			.Kcard_content input[type="checkbox"]{
+				position: absolute;
+				left: -9999px;
+			}
+
+
+
+			.Kcard_footer{
+			  	position: var(--Kcard_footer-position);
+			    width: var(--Kcard_footer-width);
+			    height: var(--Kcard_footer-height);
+			    color: var(--Kcard_footer-color);
+			    background: var(--Kcard_footer-bgColor);
+			    display: var(--Kcard_footer-display);
+			    padding-left: 10px;
+
+				-webkit-border-radius: 0px 0px 16px 16px;
+				-moz-border-radius: 0px 0px 16px 16px;
+				border-radius: 0px 0px 16px 16px;
+
+			}
+
+
+/* FOR TESTS*/
+
+/*.Kcard_header {display: none;}*/
+/*.Kcard_img {display: none;}*/
+/*.Kcard_content {display: none;}*/
+/*.Kcard_menu {display: block;}*/
+/*.Kcard_footer {display: none;}*/
+
+	</style>
+
+
+</head>
+
+<body>
+
+  <div class="row">
+
+
+
+  																	<div class="example-0 card">
+
+
+
+
+
+		<div ID_wrapper_Kcard="wrapper_Kcard" class="wrapper_Kcard">
+
+					<!-- /* overlayed */ -->
+					<div class="Kcard_stick"><span>stick</span></div>
+					<div class="Kcard_label"><span><br>label</span></div>
+<!-- 					<div id="Kcard_menu" class="Kcard_menu">
+					        <span>MENU</span>
+					</div> -->
+
+					<!-- /* vertically ordered */ -->
+					<div class="Kcard_header">
+					        <span>HEADER</span>
+					</div>
+
+					<div class="Kcard_img"  align="center">
+					        <span><br><br><br>IMG</span>
+					</div>
+
+
+					<div class="Kcard_content">
+					    <input id="Kcard_openMenu" class="Kcard_openMenu_input" type="checkbox" >
+					    <label for="Kcard_openMenu"  class="Kcard_openMenu_label" >...</label>
+						<div id="Kcard_menu" class="Kcard_menu"><span>MENU</span></div>
+						<span class="Kcard_content-title">CONTENT title</span>
+						<p class="Kcard_content-content">CONTENT Content</p>
+					</div>
+
+					<div class="Kcard_footer">
+					        <span>FOOTER</span>
+					</div>
+					<!-- /* end vertically ordered */ -->
+
+		</div>
+
+
+
+  																		</div>
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+  <section>
+    <input id="Kcard_openMenu" type="checkbox" >
+    <label for="Kcard_openMenu" >OPEN</label>
+    <div class="test"> MENU APPEARS</div>
+  </section>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+  																	<div class="example-1 card">
+
+
+
+
+
+
+
+
+
+
+    <div class="wrapper-card">
+
+
+		      <div class="data-img">    </div>
+
+
+				<div class="header">
+				        <ul class="menu-content-card-top">
+				          <li>
+				            <a href="#" class="fa fa-bookmark-o"></a>
+				          </li>
+				          <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
+				          <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
+				        </ul>
+				</div>
+
+
+		      <div class="date-card">
+		        <span class="day-card">12</span>
+		        <span class="month-card">Aug</span>
+		        <span class="year-card">2016</span>
+		      </div>
+
+
+
+
+		      <div class="data-card" style="display: block;">
+
+			        <div class="content-card">
+			          <span class="author-card">Jane Doe</span>
+			          <h1 class="title-card">Everything You Need to Know About Gold Medals</h1>
+			          <p class="text-card">Olympic gold medals contain only about 1.34 percent gold, with the rest composed of sterling silver.</p>
+			          <label for="show-menu-card" class="menu-button-card"><span></span></label>
+			        </div>
+
+			        <input type="checkbox" id="show-menu-card" />
+			        <ul class="menu-content-card">
+			          <li>
+			            <a href="#" class="fa fa-bookmark-o"></a>
+			          </li>
+			          <li><a href="#" class="fa fa-heart-o"><span>47</span></a></li>
+			          <li><a href="#" class="fa fa-comment-o"><span>8</span></a></li>
+			        </ul>
+
+			 </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  																		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="example-2 card">
+    <div class="wrapper-card">
+      <div class="header">
+        <div class="date-card">
+          <span class="day-card">12</span>
+          <span class="month-card">Aug</span>
+          <span class="year-card">2016</span>
+        </div>
+        <ul class="menu-content-card">
+          <li>
+            <a href="#" class="fa fa-bookmark-o"></a>
+          </li>
+          <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
+          <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
+        </ul>
+      </div>
+      <div class="data-card">
+        <div class="content-card">
+          <span class="author-card">Jane Doe</span>
+          <h1 class="title-card"><a href="#">Stranger Things: The sound of the Upside Down</a></h1>
+          <p class="text-card">The antsy bingers of Netflix will eagerly anticipate the digital release of the Survive soundtrack, out today.</p>
+          <a href="#" class="button-card">Read more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</body>
+
+</html>
+>>>>>>> d9e51a6aff59411e043abff15fcc3b3210a42892
+>>>>>>> 28d4ae0a9019eba3f2b72cc873f4d19e19b250a2
