@@ -1,0 +1,12 @@
+# Ignorer tous les fichiers nommés foo.txt
+# foo.txt
+# Ignorer tous les fichiers .ext
+*.zip
+# Ignorer tous les fichiers .ext
+*.rar
+# Ignorer tous les fichiers .ext
+*.psd
+# à l'exception de foo.html qui est maintenu à la main
+!foo.html
+# Ignorer les objets et les archives
+*.[oa]
