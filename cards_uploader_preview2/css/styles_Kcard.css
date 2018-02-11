@@ -1,0 +1,492 @@
+/*@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);*/
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-image: -webkit-gradient(linear, left top, right top, from(#034378), to(#2d4e68));
+  background-image: linear-gradient(to right, #034378, #2d4e68);
+/*  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;*/
+  height: 100vh;
+  font-family: "Open Sans", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
+
+
+:root {
+  --card-bg-color: white;
+  --card-bg-img: white;
+  --card-bg-color-content: black;
+  --card-bg-color-content-opacity: 0.5;
+  --card-bg-color-content-hover: grey;
+  --card-color-content: grey;
+  --card-color-content-hover: white;
+  --card-bg-color-date: red;
+  --card-bg-color-menu: #77d7b9;
+
+  --card-bg-color-menu-button-card: white;
+
+  --card-color-author-card: white;
+
+  --card-color-span : red;
+
+  --card-width: 33%;
+
+  --wrapper-card-height: 540px;
+  --card-content-height: 230px; /*230*/
+  --card-menu-content-card-height: 60px;
+
+  --delta-em: 1em;
+  --delta: calc(70px + var(--delta-em));
+  --delta-bottom : calc(var(--delta) - var(--delta-em));
+
+  --card-img-heightX: calc(var(--wrapper-card-height) - var(--card-content-height) + var(--delta));
+  --card-img-height: calc(var(--wrapper-card-height) - var(--card-content-height) + var(--delta-em))  ;
+
+
+  --card-img-z-index: 1000;
+  --date-card-z-index: 2000;
+  --data-card-z-index: 2000;
+
+
+
+/*336px*/
+
+}
+
+
+.row {
+  max-width: 90%;
+  margin: 20px auto 0;
+}
+
+.card {
+  float: left;
+/*  padding: 0 1rem;*/
+  width: var(--card-width);
+  cursor:default;
+  text-decoration: none;
+    margin: 0px;
+  padding: 20px;
+}
+.card .menu-content-card {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.card .menu-content-card::before, .card .menu-content-card::after {
+  content: '';
+  display: table;
+    margin-bottom: 0px;
+  padding-bottom: 0px;
+
+}
+.card .menu-content-card::after {
+  clear: both;
+    margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.card .menu-content-card li {
+  display: inline-block;
+    margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.card .menu-content-card a {
+  color: #fff;
+    margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.card .menu-content-card span {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Open Sans';
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  color: var(--card-color-span);
+    margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.card .wrapper-card {
+  background-color: var(--card-bg-color);
+  min-height: var(--wrapper-card-height);
+  position: relative;
+  overflow: hidden;
+  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
+  cursor:default;
+  text-decoration: none;
+    margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+/*.card .wrapper-card:hover .data-card {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}*/
+.card .data-card {
+  position: absolute;
+  width: 100%;
+  -webkit-transform: translateY(var(--delta)); 
+          transform: translateY(var(--delta));
+          /*transform: translateY(calc(70px + 1em));*/
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  cursor:default;
+  height: var(--card-content-height);
+  z-index: var(--data-card-z-index);
+  bottom: var(--delta-bottom);
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+/*.card .data-card .content-card:hover {
+  -webkit-transform: translateY(20);
+          transform: translateY(0);
+          background-color: var(--card-bg-color-content-hover);
+          cursor:default;
+}*/
+
+.card .data-card .content-card:hover {
+          background-color: var(--card-bg-color-content-hover);
+          color: var(--card-color-content-hover);
+          cursor:default;
+}
+
+
+.card .data-card .content-card {
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+
+}
+.card .author-card {
+  font-size: 12px;
+  color: var(--card-color-author-card);
+}
+.card .title-card {
+  margin-top: 10px;
+}
+.card .text-card {
+  height: 70px;
+  margin: 0;
+}
+.card input[type='checkbox'] {
+  display: none;
+
+}
+.card input[type='checkbox']:checked + .menu-content-card {
+  -webkit-transform: translateY(-60px);
+          transform: translateY(-60px);
+}
+
+.example-1X .wrapper-cardX {
+  background: url(http://res.cloudinary.com/thedailybeast/image/upload/v1492110403/articles/2016/08/12/whose-gold-medal-is-worth-the-most/160811-glasser-olympic-medal-tease_mvemzf.jpg) center/cover no-repeat;
+}
+
+.example-1 .wrapper-card {
+/*  background: url(http://.../160811-glasser-olympic-medal-tease_mvemzf.jpg) center/cover no-repeat;*/
+/*  background-image: url(img/card_img.jpg) center/cover no-repeat;*/
+/*  background-image:url(img/card_img.jpg);
+  background-repeat:no-repeat;
+  background-position:center;*/
+
+/*  background: url(http://127.0.0.1/cards_uploader_preview/img/card_img.jpg) center/cover no-repeat;*/
+  background: url(../img/card_img.jpg) center/cover no-repeat;
+}
+
+
+.example-1 .date-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--card-bg-color-date);
+  color: #fff;
+  padding: 0.8em;
+
+  z-index: var(--date-card-z-index);
+  position: absolute;
+
+
+}
+.example-1 .date-card span {
+  display: block;
+  text-align: center;
+}
+.example-1 .date-card .day-card {
+  font-weight: 700;
+  font-size: 24px;
+  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.18);
+}
+.example-1 .date-card .month-card {
+  text-transform: uppercase;
+}
+.example-1 .date-card .month-card,
+.example-1 .date-card .year-card {
+  font-size: 12px;
+}
+.example-1 .content-card {
+  color : var(--card-color-content);
+  background-color: var(--card-bg-color-content);
+  opacity: var(--card-bg-color-content-opacity);
+  -webkit-box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.3);
+
+}
+.example-1 .title-card a {
+  color: gray;
+}
+.example-1 .menu-button-card {
+  position: absolute;
+  z-index: 999;
+  top: 16px;
+  right: 16px;
+  width: 25px;
+  text-align: center;
+  cursor: pointer;
+}
+.example-1 .menu-button-card span {
+  width: 5px;
+  height: 5px;
+  background-color: var(--card-bg-color-menu-button-card);
+  color: var(--card-bg-color-menu-button-card);
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+}
+.example-1 .menu-button-card span::after, .example-1 .menu-button-card span::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  background-color: currentColor;
+  position: absolute;
+  border-radius: 50%;
+}
+.example-1 .menu-button-card span::before {
+  left: -10px;
+}
+.example-1 .menu-button-card span::after {
+  right: -10px;
+}
+.example-1 .menu-content-card {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+.example-1 .menu-content-card li {
+  width: 33.333333%;
+  float: left;
+  background-color: var(--card-bg-color-menu);
+  height: var(--card-menu-content-card-height);
+  position: relative;
+}
+.example-1 .menu-content-card a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 24px;
+}
+.example-1 .menu-content-card span {
+  top: -10px;
+}
+
+
+
+
+.example-1 .header {
+  color: #fff;
+  padding-right: 1em;
+  z-index: var(--date-card-z-index);
+}
+.example-1 .header::before, .example-1 .header::after {
+  content: '';
+  display: table;
+}
+.example-1 .header::after {
+  clear: both;
+}
+.example-1 .menu-content-card-top {
+  float: right;
+}
+.example-1 .menu-content-card-top li {
+/*  margin: 0 5px;*/
+  position: relative;
+  display: inline;
+  list-style: none; /* pour enlever les puces sur IE7 */
+  z-index: var(--date-card-z-index);
+}
+.example-1 .menu-content-card-top li a{
+  text-decoration: none;
+  color: white;
+}
+.example-1 .data-img {
+  background-color: white;
+  width: 100%;
+  height: var(--card-img-height);
+  z-index: var(--card-img-z-index);
+  position: absolute;
+  background: url(../img/card_img.jpg) center/cover no-repeat;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.example-2 .wrapper-card {
+  background: url(https://tvseriescritic.files.wordpress.com/2016/10/stranger-things-bicycle-lights-children.jpg) center/cover no-repeat;
+}
+.example-2 .wrapper-card:hover .menu-content-card span {
+  -webkit-transform: translate(-50%, -10px);
+          transform: translate(-50%, -10px);
+  opacity: 1;
+}
+.example-2 .header {
+  color: #fff;
+  padding: 1em;
+}
+.example-2 .header::before, .example-2 .header::after {
+  content: '';
+  display: table;
+}
+.example-2 .header::after {
+  clear: both;
+}
+.example-2 .header .date-card {
+  float: left;
+  font-size: 12px;
+}
+.example-2 .menu-content-card {
+  float: right;
+}
+.example-2 .menu-content-card li {
+  margin: 0 5px;
+  position: relative;
+}
+.example-2 .menu-content-card span {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  opacity: 0;
+}
+.example-2 .data-card {
+  color: #fff;
+
+     cursor:default;  
+     
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  height: 400px;
+
+
+}
+
+
+
+
+
+/*.example-2 .card .data-card {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-transform: translateY(calc(70px + 1em));
+          transform: translateY(calc(70px + 1em));
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+
+
+}*/
+
+/*.example-2 .data-card .content-card:hover {
+  -webkit-transform: translateY(20);
+          transform: translateY(0);
+          background-color: var(--card-bg-color-content-hover);
+          cursor:default;
+}
+
+.example-2 .card .data-card .content-card:hover {
+          background-color: var(--card-bg-color-content-hover);
+          color: var(--card-color-content-hover);
+          cursor:default;
+}*/
+
+
+.example-2  .card .data-card .content-card {
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+
+}
+
+
+
+
+
+
+
+
+
+.example-2 .title-card a {
+  color: #fff;
+}
+.example-2 .button-card {
+  display: block;
+  width: 100px;
+  margin: 2em auto 1em;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  font-weight: 700;
+}
+.example-2 .button-card::after {
+  content: '\2192';
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.example-2 .button-card:hover::after {
+  -webkit-transform: translate(5px, -50%);
+          transform: translate(5px, -50%);
+  opacity: 1;
+}
