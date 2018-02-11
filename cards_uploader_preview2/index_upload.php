@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Card Uploader</title>
-  
-	  
+
+
 	<!--   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'> -->
 	<!-- 	<link rel='stylesheet' href='css/font-awesome.min.css'>-->
-	<link rel="stylesheet" href="css/style_Kcard.css"> 
+	<link rel="stylesheet" href="css/style_Kcard.css">
 
 
 
@@ -27,7 +27,7 @@
 
 
 
-  
+
 </head>
 
 <body>
@@ -36,8 +36,8 @@
 
 
 
-  															
-										
+
+
 <style>
 .dm-uploader{
 	width: var(--Kcard_img-width);
@@ -98,14 +98,14 @@ nav {
   min-width: 600px;
   overflow: hidden;
 }
- 
+
 ul {
   display: flex;
 	padding: 0;
 	margin: 0;
 	list-style-type: none;
 }
- 
+
 .flex {
 	flex: 1;
 /*	max-width:50px;*/
@@ -122,25 +122,25 @@ width: 100%;
 	  padding: 0px;
 
 }
- 
+
 	.flex:hover {
 		background: #1E6B47;
 		cursor: pointer;
 
   }
- 
+
 .fixed {
 	display: inline-flex;
 	background: #1E6B47;
 	padding: 1em;
 	transition: all .3s;
 }
- 
-	.fixed:hover { 
+
+	.fixed:hover {
 /*    width: 30%;*/
 width: 100%;
   }
- 
+
 .fontawesome-search input {
 	flex: 1;
 	background: transparent;
@@ -158,12 +158,12 @@ text-indent: 30px;
 
 }
 
- 
+
 	.nav-nav-menu-bin-search input:focus {
 		border: 0;
 	  outline: none;
   }
- 
+
 .fontawesome-search {
   text-indent: .3em;
   width: 55px;
@@ -230,17 +230,17 @@ text-indent: 30px;
 .container-4 input#search::-webkit-input-placeholder {
    color: #65737e;
 }
- 
+
 .container-4 input#search:-moz-placeholder { /* Firefox 18- */
-   color: #65737e;  
+   color: #65737e;
 }
- 
+
 .container-4 input#search::-moz-placeholder {  /* Firefox 19+ */
-   color: #65737e;  
+   color: #65737e;
 }
- 
-.container-4 input#search:-ms-input-placeholder {  
-   color: #65737e;  
+
+.container-4 input#search:-ms-input-placeholder {
+   color: #65737e;
 }
 
 .container-4 button.icon{
@@ -250,7 +250,7 @@ text-indent: 30px;
   -moz-border-radius-bottomright: 5px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
- 
+
   border: none;
   background: #232833;
   height: 50px;
@@ -258,7 +258,7 @@ text-indent: 30px;
   color: #4f5b66;
   opacity: 0;
   font-size: 10pt;
- 
+
   -webkit-transition: all .55s ease;
   -moz-transition: all .55s ease;
   -ms-transition: all .55s ease;
@@ -271,14 +271,14 @@ text-indent: 30px;
   opacity: 1;
   margin-left: -50px;
 }
- 
+
 .container-4:hover button.icon:hover{
   background: white;
 }
 
 
 
-</style>	
+</style>
 
 
 
@@ -352,7 +352,7 @@ text-indent: 30px;
 					</div>
 
 
-						<!-- file list -->   
+						<!-- file list -->
 <!-- 			          <div style="margin:0px;padding:0px; ">
 			            <ul class="list-unstyled p-2 d-flex flex-column col" id="files" style="margin:0px;padding:0px; ">
 			            </ul>
@@ -364,13 +364,13 @@ text-indent: 30px;
 
 
 
-					<div class="Kcard_content">       
+					<div class="Kcard_content">
 					    <input bt="ID_dm-uploader-button" id="Kcard_openMenu" class="Kcard_openMenu_input" type="checkbox">
  					    <label for="Kcard_openMenu"  class="Kcard_openMenu_label" title="more">...</label>
 												<!--
 													<div id="Kcard_menu" class="Kcard_menu">
 														<span>MENU</span>
-													</div> 
+													</div>
 												-->
 
 
@@ -387,7 +387,7 @@ text-indent: 30px;
 
 
 </div>
-  																
+
 
 
 
@@ -402,7 +402,7 @@ text-indent: 30px;
 
       <div class="row">
         <div class="col-md-6 col-sm-12">
-          
+
 
           <!-- uploader -->
           <!-- Our markup, the important part here! -->
@@ -413,13 +413,13 @@ text-indent: 30px;
                 <span>Open the file Browser</span>
                 <input type="file" title='Click to add Files' />
             </div>
-          </div> 
+          </div>
           <!-- /uploader -->
 
 
         </div>
 
-<!-- file list -->   
+<!-- file list -->
         <div class="col-md-6 col-sm-12">
           <div class="card h-100">
             <div class="card-header">
@@ -474,9 +474,9 @@ text-indent: 30px;
             <strong>%%filename%%</strong> - Status: <span class="text-muted">Waiting</span>
           </p>
           <div class="progress mb-2">
-            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
               role="progressbar"
-              style="width: 0%" 
+              style="width: 0%"
               aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
             </div>
           </div>
