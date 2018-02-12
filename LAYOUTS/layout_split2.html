@@ -1,0 +1,89 @@
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+
+<!--   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="css/layout-default-latest.css">
+
+<!-- <script type="text/javascript" src="js/jquery.3.1.1.min.js"></script> -->
+<!-- <script type="text/javascript" src="js/jquery-resizable.js"></script> -->
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+
+<script type="text/javascript" src="js/jquery.layout.min.js"></script>
+
+
+<style type="text/css">
+	
+html,
+body {
+  height: 100%;
+    padding: 0;
+  margin: 0;
+  overflow: none;
+}
+
+#mainLayout{
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
+
+.ui-layout-pane {
+    border: 0;
+    /* cosmetic */
+    padding: 0;
+    overflow: hidden;
+}
+
+.ui-layout-resizer-south {
+  height: 6px !important;
+}
+.ui-layout-toggler-south {
+  height: 6px !important;
+}
+
+.ui-layout-resizer-east {
+  width: 6px !important;
+}
+.ui-layout-toggler-east {
+  width: 6px !important;
+}
+
+</style>
+
+</head>
+
+
+<div id="mainLayout">
+<div id="rightPanel">
+    <div id="graph"></div>
+    <div id="details"></div>
+</div>
+<div id="filter">
+</div>
+</div>
+
+<script type="text/javascript">
+	
+  // OUTER-LAYOUT
+  $('#mainLayout').layout({
+    center__paneSelector: "#rightPanel",
+    west__paneSelector:   "#filter",
+      west__size: 250,
+    // MIDDLE-LAYOUT (child of outer-center-pane)
+    center__childOptions: {
+      center__paneSelector: "#graph",
+      south__paneSelector:  "#details",
+      south__size:      250
+    }
+  });
+
+</script>

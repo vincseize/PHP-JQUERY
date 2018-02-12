@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery flexLayout Plugin Demo</title>
+
+<style>
+body { background-color:#61B2A0; color:#fff;}
+.container { margin:5px auto; max-width:960px; height:600px; border:2px solid #eee;}
+.demo { }
+</style>
+</head>
+
+<body>
+https://www.jqueryscript.net/layout/Lightweight-Customizable-jQuery-Split-Layout-Plugin-flexLayout.html
+<div class="container">
+    <div class="demo">
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="js/flexlayout.js"></script>
+<script>
+ var layoutConfig = [
+    '20px:#fixed', 
+    ['2', ['1', '1']], 
+    ['3', ['1', '1', '1']]
+]; 
+
+ $('.demo').flexlayout(layoutConfig, {
+         dir: 'v',
+         adjust: true,
+         bars: {flex: '0 0 3px', 'background-color': '#fff'},
+    });
+</script>
+
+</body>
+</html>
+
+
+<!-- flexLayout is a lightweight and highly customizable jQuery plugin used for generating a horizontal or vertical split layout with any number of resizable content sections. Heavily based on CSS3 flexbox mode. A great alternative to the legacy frame element.
+Basic usage:
+
+1. Place jQuery library and the jQuery flexLayout plugin' script at the bottom of the webpage.
+1
+    <script src="//code.jquery.com/jquery.min.js"></script>
+2
+    <script src="flexlayout.js"></script>
+
+2. Config the split layout using JavaScript arrays as follow:
+01
+    var layoutConfig = [
+02
+     
+03
+        // block1:block2:block3 = 1:2:3
+04
+        ['1', '2', '3'],
+05
+     
+06
+        // block1 = 100px
+07
+        // block2:block3 = 1:3
+08
+        ['100px', '1', '3']
+09
+         
+10
+    ];
+
+3. Render the split layout inside a specified container.
+1
+    $('.container').flexlayout(layoutConfig);
+
+4. Pass the following options as the second parameter to the flexlayout() function.
+01
+    $('.container').flexlayout(layoutConfig,{
+02
+     
+03
+      /*defines the height of the requesting element; '...string...'*/
+04
+      height: '100%',
+05
+     
+06
+      /*defines the width of the requesting element '...string...'*/
+07
+      width: '100%',
+08
+     
+09
+      /*defines the direction of the layout; 'h', 'v' or ['h', 'v', 'v', ...]*/
+10
+      dir: 'h',
+11
+     
+12
+      /*defines whether the width/height of created blocks can be adjusted or not, boolean or [boolean, boolean]*/
+13
+      adjust: false,
+14
+     
+15
+      /*defines the style of divide bars between created blocks, {...css object}, '...string of class name...', boolean or [..., ..., ..., ...]*/
+16
+      bars: {flex: '0 0 1px', 'background-color': '#DEDEDE'}
+17
+     
+18
+    });
+Change log:
+
+2017-03-04
+
+    fixed cached bars, cannot be found bug;
+
+2017-03-02
+
+    v0.3.1
+ -->

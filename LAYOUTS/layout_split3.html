@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!--   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script> -->
+  <script src="js/jquery.splitter.js"></script>
+
+
+
+
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color:#2C3E50;
+  color:#fff;
+}
+body p {
+  padding:20px;
+}
+#leftPane {
+  width: 200px;
+}
+#topPane {
+    width: 100%;
+  height: 100px;
+}
+</style>
+<title>jQuery Splitter Plugin Demo</title>
+</head>
+<body>
+
+
+
+<div id="workspace">
+  <div id="leftPane">
+    <p>Left</p>
+  </div>
+  <div id="rightPane">
+    <div id="topPane">
+
+        <p style="font-size:12px"> Right Top <br><br>
+            https://www.jqueryscript.net/layout/jQuery-Plugin-To-Divide-Webpage-Into-Several-Sections-Splitter.html      
+            <br><br>
+            bla bla bla bla
+            <br><br>
+            bla bla bla bla
+        </p>
+
+    </div>
+    <div id="bottomPane">
+      <p>Right Bottom</p>
+    </div>
+  </div>
+</div>
+<script>
+$(function() {
+  $("#workspace").splitter({
+    "orientation": "horizontal",
+    "limit": 100
+  });
+  $("#rightPane").splitter({
+    "orientation": "vertical",
+    "limit": 100
+  });
+});
+</script>
+</body>
+</html>
+
+
+
+
+<!-- 4. Default plugin settings.
+01
+    // horizontal or vertical
+02
+    "orientation" : "horizontal",
+03
+     
+04
+    // Minimum size of left(top) element.
+05
+    "limit" : 0,
+06
+     
+07
+    // When window resized, keep left(top) size or not.
+08
+    "keepLeft" : true,
+09
+     
+10
+    // bar width
+11
+    "barwidth": 4
+12
+     
+13
+    // Callbacks
+14
+    "paneResized" : null,
+15
+    "windowResized" : null
+Change log:
+
+2016-12-07
+
+    bugfix
+
+2016-12-04
+
+    Fix iframe bug
+    Added overlay. -->
+

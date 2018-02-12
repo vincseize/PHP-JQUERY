@@ -1,0 +1,164 @@
+<html style="background:#dbdbdb">
+<meta charset="utf-8"/>
+<head>
+    <title>jQuery Touch Splitter Plugin Demo</title>
+    <link href="css/touchsplitter.css" rel="stylesheet"/>
+    <style>
+        html,body {
+            width:100%;
+            height:100%;
+        }
+        body { margin:0; }
+        .split-me>div{
+            background: #444;
+      color:#fff;
+        }
+        .split-me>div:first-child{
+            background: #555;
+        }
+        .split-me>div:last-child{
+            background: #666;
+        }
+
+        .split-me-container {
+            position: absolute;
+            top: 3em;
+            left: 1em;
+            right: 1em;
+            bottom: 1em;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .splitter-bar {
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="js/jquery.touchsplitter.js"></script>
+    <h1>jQuery Touch Splitter</h1>
+    <div class="split-me-container">
+        <div class="split-me">
+            <div> Left Side </div>
+            <div> Right Side </div>
+        </div>
+    </div>
+    <script>
+        splitter = $('.split-me').touchSplit({leftMin:300, rightMin:300, thickness: "10px", dock:"left"})
+        splitter.getFirst().touchSplit({thickness: "20px", orientation:"vertical"})
+    </script>
+
+</body>
+</html>
+
+
+<!-- 
+https://www.jqueryscript.net/layout/Mobile-Slit-Layout-Plugin-jQuery-Touch-Splitter.html
+
+
+Touch Splitter is a jQuery plugin to create a mobile-friendly split layout for front-end development that allows to resize the grids using mouse drag and touch swipe.
+How to use it:
+
+1. Load the latest version of jQuery library and the jQuery touch splitter plugin's script right before the closing body tag.
+1
+    <script src="//code.jquery.com/jquery.min.js"></script>
+2
+    <script src="jquery.touchsplitter.js"></script>
+3
+    <link href="touchsplitter.css" rel="stylesheet"><br>
+
+2. The HTML structure for the split layout.
+1
+    <div class="split-me-container">
+2
+      <div class="split-me">
+3
+        <div> Left Side </div>
+4
+        <div> Right Side </div>
+5
+      </div>
+6
+    </div>
+
+3. The JavaScript to create a default splitter between left/right content.
+1
+    mySplitter = $('.split-me').touchSplit({
+2
+      // options here
+3
+    })
+
+4. Split the first content into more resizable containers.
+1
+    mySplitter.getFirst().touchSplit()
+
+5. Possible plugin options to customize the splitter.
+01
+    touchSplit({
+02
+     
+03
+      // min size
+04
+      leftMin: 0,
+05
+      rightMin: 0,
+06
+     
+07
+      // max size
+08
+      leftMax: false,
+09
+      rightMax: false,
+10
+     
+11
+      // or vertical
+12
+      orientation: 'horizontal',
+13
+     
+14
+      // or right
+15
+      dock: 'left',
+16
+     
+17
+      // width (height) of the spliiter
+18
+      thickness: '20px'
+19
+     
+20
+    })
+
+5. API methods.
+01
+    // Destroy the splitter
+02
+    mySplitter.touchSplitter.destroy();
+03
+     
+04
+    // Destroy the splitter and remove top or left element
+05
+    mySplitter.touchSplitter.destroy('first');
+06
+     
+07
+    // Destroy the splitter and remove bottom or right element
+08
+    mySplitter.touchSplitter.destroy('second');
+09
+     
+10
+    // Destroy the splitter and remove all elements
+11
+    mySplitter.touchSplitter.destroy('both');
+
+     -->
