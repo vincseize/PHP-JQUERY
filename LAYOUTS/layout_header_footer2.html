@@ -2,25 +2,29 @@
 <title>STORYGRAPH</title>
 <head>
 
-<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-<!-- 		<script type="text/javascript" src="js/jquery-ui-layout.js"></script> -->
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
-
-
-<!--     <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-
-	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-	<link rel="stylesheet" type="text/css" href="css/home.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-
-	<link rel="stylesheet" href="css/bin.css">
-
-	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css"> -->
-
+	<script type="text/javascript" src="js/config2.js"></script>
+	<script type="text/javascript">
+		var width_left_pane = "200px";
+		var width_right_pane = "200px";
+	</script>
 
 	<style type="text/css">
+
+		:root {
+
+  		--width-left-pane: 200px;
+  		--width-right-pane: 200px;
+
+
+		}
+
+
+		*, *:before, *:after {
+		  box-sizing: border-box;
+		}
+
 		html,body {
 			width: 100%; 
 			height: 100%;
@@ -62,55 +66,66 @@
 			flex: 1 1 auto;
 			position: relative;/* need this to position inner content */
 			overflow-y: auto;
-			padding: 0;
-			margin: 0;
+			  width: 100%;
+			  height: 100%;
+			  margin: 0 ;
+			  padding: 0;
 		}
 
 
+		.layout-content--container {
+		  display: flex;
+		  width: 100%;
+		  height: 100%;
+		  margin: 0 ;
+		  padding: 0;
 
-.layout-content--container {
-  display: flex;
-  width: 100%;
-  margin: 0 0 10px 0;
-}
+		}
 
-.editor {
-  background: #333;
-  height: 200px;
-  min-width: 0px;
-  overflow: auto;
-  padding: 0px;
-  color: white;
-  font: 12px monospace;
-  &.off {
-    display: none;
-    & + .divider {
-      display: none;
-    }
-  }
-}
+		.layout-content--columns {
+/*		  height: 200px;
+		  min-width: 0px;*/
+		  overflow: auto;
+		  margin: 0 ;
+		  padding: 0;
+		  color: black;
+		  font: 12px monospace;
+		  &.off {
+		    display: none;
+		    & + .divider {
+		      display: none;
+		    }
+		  }
+		}
 
-.divider {
-  width: 15px;
-  background: red;
-  left: auto !important; // no jqui
-}
+		.layout-content--columns {
+		  flex: 1;
+		}
 
-.editor {
-  flex: 1;
-}
+		.divider {
+		  width: 15px;
+		  background: grey;
+		  left: auto !important; // no jqui
+		}
 
-.layout-content--left, .layout-content--right{
-	overflow-x: hidden;
-}
 
-.layout-content--left{
-	flex: 0.2; /*= width: % */
-}
+		.layout-content--left, .layout-content--right{
+			overflow-x: hidden;
+		}
 
-.layout-content--right{
-	flex: 0.2; /*= width: % */
-}
+		.layout-content--left{
+			flex: 0.2; /*= width: % */
+			background-color: orange;
+		}
+
+		.layout-content--center{
+			background-color: white;
+		}
+
+		.layout-content--right{
+			flex: 0.2; /*= width: % */
+			background-color: pink;
+		}
 
 	</style>
 
@@ -124,47 +139,32 @@
 		<div id="layout-header" class="layout-header">Header</div>
 		<div id="layout-content" class="layout-content">  
       
-
-
-
-
-
-
 				<div class="layout-content--container" id="layout-content--container">
 
-						  <div class="editor layout-content--left" id="layout-content--left">
+						  <div class="layout-content--columns layout-content--left" id="layout-content--left">
 						LEFT habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
 						  </div>
 						  <div class="divider" id="layout-content--divider_left"></div>
 
-						  <div class="editor" id="layout-content--center">
+						  <div class="layout-content--columns layout-content--center" id="layout-content--center">
 						Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
 						  </div>
 
 
 						  <div class="divider" id="layout-content--divider_right"></div>
 
-						  <div class="editor  layout-content--right" id="layout-content--right">
+						  <div class="layout-content--columns  layout-content--right" id="layout-content--right">
 						  
 						  za
 						</div>
 
 				</div>
-
-
-<!-- 
-				<p id="bt_left">left</p>
-
-				<p id="bt_right">right</p> -->
-
-
-
-      
+   
 		</div>
 		<div class="layout-footer">Footer
 
-				<button id="bt_left">left</button>
-				<button id="bt_right">right</button>
+				<button id="bt_left">left close</button>
+				<button id="bt_right">right close</button>
 
 		</div>
 	</div>
@@ -175,8 +175,8 @@
 	
 $( document ).ready(function() {
 
-	$("#layout-content--left").css("flex", "0 1 200px");
-	$("#layout-content--right").css("flex", "0 1 200px");
+	$("#layout-content--left").css("flex", "0 1 "+width_left_pane); 
+	$("#layout-content--right").css("flex", "0 1 "+width_right_pane);
 
 	// For keeping track of movement
 	var divider2storage = $("#layout-content--left").width();
@@ -247,7 +247,8 @@ $( document ).ready(function() {
   		if($("#layout-content--left").width() == 0){
 	  		console.log("left was closed");
 	  		$("#layout-content--right").css("flex", right_width); 
-	  		$("#layout-content--left").css("flex", "200px"); 
+	  		// $("#layout-content--left").css("flex", "200px"); width_left_pane
+	  		$("#layout-content--left").css("flex", width_left_pane); 
 	    }
 		else {
 			console.log("left open");
@@ -261,7 +262,8 @@ $( document ).ready(function() {
 		if($("#layout-content--right").width() == 0){
 			console.log("right was closed");			
 			$("#layout-content--left").css("flex", left_width); 
-			$("#layout-content--right").css("flex", "200px"); 
+			// $("#layout-content--right").css("flex", "200px"); 
+			$("#layout-content--right").css("flex", width_right_pane); 
 		} else {
 		    console.log("right open");
 		    $("#layout-content--left").css("flex", left_width); 
