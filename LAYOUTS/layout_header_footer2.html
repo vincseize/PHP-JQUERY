@@ -1,6 +1,25 @@
 <html>
 <title>STORYGRAPH</title>
 <head>
+
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<!-- 		<script type="text/javascript" src="js/jquery-ui-layout.js"></script> -->
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+
+
+<!--     <script type="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="css/bin.css">
+
+	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css"> -->
+
+
 	<style type="text/css">
 		html,body {
 			width: 100%; 
@@ -10,7 +29,7 @@
 			margin: 0;
 			font-family: Arial, Helvetica, sans-serif;
 		}
-		.layout {
+		.layout-main {
 			width: 100%; 
 			height: 100%;
 			display: flex;
@@ -19,7 +38,7 @@
 			padding: 0;
 			margin: 0;
 		}
-		.header {
+		.layout-header {
 			flex: 0 0 auto;
 			background-color: black;
 			color:white;
@@ -29,7 +48,7 @@
 			padding: 0;
 			margin: 0;
 		}
-		.footer {
+		.layout-footer {
 			flex: 0 0 auto;
 			background-color: black;
 			color:white;
@@ -46,24 +65,303 @@
 			padding: 0;
 			margin: 0;
 		}
+
+
+
+.layout-content--container {
+  display: flex;
+  width: 100%;
+  margin: 0 0 10px 0;
+}
+
+.editor {
+  background: #333;
+  height: 200px;
+  min-width: 0px;
+  overflow: auto;
+  padding: 0px;
+  color: white;
+  font: 12px monospace;
+  &.off {
+    display: none;
+    & + .divider {
+      display: none;
+    }
+  }
+}
+
+.divider {
+  width: 15px;
+  background: red;
+  left: auto !important; // no jqui
+}
+
+.editor {
+  flex: 1;
+}
+
+.layout-content--left, .layout-content--right{
+	overflow-x: hidden;
+}
+
+.layout-content--left{
+	flex: 0.2; /*= width: % */
+}
+
+.layout-content--right{
+	flex: 0.2; /*= width: % */
+}
+
 	</style>
+
+
+
+
+
 </head>
 <body>
-	<div class="layout">
-		<div class="header">Header</div>
-		<div class="layout-content">  
+	<div id="layout-main" class="layout-main">
+		<div id="layout-header" class="layout-header">Header</div>
+		<div id="layout-content" class="layout-content">  
       
-        <p>Sriracha small batch tousled Tumblr banh mi sartorial. Cosby sweater XOXO direct trade Austin meggings banjo. Wayfarers deep v tousled Schlitz shabby chic, Portland Truffaut Marfa aesthetic keffiyeh. Salvia retro tattooed sartorial polaroid. Selvage hella 3 wolf moon PBR pug, ugh Schlitz freegan keffiyeh raw denim jean shorts wayfarers roof party. Neutra Shoreditch iPhone, +1 brunch Echo Park XOXO slow-carb street art Vice Williamsburg tattooed forage. Butcher Godard ethical try-hard.</p>
-<p>Sriracha small batch tousled Tumblr banh mi sartorial. Cosby sweater XOXO direct trade Austin meggings banjo. Wayfarers deep v tousled Schlitz shabby chic, Portland Truffaut Marfa aesthetic keffiyeh. Salvia retro tattooed sartorial polaroid. Selvage hella 3 wolf moon PBR pug, ugh Schlitz freegan keffiyeh raw denim jean shorts wayfarers roof party. Neutra Shoreditch iPhone, +1 brunch Echo Park XOXO slow-carb street art Vice Williamsburg tattooed forage. Butcher Godard ethical try-hard.</p><p>Sriracha small batch tousled Tumblr banh mi sartorial. Cosby sweater XOXO direct trade Austin meggings banjo. Wayfarers deep v tousled Schlitz shabby chic, Portland Truffaut Marfa aesthetic keffiyeh. Salvia retro tattooed sartorial polaroid. Selvage hella 3 wolf moon PBR pug, ugh Schlitz freegan keffiyeh raw denim jean shorts wayfarers roof party. Neutra Shoreditch iPhone, +1 brunch Echo Park XOXO slow-carb street art Vice Williamsburg tattooed forage. Butcher Godard ethical try-hard.</p><p>Sriracha small batch tousled Tumblr banh mi sartorial. Cosby sweater XOXO direct trade Austin meggings banjo. Wayfarers deep v tousled Schlitz shabby chic, Portland Truffaut Marfa aesthetic keffiyeh. Salvia retro tattooed sartorial polaroid. Selvage hella 3 wolf moon PBR pug, ugh Schlitz freegan keffiyeh raw denim jean shorts wayfarers roof party. Neutra Shoreditch iPhone, +1 brunch Echo Park XOXO slow-carb street art Vice Williamsburg tattooed forage. Butcher Godard ethical try-hard.</p><p>Sriracha small batch tousled Tumblr banh mi sartorial. Cosby sweater XOXO direct trade Austin meggings banjo. Wayfarers deep v tousled Schlitz shabby chic, Portland Truffaut Marfa aesthetic keffiyeh. Salvia retro tattooed sartorial polaroid. Selvage hella 3 wolf moon PBR pug, ugh Schlitz freegan keffiyeh raw denim jean shorts wayfarers roof party. Neutra Shoreditch iPhone, +1 brunch Echo Park XOXO slow-carb street art Vice Williamsburg tattooed forage. Butcher Godard ethical try-hard.</p><p>Sriracha small batch tousled Tumblr banh mi sartorial. Cosby sweater XOXO direct trade Austin meggings banjo. Wayfarers deep v tousled Schlitz shabby chic, Portland Truffaut Marfa aesthetic keffiyeh. Salvia retro tattooed sartorial polaroid. Selvage hella 3 wolf moon PBR pug, ugh Schlitz freegan keffiyeh raw denim jean shorts wayfarers roof party. Neutra Shoreditch iPhone, +1 brunch Echo Park XOXO slow-carb street art Vice Williamsburg tattooed forage. Butcher Godard ethical try-hard.</p><p>Sriracha small batch tousled Tumblr banh mi sartorial. Cosby sweater XOXO direct trade Austin meggings banjo. Wayfarers deep v tousled Schlitz shabby chic, Portland Truffaut Marfa aesthetic keffiyeh. Salvia retro tattooed sartorial polaroid. Selvage hella 3 wolf moon PBR pug, ugh Schlitz freegan keffiyeh raw denim jean shorts wayfarers roof party. Neutra Shoreditch iPhone, +1 brunch Echo Park XOXO slow-carb street art Vice Williamsburg tattooed forage. Butcher Godard ethical try-hard.</p><p>Sriracha small batch tousled Tumblr banh mi sartorial. Cosby sweater XOXO direct trade Austin meggings banjo. Wayfarers deep v tousled Schlitz shabby chic, Portland Truffaut Marfa aesthetic keffiyeh. Salvia retro tattooed sartorial polaroid. Selvage hella 3 wolf moon PBR pug, ugh Schlitz freegan keffiyeh raw denim jean shorts wayfarers roof party. Neutra Shoreditch iPhone, +1 brunch Echo Park XOXO slow-carb street art Vice Williamsburg tattooed forage. Butcher Godard ethical try-hard.</p>
-        <p>Vegan blog Truffaut irony deep v Etsy. You probably haven't heard of them Schlitz chambray art party craft beer Echo Park mixtape, deep v fashion axe Wes Anderson twee McSweeney's DIY. Retro twee polaroid 3 wolf moon, Bushwick locavore organic skateboard keffiyeh Kickstarter Williamsburg sustainable Godard sartorial trust fund. Stumptown paleo put a bird on it VHS hella. Put a bird on it mixtape Godard, vegan farm-to-table letterpress chia hella. Meggings DIY freegan normcore gastropub blog. Dreamcatcher wolf kitsch biodiesel lomo jean shorts, pug fap Odd Future craft beer stumptown locavore cornhole put a bird on it salvia.</p>
 
-        <p>Hoodie Truffaut chillwave PBR art party. Slow-carb literally readymade, tousled stumptown ennui trust fund seitan paleo blog typewriter vegan. 90's mixtape American Apparel, kale chips art party iPhone Etsy Neutra organic kogi direct trade typewriter. Aesthetic occupy Portland artisan craft beer fixie, Pinterest irony normcore letterpress. 8-bit craft beer seitan flexitarian, synth banh mi cardigan ethical High Life. Fixie whatever literally semiotics Helvetica 8-bit. Gluten-free tattooed Odd Future umami blog master cleanse, asymmetrical 8-bit yr.</p>
 
-        <p>Tattooed gentrify asymmetrical twee, fashion axe normcore banh mi Etsy. Irony post-ironic kale chips readymade selfies art party, Marfa narwhal occupy before they sold out Thundercats. Banjo locavore 3 wolf moon artisan Marfa. XOXO church-key hella bitters, pour-over Blue Bottle wolf typewriter Carles. American Apparel umami twee locavore, blog hella artisan. Mixtape Shoreditch sriracha, organic before they sold out asymmetrical fashion axe ugh. Kale chips yr Pitchfork jean shorts Vice gentrify.</p>
+
+
+
+
+				<div class="layout-content--container" id="layout-content--container">
+
+						  <div class="editor layout-content--left" id="layout-content--left">
+						LEFT habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
+						  </div>
+						  <div class="divider" id="layout-content--divider_left"></div>
+
+						  <div class="editor" id="layout-content--center">
+						Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
+						  </div>
+
+
+						  <div class="divider" id="layout-content--divider_right"></div>
+
+						  <div class="editor  layout-content--right" id="layout-content--right">
+						  
+						  za
+						</div>
+
+				</div>
+
+
+
+				<p id="bt_left">left</p>
+
+				<p id="bt_right">right</p>
+
+
+
       
 		</div>
-		<div class="footer">Footer</div>
+		<div class="layout-footer">Footer</div>
 	</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+	
+$( document ).ready(function() {
+
+	$("#layout-content--left").css("flex", "0 1 200px");
+	$("#layout-content--right").css("flex", "0 1 200px");
+
+	// For keeping track of movement
+	var divider2storage = $("#layout-content--left").width();
+
+	$(".divider").draggable({
+	  
+	  // restrict the movement to only horizontal
+	  axis: "x",
+	  
+	  // restrict the movement to the row
+	  containment: $(".layout-content--container"),
+
+	  drag: function(e, ui) {
+
+	    // layout-content--divider_left
+	    if (ui.helper[0].id === "layout-content--divider_left") {
+	      
+	      // fix 3 how it is
+	      $("#layout-content--right").css("flex", "0 1 " + $("#layout-content--right").width() + "px"); 
+	      
+	      // let 2 flow
+	      $("#layout-content--center").css("flex", "1");
+	      
+	      // let 1 move
+	      $("#layout-content--left").css("flex", "0 1 " + (ui.offset.left - 20) + "px");
+	      
+	    // layout-content--divider_right
+	    } else {
+
+	      // fix 1 how it is.
+	      $("#layout-content--left").css("flex", "0 1 " + $("#layout-content--left").width() + "px");
+	      
+	      // let 3 flow
+	      $("#layout-content--right").css("flex", "1");
+	      
+	      // let 2 move
+	      $("#layout-content--center").css("flex", "0 1 " + (divider2storage + ui.position.left) + "px");
+	      
+	    }
+	  },
+
+	  stop: function(e, ui) {
+	    
+	    // jQuery UI starts over at 0 when you move again
+	    // (WHYYY, doesn't seem to in demos)
+	    // So, storing it ourselves to use
+	    
+	    // If layout-content--divider_right moves, keep track of where it moved
+	    if (ui.helper[0].id === "layout-content--divider_right") {
+	      divider2storage = divider2storage + ui.position.left;
+	      
+	    // If layout-content--divider_left moves, use this value so any further movement of layout-content--divider_right starts where it should
+	    } else {
+	      divider2storage = $("#layout-content--center").width();
+	    }
+	          
+	  }
+	  
+	});
+
+
+	function resize_layout_content_left() {
+		if($("#layout-content--left").width() == 0){
+			$("#layout-content--left").css("flex", "0 1 200px");
+		}
+		else {$("#layout-content--left").css("flex", "0 1 0px");} 
+	}
+
+	function resize_layout_content_right() {
+		if($("#layout-content--right").width() == 0){
+			$("#layout-content--right").css("flex", "0 1 200px");
+		}
+		else {
+			$("#layout-content--right").css("flex", "0 1 0px");
+			// $("#layout-content--center").css("flex", "0 1 100%");
+
+		} 
+	}
+
+	$("#bt_leftDES").click(function(){
+		if($("#layout-content--left").width() == 0){
+			$("#layout-content--left").css("flex", "200px");
+		}
+		else {$("#layout-content--left").css("flex", "0 1 0px");} 
+	});
+
+	$("#bt_rightDES").click(function(){
+
+
+		left_width = $("#layout-content--left").width();
+		console.log(left_width);
+
+		right_width = $("#layout-content--right").width();
+		console.log(right_width);
+
+
+		center_width = $("#layout-content--center").width();
+		console.log(center_width);
+
+
+		content_width = $("#layout-content").width();
+		console.log(content_width);
+
+		new_center_width = center_width + right_width;
+		console.log(new_center_width);
+
+
+
+		if($("#layout-content--right").width() == 0){
+			$("#layout-content--right").css("flex", "0.2");
+			//$("#layout-content--right").css("flex", "0 1 430px");
+			
+		}
+		else {
+			// $("#layout-content--right").css("flex", "0 1 0px");
+			$("#layout-content--right").css("flex", "0 1 " + $("#layout-content--right").width() + "px"); 
+			// $("#layout-content--center").css("flex", new_center_width+"px");
+			// $("#layout-content--center").css("flex", "1");
+			// $("#layout-content--left").css("flex", "1");
+			$("#layout-content--center").css("flex", "0 1 " + (divider2storage + ui.position.left) + "px");
+
+
+		} 
+
+	});	
+
+
+
+	$("body").keydown(function(e) {
+		var keyCode = (e.keyCode ? e.keyCode : e.which);  
+
+		left_width = $("#layout-content--left").width();
+		center_width = $("#layout-content--center").width();
+		right_width = $("#layout-content--right").width();
+		content_width = $("#layout-content").width();
+
+	  	if(e.keyCode == 37) { // left
+	  		if($("#layout-content--left").width() == 0){
+		  		console.log("left was closed");
+		  		$("#layout-content--right").css("flex", right_width); 
+		  		$("#layout-content--left").css("flex", "200px"); 
+
+		    }
+			else {
+				console.log("left open");
+		  		$("#layout-content--left").css("flex", "0 1 0px");
+		      	$("#layout-content--center").css("flex", "100vh");
+			}
+
+	  	}
+
+	  	if(e.keyCode == 39) { // right
+				if($("#layout-content--right").width() == 0){
+					console.log("right was closed");			
+					$("#layout-content--left").css("flex", left_width); 
+					$("#layout-content--right").css("flex", "200px"); 
+				} else {
+				    console.log("right open");
+				    $("#layout-content--left").css("flex", left_width); 
+					$("#layout-content--right").css("flex", "0 1 0px");
+
+					$("#layout-content--center").css("flex", "100vh");
+
+				}
+
+	  	}
+
+	});
+
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 
