@@ -152,21 +152,22 @@
 				</div>
 
 
-
+<!-- 
 				<p id="bt_left">left</p>
 
-				<p id="bt_right">right</p>
+				<p id="bt_right">right</p> -->
 
 
 
       
 		</div>
-		<div class="layout-footer">Footer</div>
+		<div class="layout-footer">Footer
+
+				<button id="bt_left">left</button>
+				<button id="bt_right">right</button>
+
+		</div>
 	</div>
-
-
-
-
 
 
 
@@ -219,10 +220,6 @@ $( document ).ready(function() {
 
 	  stop: function(e, ui) {
 	    
-	    // jQuery UI starts over at 0 when you move again
-	    // (WHYYY, doesn't seem to in demos)
-	    // So, storing it ourselves to use
-	    
 	    // If layout-content--divider_right moves, keep track of where it moved
 	    if (ui.helper[0].id === "layout-content--divider_right") {
 	      divider2storage = divider2storage + ui.position.left;
@@ -237,12 +234,20 @@ $( document ).ready(function() {
 	});
 
 
+	function layout_dimensions() {
+		left_width = $("#layout-content--left").width();
+		right_width = $("#layout-content--right").width();
+		center_width = $("#layout-content--center").width();
+		content_width = $("#layout-content").width();
+	}
+
+
 	function resize_layout_content_left() {
+		layout_dimensions();
   		if($("#layout-content--left").width() == 0){
 	  		console.log("left was closed");
 	  		$("#layout-content--right").css("flex", right_width); 
 	  		$("#layout-content--left").css("flex", "200px"); 
-
 	    }
 		else {
 			console.log("left open");
@@ -252,6 +257,7 @@ $( document ).ready(function() {
 	}
 
 	function resize_layout_content_right() {
+		layout_dimensions();
 		if($("#layout-content--right").width() == 0){
 			console.log("right was closed");			
 			$("#layout-content--left").css("flex", left_width); 
@@ -260,7 +266,6 @@ $( document ).ready(function() {
 		    console.log("right open");
 		    $("#layout-content--left").css("flex", left_width); 
 			$("#layout-content--right").css("flex", "0 1 0px");
-
 			$("#layout-content--center").css("flex", "100vh");
 
 		}
@@ -274,26 +279,16 @@ $( document ).ready(function() {
 		resize_layout_content_right();
 	});	
 
-
 	$("body").keydown(function(e) {
-
+		layout_dimensions();
 		var keyCode = (e.keyCode ? e.keyCode : e.which);  
-
-		left_width = $("#layout-content--left").width();
-		center_width = $("#layout-content--center").width();
-		right_width = $("#layout-content--right").width();
-		content_width = $("#layout-content").width();
-
 	  	if(e.keyCode == 37) { // left
 			resize_layout_content_left();
 	  	}
-
-	  	if(e.keyCode == 39) { // right	
+	  	if(e.keyCode == 39) { // right
 	  		resize_layout_content_right();
 	  	}
-
 	});
-
 
 });
 
