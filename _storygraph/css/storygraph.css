@@ -1,0 +1,246 @@
+:root {
+    --st-color-dark-black:#171714;
+
+    --st-color-grey1:#222;
+    --st-color-grey2:#333;
+    --st-color-grey3:#444;
+    --st-color-grey4:#575757;
+    --st-color-grey5:#858484;
+    --st-color-grey6:#B7B6B6;
+
+    --st-color-blue1:#3cb0fd;
+    --st-color-blue2:#3cb0fd;
+    --st-color-blue3:#069;
+    --st-color-blue6:#0D3246;
+
+    --st-main-bg-color: var(--st-color-dark-black);
+
+    --st-menuTop-height: 32px;
+}
+
+html,body {
+    height: 100%;
+    margin:0;
+    padding:0;
+    background-color: var(--st-color-grey2);
+    overflow: hidden;
+}
+/* Menu principal top */
+.mainMenu {
+	margin-left: 300px;
+	margin-bottom: 15px;
+}
+.bt_Storygraph {
+	margin-right: 10px;
+	cursor: pointer;
+	background-color: var(--st-color-grey1);
+	border: 1px solid #444;
+	border-radius: 4px;
+	padding: 4px 7px;
+	color: #EEE;
+    height: var(--st-menuTop-height);
+}
+
+
+.bt_Storygraph:hover {
+	background-color: var(--st-color-grey2);
+	color: #fff;
+}
+
+
+.layoutCh{ /*// select*/
+	margin-right: 10px;
+	cursor: pointer;
+	background-color: #282828;
+	border: 1px solid #444;
+	border-radius: 4px;
+	padding: 4px 7px;
+	color: #EEE;
+}
+
+.layoutCh:hover {
+		background-color: var(--st-color-grey2);
+	}
+
+.menuTop_ST{
+	margin-left: 15%;
+	padding:0px;
+	position:relative; float:left;
+    height: var(--st-menuTop-height);
+}
+
+.menuTop_left_ST{
+	float:left;
+	margin-left: 50px;
+	margin-right: 100px;
+}
+
+.menuTop_left_ST{
+	/*font-size: 0.8em;	*/
+}
+
+.menuLeft_ST_memo{
+	padding-top: 15px;
+	margin-top: 15px;
+	display:none;
+	height:300px;
+	font-size: 1em;
+	overflow-y:scroll;
+}
+
+
+.help_ST{
+	padding: 0;
+	border: none;
+	background: none;
+	color: black;
+	border:none;
+	text-decoration: none;
+}
+
+.help_ST:hover{
+	color:white;
+}
+
+.menuTop_Right_ST {
+	text-decoration: none;
+	float:left;
+}
+
+.clearBoth { clear:both; }
+
+
+#nbNodes {
+	font-size: 14px;
+	color: #999;
+}
+
+
+/* Menu de gauche */
+.menuLeft_ST {
+	position: fixed;
+	left: 0px;
+	top: 35px;
+	width: calc(15% + 1px);
+	height:calc(100% - 55px);
+	z-index: 8888;
+	color: #999;
+	padding: 0px;
+	padding-top: 50px;
+	margin: 0;
+	bottom: 100px;
+	background-color: var(--color-grey2);
+}
+.menuLeft_ST ul {
+	margin: 0;
+	padding: 0;
+}
+.menuLeft_ST li {
+	list-style: none;
+	margin-left: 10px;
+	margin-bottom: 4px;
+}
+.nodeModel {
+	display: inline-block;
+	/*width: 70px;*/
+	/*width: calc(40%);*/
+	padding: 15px 0;
+	border: 4px solid #DDD;
+	border-radius: 5px;
+	text-align: center;
+	margin-bottom: 10px;
+	margin-right: 5px;
+	color: #333;
+	cursor: move;
+	background-color: #DDD;
+}
+.nodeModel:hover {
+	border-color: #FC0;
+}
+.caseM { border-radius: 0px; width: calc(30%);}
+.sequenceM { border-radius: 4px; width: calc(40%);} /*// nodeModel*/
+
+
+
+
+
+.shotM, .shotM:hover  {
+	border: none;
+	padding: 20px 0;
+	background:
+		linear-gradient(120deg, transparent 15px, #DDD 0) top left,
+		linear-gradient(240deg, transparent 15px, #DDD 0) top right,
+		linear-gradient(300deg, transparent 15px, #DDD 0) bottom right,
+		linear-gradient(60deg,  transparent 15px, #DDD 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+}
+.switchMode {
+	background-color: #666;
+	margin-bottom: 10px;
+	margin-right: 5px;
+	text-align: center;
+	padding: 10px 20px;
+	border-radius: 5px;
+	color: #FFF;
+	cursor: pointer;
+}
+.switchOn {
+	background-color: #CA0;
+	font-weight: bold;
+}
+
+
+/* Conteneur principal */
+.container_storygraph {
+	position:relative;
+	/*height: calc(100% - 50px);*/
+    height: calc(100% - var(--st-menuTop-height));
+/*	width: calc(100% - 315px);*/
+	width: calc(100% - 15% -25px);
+/*	margin-left: 300px;*/
+	margin-left: calc(15% + 35px);
+/*	margin-right: 25px;*/
+	background-color: #222;
+    overflow: hidden;
+}
+
+/* Menu contextuel */
+#contextMenu {
+	position: absolute;
+	display: none;
+	min-width: 200px;
+	height: auto;
+	border-radius: 6px;
+	padding: 10px 0px;
+	box-shadow: 0 0 5px #000;
+	background-color: #444;
+	color: #FFF;
+	z-index: 999;
+}
+.ctxMenuEntry {
+	padding: 5px 10px;
+	cursor: pointer;
+}
+.ctxMenuEntry:hover {
+	background-color: #555;
+}
+.ctxNodeTitle {
+	text-align: center;
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.menuLeft_ST hr {
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #222;
+
+}
+
+
+/* Styles de test et temporaires */
+.disabled {
+	color: #888;
+	font-style: italic;
+}
