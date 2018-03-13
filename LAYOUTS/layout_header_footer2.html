@@ -1,3 +1,4 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <title>STORYGRAPH</title>
 <head>
@@ -5,10 +6,8 @@
 	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/config2.js"></script>
-	<script type="text/javascript">
-		var width_left_pane = "200px";
-		var width_right_pane = "200px";
-	</script>
+
+	<link rel="stylesheet" href="css/jquery-ui.css"  type="text/css">
 
 	<style type="text/css">
 
@@ -16,7 +15,8 @@
 
   		--width-left-pane: 200px;
   		--width-right-pane: 200px;
-
+  		--width-left-pane-flex: 0.2;
+  		--width-right-pane-flex: 0.2;
 
 		}
 
@@ -33,6 +33,7 @@
 			margin: 0;
 			font-family: Arial, Helvetica, sans-serif;
 		}
+
 		.layout-main {
 			width: 100%; 
 			height: 100%;
@@ -42,6 +43,7 @@
 			padding: 0;
 			margin: 0;
 		}
+
 		.layout-header {
 			flex: 0 0 auto;
 			background-color: black;
@@ -52,6 +54,7 @@
 			padding: 0;
 			margin: 0;
 		}
+
 		.layout-footer {
 			flex: 0 0 auto;
 			background-color: black;
@@ -62,16 +65,16 @@
 			padding: 0;
 			margin: 0;
 		}
+
 		.layout-content {
 			flex: 1 1 auto;
 			position: relative;/* need this to position inner content */
 			overflow-y: auto;
-			  width: 100%;
-			  height: 100%;
-			  margin: 0 ;
-			  padding: 0;
+			width: 100%;
+			height: 100%;
+			margin: 0 ;
+			padding: 0;
 		}
-
 
 		.layout-content--container {
 		  display: flex;
@@ -106,60 +109,79 @@
 		  width: 15px;
 		  background: grey;
 		  left: auto !important; // no jqui
+		  cursor: e-resize; 
+		}
+
+		.divider:hover {
+		  cursor: e-resize; 
 		}
 
 
 		.layout-content--left, .layout-content--right{
 			overflow-x: hidden;
+			overflow-y: auto;
 		}
 
 		.layout-content--left{
-			flex: 0.2; /*= width: % */
+			/*= width: % cf config.js */
+			/*flex: var(--width-left-pane-flex); */
 			background-color: orange;
+			/*flex: 0.2;*/
+/*			flex:0 1 15%;*/
 		}
 
 		.layout-content--center{
 			background-color: white;
+			overflow: hidden;
+/*			flex:0 0 70%;*/
+/*			flex:0 0 70%;*/
+/*			flex-grow: 0;
+			flex-shrink: 0;
+			flex-basis: 70%;*/
 		}
 
 		.layout-content--right{
-			flex: 0.2; /*= width: % */
+			/*= width: % config.js */
+			/*flex: var(--width-right-pane-flex); */
 			background-color: pink;
+			/*flex: 0.2;*/
+/*			flex:0 1 15%;*/
+		}
+
+		.layout-content--center_frame{
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
 		}
 
 	</style>
-
-
-
-
 
 </head>
 <body>
 	<div id="layout-main" class="layout-main">
 		<div id="layout-header" class="layout-header">Header</div>
-		<div id="layout-content" class="layout-content">  
-      
+		<div id="layout-content" class="layout-content"> 
+
 				<div class="layout-content--container" id="layout-content--container">
 
-						  <div class="layout-content--columns layout-content--left" id="layout-content--left">
-						LEFT habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
-						  </div>
-						  <div class="divider" id="layout-content--divider_left"></div>
+				  <div class="layout-content--columns layout-content--left" id="layout-content--left">
+				Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
+				  </div>
+				  <div class="divider" id="layout-content--divider_left"></div>
 
-						  <div class="layout-content--columns layout-content--center" id="layout-content--center">
-						Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
-						  </div>
+				  <div class="layout-content--columns layout-content--center" id="layout-content--center">
+				Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
+				  </div>
 
+				  <div class="divider" id="layout-content--divider_right"></div>
 
-						  <div class="divider" id="layout-content--divider_right"></div>
-
-						  <div class="layout-content--columns  layout-content--right" id="layout-content--right">
-						  
-						  za
-						</div>
+				  <div class="layout-content--columns layout-content--right" id="layout-content--right">
+				  	za
+					</div>
 
 				</div>
-   
+
 		</div>
 		<div class="layout-footer">Footer
 
@@ -170,143 +192,136 @@
 	</div>
 
 
+	<script type="text/javascript">
+		
+	$( document ).ready(function() {
 
-<script type="text/javascript">
-	
-$( document ).ready(function() {
-
-	$("#layout-content--left").css("flex", "0 1 "+width_left_pane); 
-	$("#layout-content--right").css("flex", "0 1 "+width_right_pane);
-
-	// For keeping track of movement
-	var divider2storage = $("#layout-content--left").width();
-
-	$(".divider").draggable({
-	  
-	  // restrict the movement to only horizontal
-	  axis: "x",
-	  
-	  // restrict the movement to the row
-	  containment: $(".layout-content--container"),
-
-	  drag: function(e, ui) {
-
-	    // layout-content--divider_left
-	    if (ui.helper[0].id === "layout-content--divider_left") {
-	      
-	      // fix 3 how it is
-	      $("#layout-content--right").css("flex", "0 1 " + $("#layout-content--right").width() + "px"); 
-	      
-	      // let 2 flow
-	      $("#layout-content--center").css("flex", "1");
-	      
-	      // let 1 move
-	      $("#layout-content--left").css("flex", "0 1 " + (ui.offset.left - 20) + "px");
-	      
-	    // layout-content--divider_right
-	    } else {
-
-	      // fix 1 how it is.
-	      $("#layout-content--left").css("flex", "0 1 " + $("#layout-content--left").width() + "px");
-	      
-	      // let 3 flow
-	      $("#layout-content--right").css("flex", "1");
-	      
-	      // let 2 move
-	      $("#layout-content--center").css("flex", "0 1 " + (divider2storage + ui.position.left) + "px");
-	      
-	    }
-	  },
-
-	  stop: function(e, ui) {
-	    
-	    // If layout-content--divider_right moves, keep track of where it moved
-	    if (ui.helper[0].id === "layout-content--divider_right") {
-	      divider2storage = divider2storage + ui.position.left;
-	      
-	    // If layout-content--divider_left moves, use this value so any further movement of layout-content--divider_right starts where it should
-	    } else {
-	      divider2storage = $("#layout-content--center").width();
-	    }
-	          
-	  }
-	  
-	});
-
-
-	function layout_dimensions() {
-		left_width = $("#layout-content--left").width();
-		right_width = $("#layout-content--right").width();
-		center_width = $("#layout-content--center").width();
-		content_width = $("#layout-content").width();
-	}
-
-
-	function resize_layout_content_left() {
 		layout_dimensions();
-  		if($("#layout-content--left").width() == 0){
-	  		console.log("left was closed");
-	  		$("#layout-content--right").css("flex", right_width); 
-	  		// $("#layout-content--left").css("flex", "200px"); width_left_pane
-	  		$("#layout-content--left").css("flex", width_left_pane); 
-	    }
-		else {
-			console.log("left open");
-	  		$("#layout-content--left").css("flex", "0 1 0px");
-	      	$("#layout-content--center").css("flex", "100vh");
+
+		// $("#layout-content--left").css("flex 0 1 ", width_left_pane); 
+
+		// For keeping track of movement
+		var divider2storage = $("#layout-content--left").width();
+
+		$(".divider").draggable({
+
+		// restrict the movement to only horizontal
+		axis: "x",
+
+		// restrict the movement to the row
+		containment: $(".layout-content--container"),
+
+			drag: function(e, ui) {
+
+				// layout-content--divider_left
+				if (ui.helper[0].id === "layout-content--divider_left") {
+				// order important !!!
+				// fix 3 how it is
+				$("#layout-content--right").css("flex", "0 1 " + $("#layout-content--right").width() + "px"); 
+
+				// let 2 flow
+				$("#layout-content--center").css("flex", "1");
+
+				// let 1 move
+				$("#layout-content--left").css("flex", "0 1 " + (ui.offset.left - 20) + "px");
+
+				// layout-content--divider_right
+				} else {
+				// order important !!!
+				// fix 1 how it is.
+				$("#layout-content--left").css("flex", "0 1 " + $("#layout-content--left").width() + "px");
+
+				// let 3 flow
+				$("#layout-content--right").css("flex", "1");
+
+				// let 2 move
+				$("#layout-content--center").css("flex", "0 1 " + (divider2storage + ui.position.left) + "px");
+
+				}
+			},
+
+			stop: function(e, ui) {
+
+				// jQuery UI starts over at 0 when you move again
+				// (WHYYY, doesn't seem to in demos)
+				// So, storing it ourselves to use
+
+				// If layout-content--divider_right moves, keep track of where it moved
+				if (ui.helper[0].id === "layout-content--divider_right") {
+					divider2storage = divider2storage + ui.position.left;
+
+				// If layout-content--divider_left moves, use this value so any further movement of layout-content--divider_right starts where it should
+				} else {
+					divider2storage = $("#layout-content--center").width();
+				}
+
+			}
+
+		});
+
+
+		function layout_dimensions() {
+			left_width = $("#layout-content--left").width();
+			right_width = $("#layout-content--right").width();
+			center_width = $("#layout-content--center").width();
+			content_width = $("#layout-content").width();
 		}
-	}
 
-	function resize_layout_content_right() {
-		layout_dimensions();
-		if($("#layout-content--right").width() == 0){
-			console.log("right was closed");			
-			$("#layout-content--left").css("flex", left_width); 
-			// $("#layout-content--right").css("flex", "200px"); 
-			$("#layout-content--right").css("flex", width_right_pane); 
-		} else {
-		    console.log("right open");
-		    $("#layout-content--left").css("flex", left_width); 
-			$("#layout-content--right").css("flex", "0 1 0px");
-			$("#layout-content--center").css("flex", "100vh");
 
+		function resize_layout_content_left() {
+			layout_dimensions();
+	  		if($("#layout-content--left").width() == 0){
+		  		console.log("left was closed");
+		  		$("#layout-content--right").css("flex", right_width); 
+		  		// $("#layout-content--left").css("flex", "200px"); width_left_pane
+		  		$("#layout-content--left").css("flex", width_left_pane); 
+		    }
+			else {
+				console.log("left open");
+		  		$("#layout-content--left").css("flex", "0 1 0px");
+		      	$("#layout-content--center").css("flex", "100vh");
+			}
 		}
-	}
 
-	$("#bt_left").click(function(){
-		resize_layout_content_left();
-	});
+		function resize_layout_content_right() {
+			layout_dimensions();
+			if($("#layout-content--right").width() == 0){
+				console.log("right was closed");			
+				$("#layout-content--left").css("flex", left_width); 
+				// $("#layout-content--right").css("flex", "200px"); 
+				$("#layout-content--right").css("flex", width_right_pane); 
+			} else {
+			    console.log("right open");
+			    $("#layout-content--left").css("flex", left_width); 
+				$("#layout-content--right").css("flex", "0 1 0px");
+				$("#layout-content--center").css("flex", "100vh");
+			}
+		}
 
-	$("#bt_right").click(function(){
-		resize_layout_content_right();
-	});	
-
-	$("body").keydown(function(e) {
-		layout_dimensions();
-		var keyCode = (e.keyCode ? e.keyCode : e.which);  
-	  	if(e.keyCode == 37) { // left
+		$("#bt_left").click(function(){
 			resize_layout_content_left();
-	  	}
-	  	if(e.keyCode == 39) { // right
-	  		resize_layout_content_right();
-	  	}
+		});
+
+		$("#bt_right").click(function(){
+			resize_layout_content_right();
+		});	
+
+		$("body").keydown(function(e) {
+			layout_dimensions();
+			var keyCode = (e.keyCode ? e.keyCode : e.which);  
+		  	if(e.keyCode == 37) { // left
+				resize_layout_content_left();
+		  	}
+		  	if(e.keyCode == 39) { // right
+		  		resize_layout_content_right();
+		  	}
+		});
+
+
 	});
 
-});
 
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
+	</script>	
 
 
 </body>
