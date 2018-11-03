@@ -5,20 +5,10 @@
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<script  src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+<!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script> -->
 
 
-<style>
-.hm-gradient {
-    background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
-}
-.navbar .dropdown-menu a:hover {
-    color: #616161 !important;
-}
-.darken-grey-text {
-    color: #2E2E2E;
-}
-</style>
+
 
 
 
@@ -29,7 +19,7 @@
 <style>
 
 .navbarMedia {
-    background-color: black !important;
+    background-color: grey !important;
 }
 .navbar-brandMedia {
 /*     font-size: var(--navbar-font-size) !important; */
@@ -146,24 +136,24 @@ form.form-searchinline button {
   --navbar-font-size:3vw;
 }
 .navbarMedia {
-    background-color: blue !important;
+    background-color: dark-grey;
 }
 .navbar-brandMedia {
-    font-size: var(--navbar-font-size) !important;
+    font-size: var(--navbar-font-size);
     font-weight: bold;
     line-height: 200%;
 }
 .navbar-navMedia {
-    font-size: var(--navbar-font-size) !important;
+    font-size: var(--navbar-font-size);
 }
 form.form-searchinline button {
 /*     float: left;
     background: transparent;
     color: white; */
-    font-size: var(--navbar-font-size) !important;
+    font-size: var(--navbar-font-size);
 /*     border: 0;
     cursor: pointer; */
-    margin-top: calc(var(--navbar-font-size) / 2 ) !important;
+    margin-top: calc(var(--navbar-font-size) / 2 );
 }
 </style>
 
@@ -233,5 +223,15 @@ form.form-searchinline button {
 
       
 
-  
+  <script>
+if (window.matchMedia("(min-width: 1025px)").matches) {
+  /* La largeur minimum de l'affichage est 1025 px inclus */
+  console.log('1025');
+} else {
+  /* L'affichage est inférieur à 600px de large */
+}
+</script>
+
+
+
 </body>
