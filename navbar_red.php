@@ -5,133 +5,9 @@
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<!-- <script  src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script> -->
-
-
-
-
-
-
-
-
-
 
 <style>
 
-.navbarMedia {
-    background-color: grey !important;
-}
-.navbar-brandMedia {
-/*     font-size: var(--navbar-font-size) !important; */
-    font-weight: bold;
-/*     line-height: 200%; */
-}
-.navbar-navMedia {
-/*     font-size: var(--navbar-font-size) !important; */
-}
-form.form-searchinline button {
-    float: left;
-    background: transparent;
-    color: white;
-/*     font-size: var(--navbar-font-size) !important; */
-    border: 0;
-    cursor: pointer;
-/*     margin-top: 3vh; */
-}
-
-
-
-
-
-
-
-/* -------------------------------------------------------------------------------- media check --*/
-/* 
-  ##Device = Desktops
-  ##Screen = 1281px to higher resolution desktops
-*/
-
-@media (min-width: 1281px) {
-    body {background-color: blue;}
-    :root {
-    }
-}
-
-/* -------------------------------------------------------------------------------- media check --*/
-/* 
-  ##Device = Laptops, Desktops
-  ##Screen = B/w 1025px to 1280px
-*/
-
-@media (min-width: 1025px) and (max-width: 1280px) {
-    body {background-color: white;}
-    :root {
-    }
-}
-
-/* -------------------------------------------------------------------------------- media check --*/
-/* 
-  ##Device = Tablets, Ipads (portrait)
-  ##Screen = B/w 768px to 1024px
-*/
-
-@media (min-width: 768px) and (max-width: 1024px) {
-    body {background-color: red;}
-    :root {
-    }
-}
-
-/* -------------------------------------------------------------------------------- media check --*/
-/* 
-  ##Device = Tablets, Ipads (landscape)
-  ##Screen = B/w 768px to 1024px
-*/
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    body {background-color: green;}
-    :root {
-    }
-}
-
-/* -------------------------------------------------------------------------------- media check --*/
-/* 
-  ##Device = Low Resolution Tablets, Mobiles (Landscape)
-  ##Screen = B/w 481px to 767px
-*/
-
-@media (min-width: 481px) and (max-width: 767px) {
-    body {background-color: yellow;}
-    :root {
-    }
-}
-
-/* -------------------------------------------------------------------------------- media check --*/
-/* 
-  ##Device = Most of the Smartphones Mobiles (Portrait)
-  ##Screen = B/w 320px to 479px
-*/
-
-@media (min-width: 320px) and (max-width: 480px) {
-    body {background-color: black;}
-    :root {
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ////////////////////////////////////////////////   */  
 :root {
   --navbar-font-size:3vw;
 }
@@ -147,34 +23,84 @@ form.form-searchinline button {
     font-size: var(--navbar-font-size);
 }
 form.form-searchinline button {
-/*     float: left;
-    background: transparent;
-    color: white; */
     font-size: var(--navbar-font-size);
-/*     border: 0;
-    cursor: pointer; */
     margin-top: calc(var(--navbar-font-size) / 2 );
+    float: left;
+    background: transparent;
+    color: white;
+    border: 0;
+    cursor: pointer;
 }
+
+/* -------------------------------------------------------------------------------- media check --*/
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+@media (min-width: 1281px) {
+    body {background-color: blue;}
+    :root {
+    }
+}
+
+/* -------------------------------------------------------------------------------- media check --*/
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+    body {background-color: white;}
+    :root {
+    }
+}
+
+/* -------------------------------------------------------------------------------- media check --*/
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {background-color: red;}
+    :root {
+    }
+}
+
+/* -------------------------------------------------------------------------------- media check --*/
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    body {background-color: green;}
+    :root {
+    }
+}
+
+/* -------------------------------------------------------------------------------- media check --*/
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+    body {background-color: yellow;}
+    :root {
+    }
+}
+
+/* -------------------------------------------------------------------------------- media check --*/
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+    body {background-color: black;}
+    :root {
+    }
+}
+
 </style>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <body>
-    
-
-
-            
-
             <!--Navbar -->
             <nav class="navbar navbar-expand-sm navbar-dark navbarMedia">
                 <a class="navbar-brand navbar-brandMedia" href="#">HOME</a>
@@ -197,41 +123,19 @@ form.form-searchinline button {
                         </li>
                     </ul>
                     <form class="form-searchinline">
-<!--                         <button class="btn btn-outline-white btn-sm my-0 btSearch" type="submit">Search</button>
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button> -->
-
-  <button type="submit"><i class="fa fa-search btSearch"></i></button>
-
-
+                        <button type="submit"><i class="fa fa-search btSearch"></i></button>
                     </form>
-
-
-
-
-
-
-
-
-
-
-
-
-                    
                 </div>
             </nav>
             <!--/.Navbar -->
-
-      
-
-  <script>
-if (window.matchMedia("(min-width: 1025px)").matches) {
-  /* La largeur minimum de l'affichage est 1025 px inclus */
-  console.log('1025');
-} else {
-  /* L'affichage est inférieur à 600px de large */
-}
+     
+ <script>
+    if (window.matchMedia("(min-width: 1025px)").matches) {
+      /* La largeur minimum de l'affichage est 1025 px inclus */
+      console.log('1025');
+    } else {
+      /* L'affichage est inférieur à 600px de large */
+    }
 </script>
-
-
 
 </body>
