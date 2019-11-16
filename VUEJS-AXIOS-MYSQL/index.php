@@ -40,7 +40,7 @@
     </div>
       <!-- <input type="button" @click="createContact()" value="Add Input"> -->
       <!-- <button id="btAdd" type="button" class="btn btn-primary">Add</button> -->
-      <button id='btAdd' type="button" @click="toggleForm()" class="btn btn-primary" style="display:block;">Add</button>
+      <button id='btAdd' type="button" @click="addToggleForm()" class="btn btn-primary" style="display:block;">Add</button>
       <button id='btCancel' type="button" @click="cancelForm()" class="btn btn-default" style="display:none;">Cancel</button>
       <button id='btConfirm' type="button" @click="createContact()" class="btn btn-primary" style="display:none;">Confirm</button>
       <button id='btUpdate' type="button" @click="updateContact()" class="btn btn-primary" style="display:none;">Update</button>
@@ -81,7 +81,7 @@ var app = new Vue({
       city: '',
       job: '',
       id: '',
-
+      url_api: 'api/contacts.php',
       contacts: []
   },
   mounted: function () {
@@ -109,7 +109,7 @@ var app = new Vue({
         job_update= $("#form_job").val();
 
         console.log(id+name_update+email_update+city_update+country_update+job_update);
-        axios.post('api/contacts.php', {
+        axios.post(app.url_api, {
           data : {
             update: id,
             name: name_update,
@@ -121,17 +121,16 @@ var app = new Vue({
           }) .then(function (response) {
             //handle success
             // to do better
-              // this.cancelForm;
 
+              // this.cancelForm;
               $("#form").hide();
               $("#btAdd").show();
               $("#btCancel").hide();
               $("#btUpdate").hide();
               $("#btConfirm").hide();
 
-
               //  refresh Contacts to do better
-              axios.get('api/contacts.php')
+              axios.get(app.url_api)
               .then(function (response) {
                   console.log(response.data);
                   app.contacts = response.data;
@@ -179,16 +178,13 @@ var app = new Vue({
 
     deleteContact: function(id){
         console.log("Delete"+id);
-        axios.post('api/contacts.php', {
+        axios.post(app.url_api, {
           data : {delete: id},
           }) .then(function (response) {
             //handle success
 
-
-
-
               //  refresh Contacts to do better
-              axios.get('api/contacts.php')
+              axios.get(app.url_api)
               .then(function (response) {
                   console.log(response.data);
                   app.contacts = response.data;
@@ -228,7 +224,7 @@ var app = new Vue({
             });
             axios({
                 method: 'post',
-                url: 'api/contacts.php',
+                url: app.url_api,
                 data: formData,
                 config: { headers: {'Content-Type': 'multipart/form-data'}}
             })
@@ -263,11 +259,13 @@ var app = new Vue({
       //   return value;
       // }
     },
-    toggleForm: function(){
+    addToggleForm: function(){
       $("#form").toggle();
       $("#btAdd").toggle();
       $("#btCancel").toggle();
       $("#btConfirm").toggle();
+      // $("#form").trigger('reset');
+      app.resetForm();
     },
     cancelForm: function(){
       $("#form").hide();
