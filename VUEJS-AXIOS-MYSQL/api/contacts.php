@@ -40,14 +40,12 @@ switch ($method) {
         $sql = "INSERT into contacts (name, email, city, country, job) values ('$name', '$email', '$city', '$country', '$job')"; 
         break;
       }
-      elseif (isset($_POST["update"])){
-        $name = sanitize($_POST["name"]);
-        $email = sanitize($_POST["email"]);
-        $country = sanitize($_POST["country"]);
-        $city = sanitize($_POST["city"]);
-        $job = sanitize($_POST["job"]);
-        $id = sanitize($_POST["id"]);
-        $sql = "UPDATE contacts SET name='$name' WHERE id='$id'";  
+      elseif (!isset($_POST["name"]) && !isset($_POST["delete"])){
+        $id = $result['data']['update'];
+        $name = $result['data']['name'];
+        if ($id != '' && $id !== ''){
+          $sql = "UPDATE contacts SET name='$name' WHERE id='$id'"; 
+        }
         break;
       }
       elseif(!isset($_POST["name"]) && !isset($_POST["update"])){
