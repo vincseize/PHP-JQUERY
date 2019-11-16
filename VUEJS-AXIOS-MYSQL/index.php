@@ -90,7 +90,7 @@ var app = new Vue({
   },
   methods: {
     getContacts: function(){
-        axios.get('api/contacts.php')
+        axios.get(this.url_api)
         .then(function (response) {
             console.log(response.data);
             app.contacts = response.data;
