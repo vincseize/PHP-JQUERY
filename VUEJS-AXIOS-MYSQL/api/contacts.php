@@ -31,7 +31,8 @@ switch ($method) {
       $out['contacts'] = $contacts;
       break;
     case 'POST':
-      if (isset($_POST["name"]) && !isset($_POST["update"])){
+      // create
+      if (isset($_POST["name"])){
         $name = sanitize($_POST["name"]);
         $email = sanitize($_POST["email"]);
         $country = sanitize($_POST["country"]);
@@ -40,23 +41,26 @@ switch ($method) {
         $sql = "INSERT into contacts (name, email, city, country, job) values ('$name', '$email', '$city', '$country', '$job')"; 
         break;
       }
-      elseif (!isset($_POST["name"]) && !isset($_POST["delete"])){
-        $id = $result['data']['update'];
-        $name = $result['data']['name'];
-        if ($id != '' && $id !== ''){
-          $sql = "UPDATE contacts SET name='$name' WHERE id='$id'"; 
-        }
-        break;
-      }
-      elseif(!isset($_POST["name"]) && !isset($_POST["update"])){
+      // update
+      if(!isset($_POST["name"]) && $result['data']['update'] !== ''){
         $id = $result['data']['delete'];
         if ($id != '' && $id !== ''){
           $sql = "DELETE FROM contacts WHERE id='$id'"; 
+          break;
         }
-        break;
       }
-      else{
-        break;
+      // update
+      if (!isset($_POST["name"]) && $result['data']['delete'] !== ''){
+        $id = $result['data']['update'];
+        $name = $result['data']['name'];
+        $email = $result['data']['email'];
+        $city = $result['data']['city'];
+        $country = $result['data']['country'];
+        $job = $result['data']['job'];
+        if ($id != '' && $id !== ''){
+          $sql = "UPDATE contacts SET name='$name', email='$email', city='$city', country='$country', job='$job' WHERE id='$id'"; 
+          break;
+        }
       }
 }
 
