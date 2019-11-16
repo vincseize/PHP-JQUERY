@@ -13,37 +13,37 @@
 </head>
 <body>
 
-<h1>Administration Contacts</h1>
+<h1>CONTACTS Administration</h1>
 <hr>
 <div id='vueapp' style="padding:5px;">
 
   <div id='form' style="padding:5px;display:none;">
       <form>
         <label>Name</label>
-        <input type="text" name="name" v-model="name">
+        <input type="text" id="form_name" name="name" v-model="name">
         </br>
         <label>Email</label>
-        <input type="email" name="email" v-model="email">
+        <input type="email" id="form_email" name="email" v-model="email">
         </br>
         <label>Country</label>
-        <input type="text" name="country" v-model="country">
+        <input type="text" id="form_country" name="country" v-model="country">
         </br>
         <label>City</label>
-        <input type="text" name="city" v-model="city">
+        <input type="text" id="form_city" name="city" v-model="city">
         </br>
         <label>Job</label>
-        <input type="text" name="job" v-model="job">
+        <input type="text" id="form_job" name="job" v-model="job">
         </br>
-        <label>Id</label>
-        <input type="text" name="id" v-model="id">
+        <input type="text" id="form_id" name="id" v-model="id" style="display:none;">
       </form>
       </br>
     </div>
       <!-- <input type="button" @click="createContact()" value="Add Input"> -->
       <!-- <button id="btAdd" type="button" class="btn btn-primary">Add</button> -->
-      <button id='btAdd' type="button" @click="toggleForm()" class="btn btn-primary">Add</button>
-      <button id='btCancel' type="button" @click="toggleForm()" class="btn btn-default" style="display:none;">Cancel</button>
+      <button id='btAdd' type="button" @click="toggleForm()" class="btn btn-primary" style="display:block;">Add</button>
+      <button id='btCancel' type="button" @click="cancelForm()" class="btn btn-default" style="display:none;">Cancel</button>
       <button id='btConfirm' type="button" @click="createContact()" class="btn btn-primary" style="display:none;">Confirm</button>
+      <button id='btUpdate' type="button" @click="updateContact()" class="btn btn-primary" style="display:none;">Update</button>
     <hr>
   <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr style="background-color:gray;">
@@ -61,7 +61,7 @@
       <td>{{ contact.country }}</td>
       <td>{{ contact.city }}</td>
       <td>{{ contact.job }}</td>
-      <td><button type="submit" @click="updateContact(contact.id,contact.name)" class="btn btn-primary">Update</button></td>
+      <td><button type="submit" @click="updateTogleForm(contact.id,contact.name,contact.email,contact.country,contact.city,contact.job)" class="btn btn-primary">Update</button></td>
       <td><button type="submit" @click="deleteContact(contact.id)" class="btn btn-danger">Delete</button></td>
       <!-- <td><button type="submit" @click="deleteContact(contact.id)" class="btn btn-danger btn-xs">Delete</button></td> -->
     </tr>
@@ -81,6 +81,7 @@ var app = new Vue({
       city: '',
       job: '',
       id: '',
+
       contacts: []
   },
   mounted: function () {
@@ -98,16 +99,36 @@ var app = new Vue({
             console.log(error);
         });
     },
-    updateContact: function(id,name_update){
-        console.log("Update");
-        console.log(id+name_update);
+    updateContact: function(){
+        console.log("updateContact");
+        id = $("#form_id").val();
+        name_update= $("#form_name").val();
+        email_update= $("#form_email").val();
+        city_update= $("#form_city").val();
+        country_update= $("#form_country").val();
+        job_update= $("#form_job").val();
+
+        console.log(id+name_update+email_update+city_update+country_update+job_update);
         axios.post('api/contacts.php', {
           data : {
             update: id,
-            name: name_update
+            name: name_update,
+            email: email_update,
+            city: city_update,
+            country: country_update,
+            job: job_update
             },
           }) .then(function (response) {
             //handle success
+            // to do better
+              // this.cancelForm;
+
+              $("#form").hide();
+              $("#btAdd").show();
+              $("#btCancel").hide();
+              $("#btUpdate").hide();
+              $("#btConfirm").hide();
+
 
               //  refresh Contacts to do better
               axios.get('api/contacts.php')
@@ -124,12 +145,47 @@ var app = new Vue({
               console.log(error)
           });
     },
+
+// deleteContact: (id) => {
+
+  // console.log("Delete");
+  //       axios.post('api/contacts.php', {
+  //         data : {delete: id},
+  //         }) .then(function (response) {
+  //           //handle success
+
+
+                // this.getContacts();
+
+  //             //  refresh Contacts to do better
+  //             axios.get('api/contacts.php')
+  //             .then(function (response) {
+  //                 console.log(response.data);
+  //                 app.contacts = response.data;
+  //             })
+  //             .catch(function (error) {
+  //                 console.log(error);
+  //             });
+
+
+            
+  //         }) .catch(function (error) {
+  //             //handle error
+  //             console.log(error)
+  //         });
+  //   },
+
+//}
+
     deleteContact: function(id){
-        console.log("Delete");
+        console.log("Delete"+id);
         axios.post('api/contacts.php', {
           data : {delete: id},
           }) .then(function (response) {
             //handle success
+
+
+
 
               //  refresh Contacts to do better
               axios.get('api/contacts.php')
@@ -140,6 +196,8 @@ var app = new Vue({
               .catch(function (error) {
                   console.log(error);
               });
+
+
             
           }) .catch(function (error) {
               //handle error
@@ -211,12 +269,46 @@ var app = new Vue({
       $("#btCancel").toggle();
       $("#btConfirm").toggle();
     },
+    cancelForm: function(){
+      $("#form").hide();
+      $("#btAdd").show();
+      $("#btCancel").hide();
+      $("#btUpdate").hide();
+      $("#btConfirm").hide();
+    },
+    updateTogleForm: function(id,name,email,country,city,job){
+      console.log('updateTogleForm');
+      console.log(id);
+      console.log(name);
+      $("#form").show();
+      $("#btAdd").hide();
+      $("#btCancel").show();
+      $("#btUpdate").show();
+      $("#btConfirm").hide();
+
+      app.id = id;
+      app.name = name;
+      app.email = email;
+      app.country = country;
+      app.city = city;
+      app.job = job;
+
+      // $("#form_id").val(id);
+      // $("#form_name").val(name);
+      // $("#form_email").val(email);
+      // $("#form_country").val(country);
+      // $("#form_city").val(city);
+      // $("#form_job").val(job);
+
+    },
     resetForm: function(){
+      console.log('resetForm');
         this.name = '';
         this.email = '';
         this.country = '';
         this.city = '';
         this.job = '';
+        this.id = '';
     }
   }
 })    
@@ -228,6 +320,26 @@ var app = new Vue({
 //     $("#form").toggle();
 //   });
 // });
+
+// function updateTogleFormDES(id,name,email,country,city,job){
+//       console.log('updateTogleForm new');
+//       console.log(id);
+//       console.log(name);
+//       $("#form").show();
+//       $("#btAdd").hide();
+//       $("#btCancel").show();
+//       $("#btUpdate").show();
+//       $("#btConfirm").hide();
+
+//       $("#form_id").val(id);
+//       $("#form_name").val(name);
+//       $("#form_email").val(email);
+//       $("#form_country").val(country);
+//       $("#form_city").val(city);
+//       $("#form_job").val(job);
+
+//     }
+
 </script>
 
 <style>
