@@ -5,12 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CRUD -> PHP| MySQL | Vue.js | Axios</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
+    
+    <script src="js/vue/2.6.10/vue.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/3.3.7/bootstrap-theme.min.css">
+
+  </head>
 <body>
 
 <h1>CONTACTS Administration</h1>
@@ -108,7 +116,7 @@ var app = new Vue({
         country_update= $("#form_country").val();
         job_update= $("#form_job").val();
 
-        console.log(id+name_update+email_update+city_update+country_update+job_update);
+        // console.log(id+name_update+email_update+city_update+country_update+job_update);
         axios.post(app.url_api, {
           data : {
             update: id,
@@ -140,7 +148,6 @@ var app = new Vue({
               });
             
           }) .catch(function (error) {
-              //handle error
               console.log(error)
           });
     },
@@ -196,7 +203,6 @@ var app = new Vue({
 
             
           }) .catch(function (error) {
-              //handle error
               console.log(error)
           });
     },
@@ -235,7 +241,6 @@ var app = new Vue({
                 app.resetForm();
             })
             .catch(function (response) {
-                //handle error
                 console.log(response)
             });
         }
