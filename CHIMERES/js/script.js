@@ -40,7 +40,7 @@ $(document).ready(function(){
     
     // SET THUMBNAIL VIEW - CHANGE CSS VARIABLE
     rangeInput.addEventListener("input", function() {
-      document.documentElement.style.setProperty("--minRangeValue",`${this.value}px`);
+      document.documentElement.style.setProperty("--minImgWidth",`${this.value}px`);
     });
     
     // SEARCH FUNCTIONALITY
@@ -62,11 +62,20 @@ $(document).ready(function(){
       if (filteredArray.length > 0) {
         for (const el of filteredArray) {
           document.querySelector(`.image-list li:nth-child(${el.id})`).classList.remove(dNone);
+          $(".cancel").css("display", "none");
         }
       }
+      if (filteredArray.length == 0) {
+        $(".cancel").css("display", "block");
+      }
       photosCounter.textContent = filteredArray.length;
+
     }
     
+    $("#CANCEL").click(function(){
+      location.reload();
+      $("#CANCEL").hide();
+    });
     
     });
     
