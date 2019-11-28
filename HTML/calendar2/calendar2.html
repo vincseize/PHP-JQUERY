@@ -1,0 +1,73 @@
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="dist/daterangepicker.min.css"/>
+
+
+    <style type="text/css">
+
+
+        .date-picker-wrapper .month-wrapper table .day.lalala {
+            background-color: orange;
+        }
+
+        /* .options {
+            display: none;
+            border-left: 6px solid #8ae;
+            padding: 10px;
+            font-size: 12px;
+            line-height: 1.4;
+            background-color: #eee;
+            border-radius: 4px;
+        } */
+
+        .date-picker-wrapper.date-range-picker19 .day.first-date-selected {
+            background-color: green !important;
+        }
+
+        .date-picker-wrapper.date-range-picker19 .day.last-date-selected {
+            background-color: orange !important;
+        }
+    </style>
+
+
+<span id="two-inputs">
+    <input id="date-range1" size="20" value=""> &agrave; <input id="date-range2" size="20" value="">
+</span>
+                
+
+
+
+
+
+
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/moment.min.js" type="text/javascript"></script>
+<script src="src/jquery.daterangepicker.js"></script>
+
+<script>
+$(function()
+{
+	$('#two-inputs').dateRangePicker(
+        {
+
+            language: 'fr',
+            format: 'DD-MM-YYYY',
+	        separator: ' &agrave; ',
+            extraClass: 'date-range-picker19',
+
+            getValue: function()
+            {
+                if ($('#date-range2').val() && $('#date-range1').val() )
+                    return $('#date-range2').val() + ' to ' + $('#date-range1').val();
+                else
+                    return '';
+            },
+            setValue: function(s,s1,s2)
+            {
+                $('#date-range2').val(s1);
+                $('#date-range1').val(s2);
+            }
+        });
+    });
+</script>
