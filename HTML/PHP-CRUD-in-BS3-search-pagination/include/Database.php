@@ -140,12 +140,44 @@ class Database{
         }
     }
      
+
+    public function searchInColumnsTable($Table, $Search)
+    {
+
+        $results = array();
+
+        $searchphrase = $Search;
+        $table = $Table;
+        $sql_search = "SELECT * FROM " . $table . " WHERE ";
+        $sql_search_fields = Array();
+        $sql = "SHOW COLUMNS FROM " . $table;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($rows as $row){
+            $colum = $row['Field'];
+            $sql_search_fields[] = $colum . " LIKE('%" . $searchphrase . "%')";
+        }
+
+        $sql_search .= implode(" OR ", $sql_search_fields);
+
+        $stmt = $this->pdo->prepare($sql_search);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($rows as $row){
+            array_push($results, $row);
+        }
+
+		return $results;
+	}
+
     public function getAllRecords($tableName, $fields='*', $cond='', $orderBy='', $limit='')
     {
-        //echo "SELECT  $tableName.$fields FROM $tableName WHERE 1 ".$cond." ".$orderBy." ".$limit;
-        //print "<br>SELECT $fields FROM $tableName WHERE 1 ".$cond." ".$orderBy." ".$limit;
+
         $stmt = $this->pdo->prepare("SELECT $fields FROM $tableName WHERE 1 ".$cond." ".$orderBy." ".$limit);
-        //print "SELECT $fields FROM $tableName WHERE 1 ".$cond." ".$orderBy." " ;
+
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $rows;
@@ -170,6 +202,7 @@ class Database{
     public function getQueryCount($tableName, $field, $cond='')
     {
         $stmt = $this->pdo->prepare("SELECT count($field) as total FROM $tableName WHERE 1 ".$cond);
+
         try {
             $stmt->execute();
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
