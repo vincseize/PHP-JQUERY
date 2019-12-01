@@ -174,7 +174,7 @@
 						<div class="row">
 						<div class="col-sm-2">
 								<div class="form-group">
-									<select id="select_orders" class="form-control selects" data-role="select">
+									<select id="select_orderType" class="form-control selects" data-role="select">
 									<option value="DESC">ORDER DESC</option>
 									<option value="ASC">ORDER ASC</option>
 									</select>
@@ -184,7 +184,7 @@
 
 							<div class="col-sm-2">
 								<div class="form-group">
-									<select id="select_orders_fields" class="form-control selects" data-role="select">
+									<select id="select_orderType_fields" class="form-control selects" data-role="select">
 									<option value="nom">Nom</option>
 									<option value="email">Email</option>
 									<option value="id">Id</option>
@@ -196,26 +196,8 @@
 					</form>
 					
 
-
 					</div>
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			
 		</div>
@@ -265,11 +247,8 @@
 				</tbody>
 			</table>
 
-
-
 			<!-- // ----- Pagination -->
 			<nav aria-label="Page navigation">
-
 
 			<div id="div_pagination" <?php echo $style_pagination; ?>>
 
@@ -334,7 +313,6 @@
 					$page = $currentPage;
 
 					?>
-
 
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -444,15 +422,19 @@ $(document).on('click', '#deleteIds', function () {
 // OTHERS
 $(document).ready(function(){
 
-	// ----- only used for multiple delete
-	$("#all_checkbox").click(function(){
-  		$('input:checkbox').not(this).prop('checked', this.checked);
-	});
+	// // ----- ui vars
+	// var order = $("#select_orderType").val();
+	// var search = $("#input_search").val();
+	// var field = $("#select_fields").val();
+	// var orderType = $("#select_orderType").val();
+	// var orderType_fields = $("#select_orderType_fields").val();
 
-	// -----
+	// ----- get vars
 	var var_order_url = GetUrlValue('order');
 	var var_field_url = GetUrlValue('field');
 	var var_field_search_url = GetUrlValue('fieldSearch');
+	var var_orderType_url = GetUrlValue('orderType');
+	var var_orderType_fields_url = GetUrlValue('orderType_fields');
 
 	if(check_var_notNullEmptyUndefined(var_order_url)=="TRUE" && check_var_notNullEmptyUndefined(var_field_url)=="TRUE"){
 		conform_ui_orderSelects(var_order_url,var_field_url);
@@ -460,41 +442,69 @@ $(document).ready(function(){
 	if(check_var_notNullEmptyUndefined(var_field_search_url)=="TRUE"){
 		conform_ui_fieldSelect(var_field_search_url);
 	}
+	if(check_var_notNullEmptyUndefined(var_orderType_url)=="TRUE"){
+		conform_ui_orderType(var_orderType_url);
+	}
+	if(check_var_notNullEmptyUndefined(var_orderType_fields_url)=="TRUE"){
+		conform_ui_orderType_fields(var_orderType_fields_url);
+	}
 	
-    $("#bt_search").click(function(){        
-		var search = $("#input_search").val();
-		var field = $("#select_fields").val();
+	// ----- only used for multiple delete
+	$("#all_checkbox").click(function(){
+  		$('input:checkbox').not(this).prop('checked', this.checked);
+	});
 
-		if(search==""){
-			alert("Search is empty");
-		} else {
-
-			var url = '<?php echo $_SERVER['PHP_SELF'];?>'+'?'+field+'='+search+'&submit=search&search='+search+'&fieldSearch='+field;
-			if(field=="all"){
-				var url = '<?php echo $_SERVER['PHP_SELF'];?>'+'?'+field+'='+search+'&submit=search&search='+search+'&searchAll='+field;
-			}
-
-			window.location.href = url;
-		}
-    });
+	// -----
 
 	$("#bt_showAll").click(function(){        
 		var url = '<?php echo $_SERVER['PHP_SELF'];?>';
 		window.location.href = url;
 	});
 
-	$("#select_orders").change(function(){        
+	$("#select_orderType").change(function(){        
 		order_select();
 	});
-	$("#select_orders_fields").change(function(){        
+	$("#select_orderType_fields").change(function(){        
 		order_select();
 	});
 
-	function order_select(){
-		var order = $("#select_orders").val();
-		var field = $("#select_orders_fields").val();
-		var url = '<?php echo $_SERVER['PHP_SELF'];?>'+'?field='+field+'&order='+order;
+    $("#bt_search").click(function(){        
+		ui_vars_array = ui_vars();
+		var search = ui_vars_array[1];
+		if(search==""){
+			alert("Search is empty");
+		} else {
+			refresh_page();
+		}
+    });
+
+	function ui_vars(){
+		var order = $("#select_orderType").val();
+		var search = $("#input_search").val();
+		var field = $("#select_fields").val();
+		var orderType = $("#select_orderType").val();
+		var orderType_fields = $("#select_orderType_fields").val();
+		var ui_vars_array = [order,search,field,orderType,orderType_fields]
+		return ui_vars_array;
+	}
+
+	function refresh_page(){
+		ui_vars_array = ui_vars();
+		var order = ui_vars_array[0];
+		var search = ui_vars_array[1];
+		var field = ui_vars_array[2];
+		var orderType = ui_vars_array[3];
+		var orderType_fields = ui_vars_array[4];
+
+		var url = '<?php echo $_SERVER['PHP_SELF'];?>'+'?'+field+'='+search+'&submit=search&search='+search+'&fieldSearch='+field+'&orderType='+orderType+'&orderType_fields='+orderType_fields;
+		if(field=="all"){
+			var url = '<?php echo $_SERVER['PHP_SELF'];?>'+'?'+field+'='+search+'&submit=search&search='+search+'&searchAll='+field+'&orderType='+orderType+'&orderType_fields='+orderType_fields;
+		}
 		window.location.href = url;
+	}
+
+	function order_select(){
+		refresh_page();
 	}
 
 	function GetUrlValue(VarSearch){
@@ -531,12 +541,20 @@ $(document).ready(function(){
 });
 
 function conform_ui_orderSelects(var_order_url,var_field_url){
-	$("#select_orders").val(var_order_url);
-	$("#select_orders_fields").val(var_field_url);
+	$("#select_orderType").val(var_order_url);
+	$("#select_orderType_fields").val(var_field_url);
 }
 
 function conform_ui_fieldSelect(var_field_search_url){
 	$("#select_fields").val(var_field_search_url);
+}
+
+function conform_ui_orderType(var_orderType_url){
+	$("#select_orderType").val(var_orderType_url);
+}
+
+function conform_ui_orderType_fields(var_orderType_fields_url){
+	$("#select_orderType_fields").val(var_orderType_fields_url);
 }
 
 </script>
