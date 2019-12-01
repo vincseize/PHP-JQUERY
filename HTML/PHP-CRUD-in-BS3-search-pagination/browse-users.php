@@ -3,22 +3,37 @@
 	$table = "reservations";
 
 	// ----- pagination  - 1
-	$totalPages = count($db->getAllRecords($table,'*'));
-	$showRecordPerPage = 2;
+	$array_select_n_byPage = array(2=>2,3=>3,5=>5,10=>10,15=>15,25=>25,50=>50);
+	// $array_select_n_byPage = array(2,3,4,5,10,15,25);
+	$totalResults = count($db->getAllRecords($table,'*'));
+	$showRecordPerPage = 5;
 	$startFrom = 0;
 	$currentPage = 0;
 	$style_pagination = "";
 	$style_showAll = " style='display:none;'";
 
-	$limit = "  LIMIT $startFrom, $showRecordPerPage";
+	if(isset($_GET['n_byPage']) && !empty($_GET['n_byPage'])){
+		$showRecordPerPage = $_GET['n_byPage'];
+	}
 
+	// -----
+	$orderType = "DESC";
+	if(isset($_GET['orderType']) && !empty($_GET['orderType'])){
+		$orderType = $_GET['orderType'];
+	}
+	$orderBy = "id";
+	if(isset($_GET['orderType_fields']) && !empty($_GET['orderType_fields'])){
+		$orderBy = $_GET['orderType_fields'];
+	}
+
+	$limit = "  LIMIT $startFrom, $showRecordPerPage";
 	if(isset($_GET['page']) && !empty($_GET['page'])){
 		$currentPage = $_GET['page'];
 		$limit_start = ($currentPage + $showRecordPerPage);
 		$limit	=	" LIMIT $limit_start, $showRecordPerPage";
 	}
 
-	// ----- get request data for Check Form  - 2
+	// ----- get request data for Form  - 2
 
 	$condition	=	'';
 
@@ -37,23 +52,31 @@
 
 	if(isset($_REQUEST['submit']) and $_REQUEST['submit']=="search" and isset($_REQUEST['searchAll'])){
 		$search = $_REQUEST['search'];
-		$datas = $db->searchInColumnsTable($table,$search);
-		// print_r($datas);
-		// exit;
-	}
-
-	// ----- search in unique Column,  and css switch - 4
-	if(isset($_REQUEST['submit']) and $_REQUEST['submit']=="search"){
-		// $searchSubmit = "TRUE";
-		$style_pagination = " style='display:none;'";
-		$style_showAll = " style='display:block;'";
-		$limit = '';
+		$datas_tot = $db->searchInColumnsTable($table,$search);
 	}
 
 	// ----- get datas 5
 	if(!isset($_REQUEST['searchAll'])){
-		$datas	=	$db->getAllRecords($table,'*',$condition,'ORDER BY created DESC',$limit);
+		$limit = '';
+		$order = 'ORDER BY ' . $orderBy . ' ' . $orderType . ' ';
+		$datas_tot	=	$db->getAllRecords($table,'*',$condition,$order,$limit);	
 	}
+
+	// -----
+	$start = ($currentPage*$showRecordPerPage);
+	$end = $showRecordPerPage;
+	$datas = array_slice($datas_tot, $start , $showRecordPerPage); 
+
+	$totalResults = count($datas_tot);
+	if($totalResults>end($array_select_n_byPage)){$array_select_n_byPage[$totalResults]=$totalResults;}
+	foreach($array_select_n_byPage as $a){
+		if($a<=$totalResults){
+			$array_select_n_byPage[$a]=$a;
+		}
+	}
+	array_unique($array_select_n_byPage);
+	asort($array_select_n_byPage);
+
 
 ?>
 <!doctype html>
@@ -132,9 +155,15 @@
 									<!-- <label>&nbsp;</label> -->
 									<div>
 										<button id="bt_search" type="button" name="submit" value="search" class="btn btn-primary">
-											<i class="fa fa-fw fa-search"></i> Search</button>
+										<i class="fa fa-fw fa-search"></i> 
+										Search
+										</button>
 
-										<a href="<?php echo $_SERVER['PHP_SELF'];?>" class="btn btn-danger"><i class="fa fa-fw fa-trash"></i> Clear</a>
+										<a href="<?php echo $_SERVER['PHP_SELF'];?>" class="btn btn-danger">
+										<!-- <i class="fa fa-fw fa-trash"></i>  -->
+										Clear | Refresh
+										</a>
+
 									</div>
 								</div>
 								
@@ -219,9 +248,11 @@
 				</thead>
 				<tbody>
 					<?php 
-					$s	=	'';
+					// $s	=	'';
+					$s = ($currentPage*$showRecordPerPage);
 					$c = 0;
 					foreach($datas as $val){
+						
 						$sr_bg1 = " style='background-color:#C0C0C0;'";
 						$sr_bg2 = " style='background-color:#DCDCDC;'";
 						$sr_bg = ($c++ & 1) ? $sr_bg2 : $sr_bg1;
@@ -247,136 +278,20 @@
 				</tbody>
 			</table>
 
-			<!-- // ----- Pagination -->
-			<nav aria-label="Page navigation">
-
-			<div id="div_pagination" <?php echo $style_pagination; ?>>
-
-			<style>
-
-				.navigation_pages{
-					color: darkgray !important;
-					border: 1px solid darkgray !important;
-					/* background-color: #ccc !important; */
-					background-color: white !important;
-				}
-				.navigation_pages:hover{
-					color: white !important;
-					background-color: darkgray !important;
-				}
-				.navigation_pages_before_after{
-					background-color: white !important;
-					border: 1px solid darkgray !important;
-					color: darkgray !important;
-				}
-				.navigation_pages_before_after:hover{
-					color: white !important;
-					/* border: 1px solid darkgray !important; */
-					/* background-color: #ccc !important; */
-					background-color: darkgray !important;
-				}
-				.navigation_pages_before{
-					/* background-color: white !important; */
-					/* margin-right: 15px !important; */
-				}
-				.navigation_pages_after{
-					/* background-color: grey !important; */
-					/* margin-left: 5px !important; */
-				}
-				.navigation_margin_right{
-					margin-right: 2px !important;
-				}
-				.bt_pagination_active{
-					color: white !important;
-					background-color: darkgray !important;
-				}
-				.a_result{
-					color: darkgray !important;
-					background-color: white !important;	
-					border: 1px solid darkgray !important;
-				}
-				.a_result_perPage{
-					color: darkgray !important;
-				}
-				.select_n_byPage{
-					color: darkgray !important;
-				}
-			</style>		
-
-				<?php
-
-
-
-					/* On calcule le nombre de pages */
-					// to do better check if result derniere page
-					$nombreDePages = ceil($totalPages / $showRecordPerPage);
-					$page = $currentPage;
-
-					?>
-
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-					<a class="btn btn-primary navigation_pages_before navigation_pages" role ="button" href="?page=0">FIRST</a>&nbsp;<?php
-					
-					/* Si on est sur la première page, on n'a pas besoin d'afficher de lien
-					* vers la précédente. On va donc l'afficher que si on est sur une autre
-					* page que la première */
-					if ($page > 0):
-						?><a class="btn btn-primary navigation_margin_right navigation_pages_before_after" role ="button" href="?page=<?php echo $page - 1; ?>"><</a>&nbsp;&nbsp;<?php
-					endif;
-
-					/* On va effectuer une boucle autant de fois que l'on a de pages */
-					for ($i = 1; $i <= $nombreDePages; $i++):
-						$bt_page_active = "";
-						if($i==$currentPage){$bt_page_active='bt_pagination_active';}
-						?><a class="btn btn-primary navigation_margin_right navigation_pages <?php echo $bt_page_active; ?>" role ="button"  href="?page=<?php echo $i;?>"><?php echo $i;?></a><?php
-					endfor;
-
-					/* Avec le nombre total de pages, on peut aussi masquer le lien
-					* vers la page suivante quand on est sur la dernière */
-					if ($page < $nombreDePages):
-						?>&nbsp;&nbsp;<a class="btn btn-primary navigation_margin_right navigation_pages_before_after navigation_pages_after" role ="button" href="?page=<?php echo $page + 1; ?>">></a><?php
-					endif;
-
-					?>&nbsp;<a class="btn btn-primary navigation_margin_right navigation_pages_before_after" role ="button" href="?page=<?php echo $nombreDePages + 1; ?>">LAST</a><?php
-
-					?>
-
-<!-- <a class="label btnX btn-primaryX a_result" role ="buttonX"> -->
-	
-
-					&nbsp;&nbsp;&nbsp;&nbsp;			
-<!-- <div style="height:10px;"></div>		 -->
-					<select id="select_n_byPage" class="select_n_byPage" data-role="select">
-						<option value="10">10</option>
-						<option value="25">25</option>
-						<option value="50">50</option>
-					</select>
-					<i class="a_result_perPage">results per page</i>
-					
-				
-				<!-- </a> -->
-
-
-					
-					<span>
-
-					</span>
-					
-			
-			</div>
-			<div  <?php echo $style_showAll; ?>>
-				&nbsp;&nbsp;&nbsp;&nbsp;<a id ="bt_showAll" class="btn btn-primary navigation_pages_before navigation_pages" role ="button">RESET</a>
-			</div>
-
-			</nav>
+<!-- // ----- Pagination -->
+			<?php include('pagination.php');?>
 <!--/pagination-->
+
+
+
+
+
 
 		</div> <!--/.col-sm-12-->
 	</div>
 	
 	
-<br><br><br><br>
+<br><br>
 
 
 
@@ -388,6 +303,37 @@
 
 <script>
 
+
+// bt_pageId
+
+function refresh_pageId(id){
+	var url_server_self = url_server();
+	ui_vars_array = ui_vars();
+	var pageId = id;
+	var order = ui_vars_array[0];
+	var search = ui_vars_array[1];
+	var field = ui_vars_array[2];
+	var orderType = ui_vars_array[3];
+	var orderType_fields = ui_vars_array[4];
+	var n_byPage = ui_vars_array[5];
+	var nombreDePages = ui_vars_array[6];
+
+	if(pageId>=0 && pageId<=nombreDePages){
+		// var url = url_server_self+'?page='+pageId;
+		var url = url_server_self+'?page='+pageId+'&'+field+'='+search+'&submit=search&search='
+		+search+'&fieldSearch='+field+'&orderType='+orderType+'&orderType_fields='+orderType_fields+'&n_byPage='+n_byPage;
+		if(field=="all" && search !=""){
+			var url = url_server_self+'?page='+pageId+'&'+field+'='+search+'&submit=search&search='
+			+search+'&searchAll='+field+'&orderType='+orderType+'&orderType_fields='+orderType_fields+'&n_byPage='+n_byPage;
+		}
+
+		window.location.href = url;
+	}
+
+}
+
+
+$("#" + $(this).attr('delId')).prop('checked', true);
 
 // DELETE UNIQUE OR MULTIPLE by Id
 $(document).on('click', '#deleteIds', function () {
@@ -409,7 +355,6 @@ $(document).on('click', '#deleteIds', function () {
 		for (i = 0; i < ids.length; i++) {
 			id = ids[i];
 			var url = "delete.php?delId="+id+"&table="+table;
-			// delete.php?delId=19&table=reservations
 			console.log(url);
 			window.location.href = url;
 		} 
@@ -422,12 +367,8 @@ $(document).on('click', '#deleteIds', function () {
 // OTHERS
 $(document).ready(function(){
 
-	// // ----- ui vars
-	// var order = $("#select_orderType").val();
-	// var search = $("#input_search").val();
-	// var field = $("#select_fields").val();
-	// var orderType = $("#select_orderType").val();
-	// var orderType_fields = $("#select_orderType_fields").val();
+	
+	$("#select_n_byPage").val(<?php echo $showRecordPerPage;?>);
 
 	// ----- get vars
 	var var_order_url = GetUrlValue('order');
@@ -435,6 +376,7 @@ $(document).ready(function(){
 	var var_field_search_url = GetUrlValue('fieldSearch');
 	var var_orderType_url = GetUrlValue('orderType');
 	var var_orderType_fields_url = GetUrlValue('orderType_fields');
+	var var_n_byPage_url = GetUrlValue('n_byPage');
 
 	if(check_var_notNullEmptyUndefined(var_order_url)=="TRUE" && check_var_notNullEmptyUndefined(var_field_url)=="TRUE"){
 		conform_ui_orderSelects(var_order_url,var_field_url);
@@ -447,6 +389,9 @@ $(document).ready(function(){
 	}
 	if(check_var_notNullEmptyUndefined(var_orderType_fields_url)=="TRUE"){
 		conform_ui_orderType_fields(var_orderType_fields_url);
+	}
+	if(check_var_notNullEmptyUndefined(var_n_byPage_url)=="TRUE"){
+		conform_ui_select_n_byPage(var_n_byPage_url);
 	}
 	
 	// ----- only used for multiple delete
@@ -478,30 +423,76 @@ $(document).ready(function(){
 		}
     });
 
+});
+
+function conform_ui_orderSelects(var_order_url,var_field_url){
+	$("#select_orderType").val(var_order_url);
+	$("#select_orderType_fields").val(var_field_url);
+}
+
+function conform_ui_fieldSelect(var_field_search_url){
+	$("#select_fields").val(var_field_search_url);
+}
+
+function conform_ui_orderType(var_orderType_url){
+	$("#select_orderType").val(var_orderType_url);
+}
+
+function conform_ui_orderType_fields(var_orderType_fields_url){
+	$("#select_orderType_fields").val(var_orderType_fields_url);
+}
+
+function conform_ui_select_n_byPage(var_n_byPage_url){
+	$("#select_n_byPage").val(var_n_byPage_url);
+}
+
+// ----
+
+	function url_server(){
+		var url_server_self = '<?php echo $_SERVER['PHP_SELF'];?>';
+		return url_server_self;
+	}
+
+
 	function ui_vars(){
 		var order = $("#select_orderType").val();
 		var search = $("#input_search").val();
 		var field = $("#select_fields").val();
 		var orderType = $("#select_orderType").val();
 		var orderType_fields = $("#select_orderType_fields").val();
-		var ui_vars_array = [order,search,field,orderType,orderType_fields]
+		var n_byPage = $("#select_n_byPage").val();
+		var nombreDePages = '<?php echo $nombreDePages;?>';
+		var ui_vars_array = [order,search,field,orderType,orderType_fields,n_byPage,nombreDePages]
 		return ui_vars_array;
 	}
 
 	function refresh_page(){
+		// var url_server_self = url_server();
 		ui_vars_array = ui_vars();
+		pageId = '0';
 		var order = ui_vars_array[0];
 		var search = ui_vars_array[1];
 		var field = ui_vars_array[2];
 		var orderType = ui_vars_array[3];
 		var orderType_fields = ui_vars_array[4];
+		var n_byPage = ui_vars_array[5];
+		var nombreDePages = ui_vars_array[6];
+		
+		go_to_url(pageId,order,search,field,orderType,orderType,orderType_fields,n_byPage);
 
-		var url = '<?php echo $_SERVER['PHP_SELF'];?>'+'?'+field+'='+search+'&submit=search&search='+search+'&fieldSearch='+field+'&orderType='+orderType+'&orderType_fields='+orderType_fields;
+	}
+
+	function go_to_url(pageId,order,search,field,orderType,orderType,orderType_fields,n_byPage){
+		var url_server_self = url_server();
+		var url = url_server_self+'?page='+pageId+'&'+field+'='+search+'&submit=search&search='
+		+search+'&fieldSearch='+field+'&orderType='+orderType+'&orderType_fields='+orderType_fields+'&n_byPage='+n_byPage;
 		if(field=="all"){
-			var url = '<?php echo $_SERVER['PHP_SELF'];?>'+'?'+field+'='+search+'&submit=search&search='+search+'&searchAll='+field+'&orderType='+orderType+'&orderType_fields='+orderType_fields;
+			var url = url_server_self+'?page='+pageId+'&'+field+'='+search+'&submit=search&search='
+			+search+'&searchAll='+field+'&orderType='+orderType+'&orderType_fields='+orderType_fields+'&n_byPage='+n_byPage;
 		}
 		window.location.href = url;
 	}
+
 
 	function order_select(){
 		refresh_page();
@@ -537,25 +528,6 @@ $(document).ready(function(){
 		}
 		return check;
 	}
-
-});
-
-function conform_ui_orderSelects(var_order_url,var_field_url){
-	$("#select_orderType").val(var_order_url);
-	$("#select_orderType_fields").val(var_field_url);
-}
-
-function conform_ui_fieldSelect(var_field_search_url){
-	$("#select_fields").val(var_field_search_url);
-}
-
-function conform_ui_orderType(var_orderType_url){
-	$("#select_orderType").val(var_orderType_url);
-}
-
-function conform_ui_orderType_fields(var_orderType_fields_url){
-	$("#select_orderType_fields").val(var_orderType_fields_url);
-}
 
 </script>
 
