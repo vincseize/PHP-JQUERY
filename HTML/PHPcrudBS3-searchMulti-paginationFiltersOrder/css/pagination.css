@@ -1,0 +1,88 @@
+.selects{
+	min-width: 140px;
+}
+.inputs-text{
+	min-width: 140px;
+}
+.navigation_pages{
+	color: darkgray !important;
+	border: 1px solid darkgray !important;
+	/* background-color: #ccc !important; */
+	background-color: white !important;
+}
+.navigation_pages:hover{
+	color: white !important;
+	background-color: darkgray !important;
+}
+.navigation_pages_before_after{
+	background-color: white !important;
+	border: 1px solid darkgray !important;
+	color: darkgray !important;
+}
+.navigation_pages_before_after:hover{
+	color: white !important;
+	/* border: 1px solid darkgray !important; */
+	/* background-color: #ccc !important; */
+	background-color: darkgray !important;
+}
+.navigation_pages_beforeDES{
+	background-color: white !important;
+	margin-right: 15px !important;
+}
+.navigation_pages_afterDES{
+	background-color: grey !important;
+	margin-left: 5px !important;
+}
+.navigation_margin_right{
+	margin-right: 2px !important;
+}
+.bt_pagination_active{
+	color: white !important;
+	background-color: darkgray !important;
+}
+.a_result{
+	color: darkgray !important;
+	background-color: white !important;	
+	border: 1px solid darkgray !important;
+}
+.a_result_perPage{
+	color: darkgray !important;
+}
+.select_n_byPage{
+	color: darkgray !important;
+}
+
+/* // ------- */
+
+.divTable{
+	display: table;
+	width: 100%;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+}
+.divTableCell, .divTableHead {
+	/* border: 1px solid black; */
+	border: 0px;
+	display: table-cell;
+	padding: 0px 0px;
+}
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+	display: table-row-group;
+}
+
+/* // ------- */
