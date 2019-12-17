@@ -1,17 +1,14 @@
 <head>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
 <style>
-body {
-  margin:0;
-}
 
-.container0 {
+.mon_container {
   display: flex;
   min-height:100px;
 }
@@ -25,9 +22,12 @@ body {
 }
 
 .sidebar.collapsed {
-  left: -150px;
-  margin-right: -150px;
+  left: -100px;
+  margin-right: -100px;
 }
+
+
+
 
 
 
@@ -102,59 +102,34 @@ ul {
   background-color: #eee;
 }
 
-.panel-default>.panel-heading a[aria-expanded="true"]:after {
-  content: "\2601";
+#btn_toggle_menu_leftSideB{
+  width:100%;
 }
-
-
-/* .panel-default>.panel-heading a[aria-expanded="true"]:after {
-  content: "\e113";
-}
-
-.panel-default>.panel-heading a[aria-expanded="false"]:after {
-  content: "\e114";
-} */
 
 
 </style>
   
 </head>
-</body>
+<body>
 
-<div class="container0">
-        <div class="sidebar" id="sidebar">
-    
-            <button onclick="document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed')">
-          toggle Sidebar xxxxxx bbbbb n
+<div class="mon_container">
+        <div class="sidebar" id="sidebar" name="sidebar" data-minWidth="50" data-maxWidth="200">
+      
+        <button id="btn_toggle_menu_leftSideB"  class="btn btn-default">
+        <i class="fa fa-arrows-h" aria-hidden="true"></i> 
         </button>
     
-     
-          
           
   <div class="panel-group" id="accordionMenu" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingOne">
-        <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Menu 0
-        </a>
-      </h4>
-      </div>
-      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-        <div class="panel-body">
-          <ul class="nav">
-            <li><a href="#">item 1</a></li>
-            <li><a href="#">item 2</a></li>
-            <li><a href="#">item 3</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    
+    
+    
+    
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingTwo">
         <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>Menu 1
+          <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span><span class="span_menu_title">Menu 1</span>
         </a>
       </h4>
       </div>
@@ -169,11 +144,17 @@ ul {
         </div>
       </div>
     </div>
+    
+    
+    
+    
+    
+    
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingThree">
         <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>Menu 2
+          <span class="glyphicon glyphicon-globe" aria-hidden="true"></span><span class="span_menu_title">Menu 2</span>
         </a>
       </h4>
       </div>
@@ -192,7 +173,7 @@ ul {
       <div class="panel-heading" role="tab" id="headingFour">
         <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionMenu" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>Menu 3
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="span_menu_title">Menu 3</span>
         </a>
       </h4>
       </div>
@@ -208,26 +189,32 @@ ul {
     
   </div>
 
-          
-          
-          
     
     
-    
-    
-    
-    
-    
-   </div> 
+  </div> 
 
   <div class="content">
     lorem bla bla
-    <button onclick="document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed')">
-      toggle Sidebar
-    </button>
   </div>
+  
 </div>
 
 
 
 </body>
+<script>
+  $('#btn_toggle_menu_leftSideB').on('click', function() {
+  var maxWidth = $("#sidebar").attr("data-maxWidth");
+  var minWidth = $("#sidebar").attr("data-minWidth");
+  if ($("#sidebar").width() > minWidth) {
+    $('.span_menu_title').toggle();
+    $("#sidebar").width(minWidth+"px");
+  } else {
+    $("#sidebar").width(maxWidth+"px");
+    // $('.span_menu_title').toggle();
+    setTimeout(function() { 
+        $('.span_menu_title').toggle();
+    }, 100);
+  }
+});
+</script>
