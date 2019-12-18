@@ -7,16 +7,6 @@ $database = 'booking_vuejs';
 $table = 'clients';
 $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
 
-$page_index = $_SERVER["PHP_SELF"];
-$limit = 15; 
-$jumlah_number = 4; // n*2 +1 (without first and last) max visible btn
-$before_icon = "&#60;";
-$next_icon = "&#62;";
-$etc = "...";
-
-$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
-$limit_start = ($page - 1) * $limit;
-
 
 function rows_count($pdo, $table){
     $sql = $pdo->prepare("SELECT COUNT(*) AS result FROM $table");
@@ -32,8 +22,37 @@ function select_table($pdo, $table, $limit_start, $limit){
     return $sql;
 }
 
+
+
+
+
+
+$page_index = $_SERVER["PHP_SELF"];
+$limit = 15; 
+$n_btn_number = 4; // n*2 +1 (without first and last) max visible btn
+$before_icon = "&#60;";
+$next_icon = "&#62;";
+$etc = "...";
+
+
+// dont touch
+$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$limit_start = ($page - 1) * $limit;
+
+
+
 $datas = select_table($pdo, $table, $limit_start, $limit);
 $rows_count =rows_count($pdo, $table);
+$n_pages_result = ceil($rows_count / $limit);
+
+
+$start_number = ($page > $n_btn_number) ? $page - $n_btn_number : 1; // Untuk awal link member
+$end_number = ($page < ($n_pages_result - $n_btn_number)) ? $page + $n_btn_number : $n_pages_result; // Untuk akhir link number
+
+$result_numbers = array();
+for ($i = $start_number; $i <= $end_number; $i++) {
+    array_push($result_numbers,$i);
+}
 
 ?>
 <!DOCTYPE html>
@@ -95,22 +114,10 @@ $rows_count =rows_count($pdo, $table);
 
         <ul class="pagination">
 
-            <!-- LINK NUMBER -->
-            <?php
+            <!-- LINK BTN NUMBERS -->
 
-            $n_pages_result = ceil($rows_count / $limit);
-            
-            // $jumlah_number = 4; 
-            $start_number = ($page > $jumlah_number) ? $page - $jumlah_number : 1; // Untuk awal link member
-            $end_number = ($page < ($n_pages_result - $jumlah_number)) ? $page + $jumlah_number : $n_pages_result; // Untuk akhir link number
 
-            $result_numbers = array();
-            for ($i = $start_number; $i <= $end_number; $i++) {
-                array_push($result_numbers,$i);
-            }
-            ?>
-
-            <!-- LINK FIRST AND PREV -->
+            <!-- LINK PAGE FIRST AND PREV -->
             <?php   
                 if ($page == 1) { 
             ?>
@@ -129,13 +136,14 @@ $rows_count =rows_count($pdo, $table);
             <li><a href="<?php echo $page_index;?>?page=1">1</a></li>
 
             <?php
-            if ($start_number+1 >= $jumlah_number) { 
+            if ($start_number+1 >= $n_btn_number) { 
             ?>
                 <li><a href="<?php echo $page_index;?>?page=<?php echo $start_number-1;?>"><?php echo $etc;?></a></li>
             <?php
             }
             ?>
 
+            <!-- LINK NUMBERS -->
             <?php
             for ($i = $start_number; $i <= $end_number; $i++) {
                 $link_active = ($page == $i) ? 'class="active"' : '';
@@ -157,7 +165,7 @@ $rows_count =rows_count($pdo, $table);
             }
             ?>
 
-
+            <!-- LINK END PAGE NUMBERS -->
             <?php
                 if ($end_number+1 < $n_pages_result) {
                 ?>
