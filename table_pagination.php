@@ -26,6 +26,13 @@ function rows_count($pdo, $table){
     return $rows_count;
 }
 
+function select_table($pdo, $table, $limit_start, $limit){
+    $sql = $pdo->prepare("SELECT * FROM $table LIMIT ".$limit_start.",".$limit);
+    $sql->execute(); 
+    return $sql;
+}
+
+$datas = select_table($pdo, $table, $limit_start, $limit);
 $rows_count =rows_count($pdo, $table);
 
 ?>
@@ -68,11 +75,8 @@ $rows_count =rows_count($pdo, $table);
                 </tr>
                 <?php
 
-                $sql = $pdo->prepare("SELECT * FROM $table LIMIT ".$limit_start.",".$limit);
-                $sql->execute(); // Eksekusi querynya
-
                 $no = $limit_start + 1; 
-                while ($data = $sql->fetch()) { 
+                while ($data = $datas->fetch()) { 
                 ?>
                     <tr>
                         <td class="align-middle text-center"><?php echo $no; ?></td>
