@@ -6,6 +6,28 @@ $password = '';
 $database = 'booking_vuejs';
 $table = 'clients';
 $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
+
+$page_index = $_SERVER["PHP_SELF"];
+$limit = 15; 
+$jumlah_number = 4; // n*2 +1 (without first and last) max visible btn
+$before_icon = "&#60;";
+$next_icon = "&#62;";
+$etc = "...";
+
+$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$limit_start = ($page - 1) * $limit;
+
+
+function rows_count($pdo, $table){
+    $sql = $pdo->prepare("SELECT COUNT(*) AS result FROM $table");
+    $sql->execute(); 
+    $rows = $sql->fetch();
+    $rows_count = $rows['result'];
+    return $rows_count;
+}
+
+$rows_count =rows_count($pdo, $table);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +35,6 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
     <meta charset="utf-8">
     <mta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Pagination dengan PHP</title>
-
-    <!-- Load file bootstrap.min.css yang ada di folder css -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <style>
         .align-middle {
@@ -26,7 +46,7 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
     </style>
 </head>
 <body>
-    <!-- Membuat Menu Header / Navbar -->
+
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -39,7 +59,7 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
                 <tr>
-                    <th class="text-center"></th>
+                    <th class="text-center"><?php echo $rows_count;?></th>
                     <th>id</th>
                     <th>nom</th>
                     <th>email</th>
@@ -48,20 +68,6 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
                 </tr>
                 <?php
 
-                $page_index = $_SERVER["PHP_SELF"];
-                $limit = 5; // Jumlah data per halamanya
-                $before_icon = "&#60;";
-                $next_icon = "&#62;";
-                $etc = "...";
-
-
-                // Cek apakah terdapat data pada page URL
-                $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
-
-                // Buat query untuk menampilkan daa ke berapa yang akan ditampilkan pada tabel yang ada di database
-                $limit_start = ($page - 1) * $limit;
-
-                // Buat query untuk menampilkan data siswa sesuai limit yang ditentukan
                 $sql = $pdo->prepare("SELECT * FROM $table LIMIT ".$limit_start.",".$limit);
                 $sql->execute(); // Eksekusi querynya
 
@@ -85,18 +91,12 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
 
         <ul class="pagination">
 
-
-
-
-
             <!-- LINK NUMBER -->
             <?php
-            $sql2 = $pdo->prepare("SELECT COUNT(*) AS jumlah FROM $table");
-            $sql2->execute(); 
-            $get_jumlah = $sql2->fetch();
 
-            $n_pages_result = ceil($get_jumlah['jumlah'] / $limit);
-            $jumlah_number = 4; // Tentukan jumlah link number sebelum dan sesudah page yang aktif
+            $n_pages_result = ceil($rows_count / $limit);
+            
+            // $jumlah_number = 4; 
             $start_number = ($page > $jumlah_number) ? $page - $jumlah_number : 1; // Untuk awal link member
             $end_number = ($page < ($n_pages_result - $jumlah_number)) ? $page + $jumlah_number : $n_pages_result; // Untuk akhir link number
 
@@ -105,7 +105,6 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
                 array_push($result_numbers,$i);
             }
             ?>
-
 
             <!-- LINK FIRST AND PREV -->
             <?php   
@@ -122,9 +121,6 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
             }
             ?>
 
-
-            
-            
             <!-- LINK FIRST PAGE NUMBER -->
             <li><a href="<?php echo $page_index;?>?page=1">1</a></li>
 
@@ -136,27 +132,22 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
             }
             ?>
 
-
-
-
-
             <?php
             for ($i = $start_number; $i <= $end_number; $i++) {
                 $link_active = ($page == $i) ? 'class="active"' : '';
             ?>
             
 
-
-            <?php
-            if ($i != '1' && $i != $n_pages_result) {
-            ?>
+                <?php
+                    if ($i != '1' && $i != $n_pages_result) {
+                ?>
 
                 <li <?php echo $link_active; ?>><a href="<?php echo $page_index;?>?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
             
                       
             
-            <?php
-            }
+                <?php
+                    }
 
 
             }
