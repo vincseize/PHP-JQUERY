@@ -49,11 +49,14 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
                 <?php
 
                 $page_index = $_SERVER["PHP_SELF"];
+                $limit = 5; // Jumlah data per halamanya
+                $before_icon = "&#60;";
+                $next_icon = "&#62;";
+                $etc = "...";
+
 
                 // Cek apakah terdapat data pada page URL
                 $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
-
-                $limit = 5; // Jumlah data per halamanya
 
                 // Buat query untuk menampilkan daa ke berapa yang akan ditampilkan pada tabel yang ada di database
                 $limit_start = ($page - 1) * $limit;
@@ -105,21 +108,16 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
 
 
             <!-- LINK FIRST AND PREV -->
-            <?php
-            
-            if ($page == 1) { 
+            <?php   
+                if ($page == 1) { 
             ?>
-                <!-- <li class="disabled"><a href="#">First</a></li> -->
-                <li class="disabled"><a>&laquo;</a></li>
-
+            <li class="disabled"><a>&#60;</a></li>
 
             <?php
             } else { 
                 $link_prev = ($page > 1) ? $page - 1 : 1;
             ?>
-                <!-- <li><a href="<?php echo $page_index;?>?page=1">First</a></li> -->
-                <!-- <li><a href="<?php echo $page_index;?>?page=<?php echo $link_prev-1; ?>">&laquo;&laquo;</a></li> -->
-                <li><a href="<?php echo $page_index;?>?page=<?php echo $link_prev; ?>">&laquo;</a></li>
+                <li><a href="<?php echo $page_index;?>?page=<?php echo $link_prev; ?>"><?php echo $before_icon;?></a></li>
             <?php
             }
             ?>
@@ -130,20 +128,19 @@ $pdo = new PDO('mysql:host='.$host.';dbname='.$database, $username, $password);
             <!-- LINK FIRST PAGE NUMBER -->
             <li><a href="<?php echo $page_index;?>?page=1">1</a></li>
 
-<?php
-// echo $start_number+1;
-if ($start_number+1 >= $jumlah_number) { 
-?>
-            <li><a href="<?php echo $page_index;?>?page=<?php echo $start_number-1;?>">...</a></li>
-<?php
-}
-?>
+            <?php
+            if ($start_number+1 >= $jumlah_number) { 
+            ?>
+                <li><a href="<?php echo $page_index;?>?page=<?php echo $start_number-1;?>"><?php echo $etc;?></a></li>
+            <?php
+            }
+            ?>
 
 
 
 
 
-<?php
+            <?php
             for ($i = $start_number; $i <= $end_number; $i++) {
                 $link_active = ($page == $i) ? 'class="active"' : '';
             ?>
@@ -166,13 +163,13 @@ if ($start_number+1 >= $jumlah_number) {
             ?>
 
 
-<?php
-            if ($end_number+1 < $n_pages_result) {
+            <?php
+                if ($end_number+1 < $n_pages_result) {
+                ?>
+                <li><a href="<?php echo $page_index;?>?page=<?php echo $end_number+1;?>"><?php echo $etc;?></a></li>
+            <?php
+                }
             ?>
-            <li><a href="<?php echo $page_index;?>?page=<?php echo $end_number+1;?>">...</a></li>
-<?php
-            }
-?>
 
             <li><a href="<?php echo $page_index;?>?page=<?php echo $n_pages_result;?>"><?php echo $n_pages_result;?></a></li>
 
@@ -180,16 +177,12 @@ if ($start_number+1 >= $jumlah_number) {
             <?php
             if ($page == $n_pages_result) {
             ?>
-                <li class="disabled"><a href="#">&raquo;</a></li>
-                <!-- <li class="disabled"><a href="<?php echo $page_index;?>?page=<?php echo $end_number+1; ?>">&raquo;&raquo;</a></li> -->
-                <!-- <li class="disabled"><a href="#">Last</a></li> -->
+                <li class="disabled"><a href="#"><?php echo $next_icon;?></a></li>
             <?php
             } else {
                 $link_next = ($page < $n_pages_result) ? $page + 1 : $n_pages_result;
             ?>
-                <li><a href="<?php echo $page_index;?>?page=<?php echo $link_next; ?>">&raquo;</a></li>
-                <!-- <li><a href="<?php echo $page_index;?>?page=<?php echo $end_number+1; ?>">&raquo;&raquo;</a></li> -->
-                <!-- <li><a href="<?php echo $page_index;?>?page=<?php echo $n_pages_result; ?>">Last</a></li> -->
+                <li><a href="<?php echo $page_index;?>?page=<?php echo $link_next; ?>"><?php echo $next_icon;?></a></li>
             <?php
             }
             ?>
