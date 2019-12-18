@@ -1,5 +1,12 @@
 <?php
 
+
+class Pagination_vincseize
+{
+    public $host = 'localhost';
+}
+
+
     // DB
     $host = 'localhost';
     $username = 'root';
@@ -47,12 +54,12 @@
 
     // pagination
 
-    function pagination_link($link_active, $class_disabled, $page_index, $page, $number){
-        $link = "<li $link_active $class_disabled><a href='$page_index?page=$page'>$number</a></li>";
+    function pagination_link($link_active, $class_disabled, $page_index, $page, $number, $limit){
+        $link = "<li $link_active $class_disabled><a href='$page_index?page=$page&n_result=$limit'>$number</a></li>";
         echo $link;
     }
 
-    function number_page_prev($page, $rows_count, $icon_before, $page_index){
+    function number_page_prev($page, $rows_count, $icon_before, $page_index, $limit){
         $link_active = '';
         $link_prev = ($page > 1) ? $page - 1 : 1;
         if ($page == 1) { 
@@ -62,55 +69,55 @@
             $class_disabled = '';
             if($rows_count==0){$class_disabled = "class='disabled'";}
         }
-        $li = pagination_link($link_active, $class_disabled, $page_index, $link_prev, $icon_before);
+        $li = pagination_link($link_active, $class_disabled, $page_index, $link_prev, $icon_before, $limit);
     }
 
-    function number_first_page($page, $page_index){
+    function number_first_page($page, $page_index, $limit){
         if($page==1){$link_active = ' class="active"';}else{$link_active = '';}
         $class_disabled = '';
-        $li = pagination_link($link_active, $class_disabled, $page_index, 1, 1);
+        $li = pagination_link($link_active, $class_disabled, $page_index, 1, 1, $limit);
     }
 
-    function number_etc_page_begin($start_number, $n_btn_number, $page_index, $icon_etc){
+    function number_etc_page_begin($start_number, $n_btn_number, $page_index, $icon_etc, $limit){
         $link_active = '';
         $class_disabled = '';
         $start_number_minus1 = $start_number-1;
         if ($start_number+1 >= $n_btn_number) { 
-            $li = pagination_link($link_active, $class_disabled, $page_index, $start_number_minus1, $icon_etc);
+            $li = pagination_link($link_active, $class_disabled, $page_index, $start_number_minus1, $icon_etc, $limit);
         }
     }
 
-    function number_page($rows_count, $limit, $start_number, $end_number, $page, $n_pages_result, $page_index){
+    function number_page($rows_count, $start_number, $end_number, $page, $n_pages_result, $page_index, $limit){
         $class_disabled = '';
         if($rows_count!=0 && $rows_count>$limit){
             for ($i = $start_number; $i <= $end_number; $i++) {
                 $link_active = ($page == $i) ? ' class="active"' : '';   
                 if ($i != '1' && $i != $n_pages_result) {
-                    $li = pagination_link($link_active, $class_disabled, $page_index, $i, $i);
+                    $li = pagination_link($link_active, $class_disabled, $page_index, $i, $i, $limit);
                 }
             }
         }
     }
 
-    function number_etc_page_end($page, $n_pages_result, $end_number, $page_index, $icon_etc){
+    function number_etc_page_end($page, $n_pages_result, $end_number, $page_index, $icon_etc, $limit){
         $class_disabled = '';
         if($page==$n_pages_result){$link_active = ' class="active"';}
         $end_number_max1 = $end_number+1;
         if ($end_number_max1 < $n_pages_result) {
             $link_active = '';
-            $li = pagination_link($link_active, $class_disabled, $page_index, $end_number_max1, $icon_etc);
+            $li = pagination_link($link_active, $class_disabled, $page_index, $end_number_max1, $icon_etc, $limit);
         }
     }
 
-    function number_end_page($rows_count, $limit, $page, $n_pages_result, $page_index){
+    function number_end_page($rows_count, $page, $n_pages_result, $page_index, $limit){
         if($rows_count!=0 && $rows_count>$limit){
             $class_disabled = '';
             if($page==$n_pages_result){$link_active = ' class="active"';}else{$link_active = '';}
-            $li = pagination_link($link_active, $class_disabled, $page_index, $n_pages_result, $n_pages_result);
+            $li = pagination_link($link_active, $class_disabled, $page_index, $n_pages_result, $n_pages_result, $limit);
         }
     }
 
-    function number_page_next($page, $n_pages_result, $rows_count, $page_index, $icon_next){
+    function number_page_next($page, $n_pages_result, $rows_count, $page_index, $icon_next, $limit){
         $link_next = ($page < $n_pages_result) ? $page + 1 : $n_pages_result;
         if ($page == $n_pages_result) {
             $link_active = '';
@@ -121,7 +128,7 @@
             $class_disabled = '';
             if($rows_count==0){$class_disabled = "class='disabled'";}
         }
-        $li = pagination_link($link_active, $class_disabled, $page_index, $link_next, $icon_next);
+        $li = pagination_link($link_active, $class_disabled, $page_index, $link_next, $icon_next, $limit);
     }
 
     //
@@ -215,25 +222,25 @@
                 // ------------------------ BTN NUMBERS PAGES, in order !important
                 
                 // NUMBER PAGE PREV
-                number_page_prev($page, $rows_count, $icon_before, $page_index);
+                number_page_prev($page, $rows_count, $icon_before, $page_index, $limit);
 
                 // NUMBER FIRST PAGE
-                number_first_page($page, $page_index);
+                number_first_page($page, $page_index, $limit);
 
                 // NUMBER icon_etc_begin PAGE
-                number_etc_page_begin($start_number, $n_btn_number, $page_index, $icon_etc);
+                number_etc_page_begin($start_number, $n_btn_number, $page_index, $icon_etc, $limit);
 
                 // NUMBERS PAGE
-                number_page($rows_count, $limit, $start_number, $end_number, $page, $n_pages_result, $page_index);
+                number_page($rows_count, $start_number, $end_number, $page, $n_pages_result, $page_index, $limit);
 
                 // NUMBER icon_etc_end PAGE
-                number_etc_page_end($page, $n_pages_result, $end_number, $page_index, $icon_etc);
+                number_etc_page_end($page, $n_pages_result, $end_number, $page_index, $icon_etc, $limit);
 
                 // NUMBER END PAGE
-                number_end_page($rows_count, $limit, $page, $n_pages_result, $page_index);
+                number_end_page($rows_count, $page, $n_pages_result, $page_index, $limit);
 
                 // NUMBER PAGE NEXT 
-                number_page_next($page, $n_pages_result, $rows_count, $page_index, $icon_next);
+                number_page_next($page, $n_pages_result, $rows_count, $page_index, $icon_next, $limit);
 
             ?>
 
