@@ -17,14 +17,8 @@
     $icon_etc = "...";
 
     // DONT TOUCH !Important
-    function rows_count($pdo, $table){
-        $sth = $pdo->prepare("SELECT COUNT(*) AS result FROM $table");
-        $sth->execute(); 
-        $rows = $sth->fetch();
-        $rows_count = $rows['result'];
-        return $rows_count;
-    }
 
+    // table 
     function select_table($pdo, $table, $limit_start, $limit){
         $sth = $pdo->prepare("SELECT * FROM $table LIMIT ".$limit_start.",".$limit);
         $sth->execute(); 
@@ -37,6 +31,116 @@
         $table_fields = $sth->fetchAll(PDO::FETCH_COLUMN);
         return $table_fields;
     }
+
+    function rows_count($pdo, $table){
+        $sth = $pdo->prepare("SELECT COUNT(*) AS result FROM $table");
+        $sth->execute(); 
+        $rows = $sth->fetch();
+        $rows_count = $rows['result'];
+        return $rows_count;
+    }
+
+    // pagination
+
+    function pagination_link($link_active, $class_disabled, $page_index, $page, $number){
+        $link = "<li $link_active $class_disabled><a href='$page_index?page=$page'>$number</a></li>";
+        echo $link;
+        // return $link;
+    }
+
+    function number_page_prev($page, $rows_count, $icon_before, $page_index){
+        $link_active = '';
+        $link_prev = ($page > 1) ? $page - 1 : 1;
+        if ($page == 1) { 
+            $class_disabled = "class='disabled'";  
+            if($rows_count==0){$class_disabled = "class='disabled'";}
+            // echo "<li $link_active $class_disabled><a href='$page_index?page=$link_prev'>$icon_before</a></li>";
+        } else { 
+            $class_disabled = '';
+            if($rows_count==0){$class_disabled = "class='disabled'";}
+            
+            // echo "<li $link_active $class_disabled><a href='$page_index?page=$link_prev'>$icon_before</a></li>";
+        }
+        $li = pagination_link($link_active, $class_disabled, $page_index, $link_prev, $icon_before);
+        // echo $li;
+        // echo "<li $link_active $class_disabled><a href='$page_index?page=$link_prev'>$icon_before</a></li>";
+    }
+
+    function number_first_page($page, $page_index){
+        if($page==1){$link_active = ' class="active"';}else{$link_active = '';}
+        $class_disabled = '';
+        $li = pagination_link($link_active, $class_disabled, $page_index, 1, 1);
+        // echo $li;
+        // echo "<li $link_active $class_disabled><a href='$page_index?page=1'>1</a></li>";
+    }
+
+    function number_etc_page_begin($start_number, $n_btn_number, $page_index, $icon_etc){
+        $link_active = '';
+        $class_disabled = '';
+        $start_number_minus1 = $start_number-1;
+        if ($start_number+1 >= $n_btn_number) { 
+            // echo "<li $link_active $class_disabled><a href='$page_index?page=$start_number_minus1'>$icon_etc</a></li>";
+            $li = pagination_link($link_active, $class_disabled, $page_index, $start_number_minus1, $icon_etc);
+            // echo $li;
+        }
+    }
+
+    function number_page($rows_count, $limit, $start_number, $end_number, $page, $n_pages_result, $page_index){
+        $class_disabled = '';
+        if($rows_count!=0 && $rows_count>$limit){
+            for ($i = $start_number; $i <= $end_number; $i++) {
+                $link_active = ($page == $i) ? ' class="active"' : '';   
+                if ($i != '1' && $i != $n_pages_result) {
+                    // echo "<li $link_active $class_disabled><a href='$page_index?page=$i'>$i</a></li>";
+                    $li = pagination_link($link_active, $class_disabled, $page_index, $i, $i);
+                    // echo $li;
+                }
+            }
+        }
+    }
+
+    function number_etc_page_end($page, $n_pages_result, $end_number, $page_index, $icon_etc){
+        $class_disabled = '';
+        if($page==$n_pages_result){$link_active = ' class="active"';}
+        $end_number_max1 = $end_number+1;
+        if ($end_number_max1 < $n_pages_result) {
+            $link_active = '';
+            // echo "<li $link_active $class_disabled><a href='$page_index?page=$end_number_max1'>$icon_etc</a></li>";
+            $li = pagination_link($link_active, $class_disabled, $page_index, $end_number_max1, $icon_etc);
+            // echo $li;
+        }
+    }
+
+    function number_end_page($rows_count, $limit, $page, $n_pages_result, $page_index){
+        if($rows_count!=0 && $rows_count>$limit){
+            $class_disabled = '';
+            if($page==$n_pages_result){$link_active = ' class="active"';}else{$link_active = '';}
+            // echo "<li $link_active $class_disabled><a href='$page_index?page=$n_pages_result'>$n_pages_result</a></li>";
+            $li = pagination_link($link_active, $class_disabled, $page_index, $n_pages_result, $n_pages_result);
+            // echo $li;
+        }
+    }
+
+    function number_page_next($page, $n_pages_result, $rows_count, $page_index, $icon_next){
+        $link_next = ($page < $n_pages_result) ? $page + 1 : $n_pages_result;
+        if ($page == $n_pages_result) {
+            $link_active = '';
+            $class_disabled = "class='disabled'";  
+            if($rows_count==0){$class_disabled = "class='disabled'";}
+            // echo "<li $link_active $class_disabled><a href='$page_index?page=$link_next'>$icon_next</a></li>";
+        } else {
+            $link_active = '';
+            $class_disabled = '';
+            if($rows_count==0){$class_disabled = "class='disabled'";}
+            // $link_next = ($page < $n_pages_result) ? $page + 1 : $n_pages_result;
+            // echo "<li $link_active $class_disabled><a href='$page_index?page=$link_next'>$icon_next</a></li>";
+        }
+        // echo "<li $link_active $class_disabled><a href='$page_index?page=$link_next'>$icon_next</a></li>";
+        $li = pagination_link($link_active, $class_disabled, $page_index, $link_next, $icon_next);
+        // echo $li;
+    }
+
+    //
 
     $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
     $limit_start = ($page - 1) * $limit;
@@ -115,72 +219,79 @@
         <ul class="pagination">
 
             <?php
-                // ------------------------ BTN NUMBERS
+                // ------------------------ BTN NUMBERS PAGES, in order !important
                 
                 // NUMBER PAGE PREV
-                $link_active = '';
-                if ($page == 1) { 
-                    $class_disabled = "class='disabled'";  
-                    if($rows_count==0){$class_disabled = "class='disabled'";}
-                    echo "<li $link_active class='disabled'><a>$icon_before</a></li>";
-                } else { 
-                    $class_disabled = '';
-                    if($rows_count==0){$class_disabled = "class='disabled'";}
-                    $link_prev = ($page > 1) ? $page - 1 : 1;
-                    echo "<li $link_active $class_disabled><a href='$page_index?page=$link_prev'>$icon_before</a></li>";
-                }
+                number_page_prev($page, $rows_count, $icon_before, $page_index);
+                // $link_active = '';
+                // if ($page == 1) { 
+                //     $class_disabled = "class='disabled'";  
+                //     if($rows_count==0){$class_disabled = "class='disabled'";}
+                //     echo "<li $link_active class='disabled'><a>$icon_before</a></li>";
+                // } else { 
+                //     $class_disabled = '';
+                //     if($rows_count==0){$class_disabled = "class='disabled'";}
+                //     $link_prev = ($page > 1) ? $page - 1 : 1;
+                //     echo "<li $link_active $class_disabled><a href='$page_index?page=$link_prev'>$icon_before</a></li>";
+                // }
 
                 // NUMBER FIRST PAGE
-                if($page==1){$link_active = ' class="active"';}else{$link_active = '';}
-                echo "<li $link_active><a href='$page_index?page=1'>1</a></li>";
+                number_first_page($page, $page_index);
+                // if($page==1){$link_active = ' class="active"';}else{$link_active = '';}
+                // echo "<li $link_active><a href='$page_index?page=1'>1</a></li>";
 
-                // NUMBER icon_etc PAGE
-                $link_active = '';
-                $class_disabled = '';
-                $start_number_minus1 = $start_number-1;
-                if ($start_number+1 >= $n_btn_number) { 
-                    echo "<li $link_active $class_disabled><a href='$page_index?page=$start_number_minus1'>$icon_etc</a></li>";
-                }
+                // NUMBER icon_etc_begin PAGE
+                number_etc_page_begin($start_number, $n_btn_number, $page_index, $icon_etc);
+                // $link_active = '';
+                // $class_disabled = '';
+                // $start_number_minus1 = $start_number-1;
+                // if ($start_number+1 >= $n_btn_number) { 
+                //     echo "<li $link_active $class_disabled><a href='$page_index?page=$start_number_minus1'>$icon_etc</a></li>";
+                // }
 
                 // NUMBERS PAGE
-                $class_disabled = '';
-                if($rows_count!=0 && $rows_count>$limit){
-                    for ($i = $start_number; $i <= $end_number; $i++) {
-                        $link_active = ($page == $i) ? ' class="active"' : '';   
-                        if ($i != '1' && $i != $n_pages_result) {
-                            echo "<li $link_active $class_disabled><a href='$page_index?page=$i'>$i</a></li>";
-                        }
-                    }
-                }
+                number_page($rows_count, $limit, $start_number, $end_number, $page, $n_pages_result, $page_index);
+                // $class_disabled = '';
+                // if($rows_count!=0 && $rows_count>$limit){
+                //     for ($i = $start_number; $i <= $end_number; $i++) {
+                //         $link_active = ($page == $i) ? ' class="active"' : '';   
+                //         if ($i != '1' && $i != $n_pages_result) {
+                //             echo "<li $link_active $class_disabled><a href='$page_index?page=$i'>$i</a></li>";
+                //         }
+                //     }
+                // }
 
-                // NUMBER icon_etc PAGE
-                $class_disabled = '';
-                if($page==$n_pages_result){$link_active = ' class="active"';}
-                $end_number_max1 = $end_number+1;
-                if ($end_number_max1 < $n_pages_result) {
-                    $link_active = '';
-                    echo "<li $link_active $class_disabled><a href='$page_index?page=$end_number_max1'>$icon_etc</a></li>";
-                }
+                // NUMBER icon_etc_end PAGE
+                number_etc_page_end($page, $n_pages_result, $end_number, $page_index, $icon_etc);
+                // $class_disabled = '';
+                // if($page==$n_pages_result){$link_active = ' class="active"';}
+                // $end_number_max1 = $end_number+1;
+                // if ($end_number_max1 < $n_pages_result) {
+                //     $link_active = '';
+                //     echo "<li $link_active $class_disabled><a href='$page_index?page=$end_number_max1'>$icon_etc</a></li>";
+                // }
 
                 // NUMBER END PAGE
-                if($rows_count!=0 && $rows_count>$limit){
-                    $class_disabled = '';
-                    if($page==$n_pages_result){$link_active = ' class="active"';}else{$link_active = '';}
-                    echo "<li $link_active $class_disabled><a href='$page_index?page=$n_pages_result'>$n_pages_result</a></li>";
-                }
+                number_end_page($rows_count, $limit, $page, $n_pages_result, $page_index);
+                // if($rows_count!=0 && $rows_count>$limit){
+                //     $class_disabled = '';
+                //     if($page==$n_pages_result){$link_active = ' class="active"';}else{$link_active = '';}
+                //     echo "<li $link_active $class_disabled><a href='$page_index?page=$n_pages_result'>$n_pages_result</a></li>";
+                // }
                 // NUMBER PAGE NEXT 
-                if ($page == $n_pages_result) {
-                    $link_active = '';
-                    $class_disabled = "class='disabled'";  
-                    if($rows_count==0){$class_disabled = "class='disabled'";}
-                    echo "<li $link_active $class_disabled><a>$icon_next</a></li>";
-                } else {
-                    $link_active = '';
-                    $class_disabled = '';
-                    if($rows_count==0){$class_disabled = "class='disabled'";}
-                    $link_next = ($page < $n_pages_result) ? $page + 1 : $n_pages_result;
-                    echo "<li $link_active $class_disabled><a href='$page_index?page=$link_next'>$icon_next</a></li>";
-                }
+                number_page_next($page, $n_pages_result, $rows_count, $page_index, $icon_next);
+                // if ($page == $n_pages_result) {
+                //     $link_active = '';
+                //     $class_disabled = "class='disabled'";  
+                //     if($rows_count==0){$class_disabled = "class='disabled'";}
+                //     echo "<li $link_active $class_disabled><a>$icon_next</a></li>";
+                // } else {
+                //     $link_active = '';
+                //     $class_disabled = '';
+                //     if($rows_count==0){$class_disabled = "class='disabled'";}
+                //     $link_next = ($page < $n_pages_result) ? $page + 1 : $n_pages_result;
+                //     echo "<li $link_active $class_disabled><a href='$page_index?page=$link_next'>$icon_next</a></li>";
+                // }
 
             ?>
 
