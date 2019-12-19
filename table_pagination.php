@@ -30,17 +30,19 @@
         public $nBtns;
         public $icons;
         public $page;
+        public $nResults;
         
         public $nPages;
         public $startNumber;
         public $endNumber;
 
-        public function __construct($url,$limit,$rows_count,$nBtns,$icons,$page){
+        public function __construct($url,$limit,$rows_count,$nBtns,$icons,$page,$nResults){
             $this->url                 = $url;
             $this->page                = $page;
             $this->limit               = $limit;
             $this->rows_count          = $rows_count;
             $this->nPages              = ceil($this->rows_count / $this->limit);
+            $this->nResults            = $nResults;
             $this->nBtns               = $nBtns;
             $this->startNumber         = ($this->page > $this->nBtns) ? $this->page - $this->nBtns : 1;
             $this->endNumber           = ($this->page < ($this->nPages - $this->nBtns)) ? $this->page + $this->nBtns : $this->nPages;
@@ -64,7 +66,7 @@
         }
 
         public function pagination_link($link_active, $class_disabled, $page_li, $number){
-            $link = "<li $link_active $class_disabled><a href='$this->url?page=$page_li&n_result=$this->limit'>$number</a></li>";
+            $link = "<li $link_active $class_disabled><a href='$this->url?page=$page_li&$this->nResults=$this->limit'>$number</a></li>";
             echo $link;
         }
 
@@ -251,17 +253,17 @@
                 $pgn_limit     = 15; // n results
                 $pgn_rowsCount = rows_count($pdo, $table);
                 $pgn_getPage   = 'page'; // url var
-                $pgn_getResult = 'n_result'; // url var
+                $pgn_getResults = 'n_result'; // url var
                 $pgn_nBtns = 4;  // tot max visible btn = n*2 +1 (without first and last)
                 $pgn_icons     = array("icon_before"=>"&#60;","icon_etc"=>"...","icon_next"=>"&#62;"); // before, next, ...
                 // |icon_before|...|1|2|3|4|center nb|5|6|7|8|...|icon_next|
 
                 // DONT CHANGE
                 $pgn_page      = (isset($_GET[$pgn_getPage])) ? $_GET[$pgn_getPage] : 1;
-                if(isset($_GET[$pgn_getResult])){$pgn_limit = $_GET[$pgn_getResult]; }
+                if(isset($_GET[$pgn_getResults])){$pgn_limit = $_GET[$pgn_getResults]; }
 
                 // --------------------------- PAGINATION UI result---------------------------
-                new Pagination($pgn_url,$pgn_limit,$pgn_rowsCount,$pgn_nBtns,$pgn_icons,$pgn_page);
+                new Pagination($pgn_url,$pgn_limit,$pgn_rowsCount,$pgn_nBtns,$pgn_icons,$pgn_page,$pgn_getResults);
             ?>
         </ul>
         <!-- ------------------------------- PAGINATION --------------------------------------------- -->
