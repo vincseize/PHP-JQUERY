@@ -250,6 +250,7 @@
             <?php              
                 // --------------------------- PAGINATION VARS ---------------------------
                 $pgn_url       = $_SERVER["PHP_SELF"];
+                // $pgn_url       = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH); // without param 
                 $pgn_limit     = 15; // n results
                 $pgn_rowsCount = rows_count($pdo, $table);
                 $pgn_getPage   = 'page'; // url var
