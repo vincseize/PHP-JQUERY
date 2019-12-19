@@ -8,37 +8,34 @@
         private $username;
         private $password;
 
-        public function __construct($database = 'booking_vuejs')
+        public function __construct($database)
         {
             $this->server = 'mysql';
             $this->host = 'localhost';
             $this->database = $database;
             $this->username = 'root';
             $this->password = '';
-
             $pdo = $this->server . ':dbname=' . $this->database . ";host=" . $this->host;
-
             parent::__construct( $pdo, $this->username, $this->password );
-
-            $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            
+            $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
         }
     }
 
     class Pagination
     {
-
         public $url;
-        public $page;
+        
         public $limit;
         public $rows_count;
-        public $nPages;
         public $nBtns;
+        public $icons;
+        public $page;
+        
+        public $nPages;
         public $startNumber;
         public $endNumber;
-        public $icons;
 
-        public function __construct($url,$page,$limit,$rows_count,$nBtns,$icons){
+        public function __construct($url,$limit,$rows_count,$nBtns,$icons,$page){
             $this->url                 = $url;
             $this->page                = $page;
             $this->limit               = $limit;
@@ -66,8 +63,8 @@
             $this->number_page_next();
         }
 
-        public function pagination_link($link_active, $class_disabled, $page, $number){
-            $link = "<li $link_active $class_disabled><a href='$this->url?page=$page&n_result=$this->limit'>$number</a></li>";
+        public function pagination_link($link_active, $class_disabled, $page_li, $number){
+            $link = "<li $link_active $class_disabled><a href='$this->url?page=$page_li&n_result=$this->limit'>$number</a></li>";
             echo $link;
         }
 
@@ -81,13 +78,13 @@
                 $class_disabled = '';
                 if($this->rows_count==0){$class_disabled = $this->btn_class_disabled;}
             }
-            $li = $this->pagination_link($link_active, $class_disabled, $link_prev, $this->icon_before, $this->limit);
+            $li = $this->pagination_link($link_active, $class_disabled, $link_prev, $this->icon_before);
         }
 
         public function number_first_page(){
             if($this->page==1){$link_active = $this->btn_class_enabled;}else{$link_active = '';}
             $class_disabled = '';
-            $li = $this->pagination_link($link_active, $class_disabled, 1, 1, $this->limit);
+            $li = $this->pagination_link($link_active, $class_disabled, 1, 1);
         }
 
         public function number_etc_page_begin(){
@@ -95,7 +92,7 @@
             $class_disabled = '';
             $start_number_minus1 = $this->startNumber-1;
             if ($this->startNumber+1 >= $this->nBtns) { 
-                $li = $this->pagination_link($link_active, $class_disabled, $start_number_minus1, $this->icon_etc, $this->limit);
+                $li = $this->pagination_link($link_active, $class_disabled, $start_number_minus1, $this->icon_etc);
             }
         }
 
@@ -105,7 +102,7 @@
                 for ($i = $this->startNumber; $i <= $this->endNumber; $i++) {
                     $link_active = ($this->page == $i) ? $this->btn_class_enabled : '';   
                     if ($i != '1' && $i != $this->nPages) {
-                        $li = $this->pagination_link($link_active, $class_disabled, $i, $i, $this->limit);
+                        $li = $this->pagination_link($link_active, $class_disabled, $i, $i);
                     }
                 }
             }
@@ -117,7 +114,7 @@
             $end_number_max1 = $this->endNumber+1;
             if ($end_number_max1 < $this->nPages) {
                 $link_active = '';
-                $li = $this->pagination_link($link_active, $class_disabled, $end_number_max1, $this->icon_etc, $this->limit);
+                $li = $this->pagination_link($link_active, $class_disabled, $end_number_max1, $this->icon_etc);
             }
         }
 
@@ -125,7 +122,7 @@
             if($this->rows_count!=0 && $this->rows_count>$this->limit){
                 $class_disabled = '';
                 if($this->page==$this->nPages){$link_active = $this->btn_class_enabled;}else{$link_active = '';}
-                $li = $this->pagination_link($link_active, $class_disabled, $this->nPages, $this->nPages, $this->limit);
+                $li = $this->pagination_link($link_active, $class_disabled, $this->nPages, $this->nPages);
             }
         }
 
@@ -140,7 +137,7 @@
                 $class_disabled = '';
                 if($this->rows_count==0){$class_disabled = $this->btn_class_disabled;}
             }
-            $li = $this->pagination_link($link_active, $class_disabled, $link_next, $this->icon_next, $this->limit);
+            $li = $this->pagination_link($link_active, $class_disabled, $link_next, $this->icon_next);
         }
     }
 
@@ -167,7 +164,7 @@
     }
 
     // 
-    $pdo = new PDOConfig();
+    $pdo = new PDOConfig('booking_vuejs');
     $table = 'clients';
     $table_fields = table_fields($pdo, $table);
     $n_results_array = ['5','10','15','25','50']; 
@@ -250,13 +247,13 @@
         <ul class="pagination"> <!-- // class from bootstrap -->
             <?php              
                 // --------------------------- PAGINATION VARS ---------------------------
-                $pgn_getPage   = 'page'; // url var
-                $pgn_getResult = 'n_result'; // url var
-                $pgn_rowsCount = rows_count($pdo, $table);
                 $pgn_url       = $_SERVER["PHP_SELF"];
                 $pgn_limit     = 15; // n results
-                $pgn_icons     = array("icon_before"=>"&#60;","icon_etc"=>"...","icon_next"=>"&#62;"); // before, next, ...
+                $pgn_rowsCount = rows_count($pdo, $table);
+                $pgn_getPage   = 'page'; // url var
+                $pgn_getResult = 'n_result'; // url var
                 $pgn_nBtns = 4;  // tot max visible btn = n*2 +1 (without first and last)
+                $pgn_icons     = array("icon_before"=>"&#60;","icon_etc"=>"...","icon_next"=>"&#62;"); // before, next, ...
                 // |icon_before|...|1|2|3|4|center nb|5|6|7|8|...|icon_next|
 
                 // DONT CHANGE
@@ -264,7 +261,7 @@
                 if(isset($_GET[$pgn_getResult])){$pgn_limit = $_GET[$pgn_getResult]; }
 
                 // --------------------------- PAGINATION UI result---------------------------
-                new Pagination($pgn_url,$pgn_page,$pgn_limit,$pgn_rowsCount,$pgn_nBtns,$pgn_icons);
+                new Pagination($pgn_url,$pgn_limit,$pgn_rowsCount,$pgn_nBtns,$pgn_icons,$pgn_page);
             ?>
         </ul>
         <!-- ------------------------------- PAGINATION --------------------------------------------- -->
