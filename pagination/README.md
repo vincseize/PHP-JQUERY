@@ -27,5 +27,5 @@
 
 ## Usage
 * `configure pdo`: -> in pdo.class
-* `configure vars rseults`: -> in table_pagination.php at the end
+* `configure vars results`: -> in table_pagination.php at the end
 * `test`: -> open table_pagination.php
