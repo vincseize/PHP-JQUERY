@@ -7,7 +7,7 @@
 - css : external bootsrap (use your own naturally)
 
 ## Result
-- '<ul><li><li>...</ul>'
+- '<ul><li></li>...</ul>'
 - |icon_before|1|2|3|current page|icon_next|
 - |icon_before|1|2|3|4|current page|5|6|7|8|...|last|icon_next|
 - |icon_before|first|...|20|21|22|23|current page|25|26|27|28|...|last|icon_next|
