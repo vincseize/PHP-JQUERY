@@ -18,7 +18,11 @@
 * `$pgn_rCount`: total all results in your table
 * `$pgn_paramPage`: name for the url parameters, return current page after process
 * `$pgn_paramRes`: name for the url parameters, return result for process
-* `$pgn_nBtns`: for ui, number of buttons
+* `$pgn_nBtns`: for ui, number of buttons, tot max visible btn = n*2 +1 (without first and last)
+* `$pgn_ics`: first, last and ... buttons look
+
+## Vars js [1] in table_pagination.php (at select list)
+* ` data-pgn_paramRes="n_result"`: in '< select ... >; IMPORTANT  n_result should be same as $pgn_paramRes
 
 ## Usage
 * `configure pdo`: -> in pdo.class
