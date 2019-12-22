@@ -31,3 +31,12 @@
 * `select your table, etc`: -> in table_pagination.php line 26, this my own vars for this sample; IMPORTANT $pgn_paramPage, $pgn_paramRes should be same as pagination var naturally
 * `configure vars pagination`: -> in table_pagination.php at the end
 * `test`: -> open table_pagination.php
+
+## TODO
+- php class, arg , twig or not twig that is the question
+- twig doc, wip
+js : onChange on ClassName , not on id, for top and bottom select possibility
+- jquery, or not // var key = document.getElementById('select_n_result').getAttribute("data-pgnParamRes");
+
+## BUG to fix
+// var key = document.getElementById('select_n_result').getAttribute("data-pgnParamRes");
