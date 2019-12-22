@@ -38,5 +38,6 @@
 js : onChange on ClassName , not on id, for top and bottom select possibility
 - jquery, or not // var key = document.getElementById('select_n_result').getAttribute("data-pgnParamRes");
 
-## BUG to fix
-// var key = document.getElementById('select_n_result').getAttribute("data-pgnParamRes");
+## BUG to fix, betterifify
+- onChange select , page = 1
+- // var key = document.getElementById('select_n_result').getAttribute("data-pgnParamRes");
