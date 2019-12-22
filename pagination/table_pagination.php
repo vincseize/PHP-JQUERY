@@ -118,7 +118,12 @@
             $pgn_ics       = array("icon_before"=>"&#60;","icon_etc"=>"...","icon_next"=>"&#62;");
             // |icon_before|...|1|2|3|4|center nb|5|6|7|8|...|icon_next|
 
-            new Pagination($pgn_dfltLimit,$pgn_rCount,$pgn_nBtns,$pgn_ics,$pgn_paramPage,$pgn_paramRes);        
+            $pgn_page      = (isset($_GET[$pgn_paramPage])) ? $_GET[$pgn_paramPage] : 1;
+            $pgn_limit      = $pgn_limit;
+            if(isset($_GET[$pgn_paramRes])){$pgn_limit = $_GET[$pgn_paramRes]; }
+
+
+            new Pagination($pgn_page,$pgn_dfltLimit,$pgn_rCount,$pgn_nBtns,$pgn_ics,$pgn_paramPage,$pgn_paramRes);        
         ?>
         <script src="table_pagination.js"></script>
         <!-- ------------------------------- PAGINATION -->
