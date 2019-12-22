@@ -1,4 +1,5 @@
-# Auto pagination php, sample with mysql (but can work, i suppose, with other fetching data)
+# Auto pagination php, sample with mysql 
+## can work, i suppose, with other fetching data
 
 - php : table_pagination.php sample
 - php : table_pagination.class
