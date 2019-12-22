@@ -16,18 +16,18 @@
         public $pgn_url;
         public $pgn_sep;
 
-    public function __construct($pgn_limit,$pgn_rCount,$pgn_nBtns,$pgn_ics,$pgn_paramPage,$pgn_paramRes){
+    public function __construct($pgn_page,$pgn_limit,$pgn_rCount,$pgn_nBtns,$pgn_ics,$pgn_paramPage,$pgn_paramRes){
             $this->pgn_url        = $_SERVER["REQUEST_URI"];
             $this->pgn_sep        = "&";
             parse_str($_SERVER['QUERY_STRING'], $output);
             if (count($output, COUNT_NORMAL) == 0 ) {
                 $this->pgn_sep = "?";
             }
-            // $this->pgn_page       = $pgn_page;
-            // $this->pgn_limit      = $pgn_limit;
-            $this->pgn_page      = (isset($_GET[$this->pgn_paramPage])) ? $_GET[$this->pgn_paramPage] : 1;
+            $this->pgn_page       = $pgn_page;
             $this->pgn_limit      = $pgn_limit;
-            if(isset($_GET[$this->pgn_paramRes])){$this->pgn_limit = $_GET[$this->pgn_paramRes]; }
+            // $this->pgn_page      = (isset($_GET[$this->pgn_paramPage])) ? $_GET[$this->pgn_paramPage] : 1;
+            // $this->pgn_limit      = $pgn_limit;
+            // if(isset($_GET[$this->pgn_paramRes])){$this->pgn_limit = $_GET[$this->pgn_paramRes]; }
             $this->pgn_rCount  = $pgn_rCount;
             $this->pgn_nPages     = ceil($this -> pgn_rCount / $this -> pgn_limit);
             $this->pgn_paramPage  = $pgn_paramPage;
@@ -129,8 +129,8 @@
                 for ($i = $this->pgn_startNb; $i <= $this->pgn_endNb; $i++) {
                     $link_active = ($this->pgn_page == $i) ? $this->pgn_btn_clEna : '';
                     if ($i != '1' && $i != $this->pgn_nPages) {
+                        // $link_active = $this->pgn_btn_clEna;
                         $li .= $this->pagination_link($link_active, $class_disabled, $i, $i);
-                        
                     }
                 }
                 return $li;
