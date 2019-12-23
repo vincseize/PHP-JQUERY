@@ -30,12 +30,8 @@
 * `$pgn_nBtns`: for ui, number of buttons, tot max visible btn = n*2 +1 (without first and last)
 * `$pgn_ics`: first, last and ... buttons look
 
-## Vars php [6] in index.php
+## Vars php [3] in index.php
 ```php
-  line 6
-  $database        = 'booking_vuejs';
-  $table           = 'clients';
-  $n_results_array = ['5','10','15','25','50']; 
   $pgn_limit       = 15;          // !Important same as $pgn_dfltLimit value as in pagination.php
   $pgn_paramPage   = 'page';      // !Important same value as in pagination.php
   $pgn_paramRes    = 'n_result';  // !Important same value as in pagination.php
@@ -45,9 +41,15 @@
 
 ## Usage
 * `configure pdo`: -> in pdo.class
-* `select your table, etc`: -> in index.php line 26, this my own vars for this sample; IMPORTANT $pgn_paramPage, $pgn_paramRes should be same as pagination var naturally
-* `configure vars pagination`: -> in pagination.php
+* `select your table, etc`: -> in index.php line 6, this my own vars for this sample;
 * `test`: -> open table_pagination.php
+* `re configure vars pagination`: -> in pagination.php
+* `test again`: -> open table_pagination.php
+
+## Features
+* `get parameters`: don't destruct your own url parameters
+* `pagination ui`: several possible on the same page (top, bottom)
+* `twig`: usage possible
 
 ## TODO
 - php class, arg , twig or not twig that is the question
