@@ -7,10 +7,13 @@
 ?>
 ```
 
-- php : index.php sample page
+![alt text](https://github.com/vincseize/PHP-JQUERY/blob/master/pagination/readme.jpg)
+
 - php : pgn.class.php
-- javasvript ES6: pgn.js
+- php : pagination.php (will be included)
+- js : pgn.js
 - //
+- php : index.php sample page
 - php : pgn_pdo.class.php for demo (use your own naturally)
 - css : external bootsrap (use your own naturally)
 
@@ -42,9 +45,9 @@
 ## Usage
 * `configure pdo`: -> in pdo.class
 * `select your table, etc`: -> in index.php line 6, this my own vars for this sample;
-* `test`: -> open table_pagination.php
+* `test`: -> open index.php
 * `re configure vars pagination`: -> in pagination.php
-* `test again`: -> open table_pagination.php
+* `test again`: -> open index.php
 
 ## Features
 * `get parameters`: don't destruct your own url parameters
