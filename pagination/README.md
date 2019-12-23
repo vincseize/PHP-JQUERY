@@ -7,6 +7,8 @@
 ?>
 ```
 
+http://  127.0.0.1/table_pagination.php?yourparam=johnDOE&page=19&n_result=5
+
 ![alt text](https://github.com/vincseize/PHP-JQUERY/blob/master/pagination/readme.jpg)
 
 - php : pgn.class.php
@@ -18,7 +20,6 @@
 - css : external bootsrap (use your own naturally)
 
 ## Result
-- http://  127.0.0.1/table_pagination.php?yourparam=johnDOE&page=19&n_result=5
 - '< ul >< li >< /li >...< /ul >'
 - |icon_before|1|2|3|current page|icon_next|
 - |icon_before|1|2|3|4|current page|5|6|7|8|...|last|icon_next|
