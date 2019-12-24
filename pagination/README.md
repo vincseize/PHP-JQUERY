@@ -83,7 +83,7 @@ $pagination .= $Pagination->li_end();
     </select>
     {{pagination|raw}}
 </div>
-<script src="js/pgn.js"></script>
+<script src="pgn.js"></script>
 ```
 
 ## Features
