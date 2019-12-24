@@ -1,4 +1,4 @@
-# Auto pagination php, twwig 
+# Auto pagination php, twig 
 ## sample with sql data; can work, i suppose, with other fetching data
 
 ```php
@@ -76,17 +76,12 @@ $pagination .= $Pagination->li_end();
 ```
 ```html
 <div class="input-group"> 
-    <select data-pgn="{{pgn_paramRes}}" name='nResult_select' id='nResult_select' class="{{pgn_paramRes}}" style="width:auto;" data-table="{{ table[0] }}">
+    <select id='nResult_select' data-pgn="{{pgn_paramRes}}" class="{{pgn_paramRes}}"">
         {% for value in n_results_array %}
             <option>{{ value }}</option>
         {% endfor %}
     </select>
-</div>
-
-<div>
-
     {{pagination|raw}}
-    
 </div>
 <script src="js/pgn.js"></script>
 ```
