@@ -1,5 +1,5 @@
-# Auto pagination php, sample with mysql 
-## can work, i suppose, with other fetching data
+# Auto pagination php, twwig 
+## sample with sql data; can work, i suppose, with other fetching data
 
 ```php
 <?php              
@@ -43,18 +43,55 @@ http://  127.0.0.1/table_pagination.php?yourparam=johnDOE&page=19&n_result=5
 ## Vars js [1] in pgn.js
 * `var classname`: line1 IMPORTANT n_result should be same as $pgn_paramRes
 
-## Usage
+## Usage PHP
 * `configure pdo`: -> in pdo.class
 * `select your table, etc`: -> in index.php line 6, this my own vars for this sample;
 * `test`: -> open index.php
 * `re configure vars pagination`: -> in pagination.php
 * `test again`: -> open index.php
 
+
+## Twig PHP
+```php
+$Pagination = new $this -> Pagination(
+    $pgn_page,
+    $pgn_dfltLimit,
+    $pgn_rCount,
+    $pgn_nBtns,
+    $pgn_ics,
+    $pgn_paramPage,
+    $pgn_paramRes,
+    "TRUE"
+);
+
+$pagination = $Pagination->li_start();
+$pagination .= $Pagination->number_page_prev();
+$pagination .= $Pagination->number_first_page();
+$pagination .= $Pagination->number_etc_page_begin();
+$pagination .= $Pagination->number_page();
+$pagination .= $Pagination->number_etc_page_end();
+$pagination .= $Pagination->number_end_page();
+$pagination .= $Pagination->number_page_next();
+$pagination .= $Pagination->li_end();
+```
+```html
+<div class="input-group"> 
+    <select data-pgn="{{pgn_paramRes}}" name='nResult_select' id='nResult_select' class="{{pgn_paramRes}}" style="width:auto;" data-table="{{ table[0] }}">
+        {% for value in n_results_array %}
+            <option>{{ value }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div>
+
+    {{pagination|raw}}
+    
+</div>
+<script src="js/pgn.js"></script>
+```
+
 ## Features
 * `get parameters`: don't destruct your own url parameters
 * `pagination ui`: several possible on the same page (top, bottom)
-* `twig`: usage possible
-
-## TODO
-- php class, arg , twig or not twig that is the question
-- twig doc, wip
+* `twig`: easy integration
