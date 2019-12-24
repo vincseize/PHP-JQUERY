@@ -64,15 +64,8 @@ $Pagination = new $this -> Pagination(
     "TRUE"
 );
 
-$pagination = $Pagination->li_start();
-$pagination .= $Pagination->number_page_prev();
-$pagination .= $Pagination->number_first_page();
-$pagination .= $Pagination->number_etc_page_begin();
-$pagination .= $Pagination->number_page();
-$pagination .= $Pagination->number_etc_page_end();
-$pagination .= $Pagination->number_end_page();
-$pagination .= $Pagination->number_page_next();
-$pagination .= $Pagination->li_end();
+$pagination = $Pagination->pagination_ui();
+
 ```
 ```html
 <div class="input-group"> 
