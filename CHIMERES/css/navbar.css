@@ -1,0 +1,307 @@
+
+        :root{
+            --NavbarTop-height: 50px;
+            --NavbarTop-searchHeight: calc(var(--NavbarTop-height) - 5px);
+            --NavbarTop-iconHeight: calc(var(--NavbarTop-height) - 15px);
+            --NavbarTop-iconWidth: calc(var(--NavbarTop-height) - 15px);
+            /* --NavbarTop-searchHeight: 38px; */
+            --Color1: #03505d;
+          }
+  
+  
+          /* clears the 'X' from Internet Explorer */
+          input[type=search]::-ms-clear {  display: none; width : 0; height: 0; }
+          input[type=search]::-ms-reveal {  display: none; width : 0; height: 0; }
+  
+          /* clears the 'X' from Chrome */
+          input[type="search"]::-webkit-search-decoration,
+          input[type="search"]::-webkit-search-cancel-button,
+          input[type="search"]::-webkit-search-results-button,
+          input[type="search"]::-webkit-search-results-decoration { display: none; }
+  
+          *,
+          *:before,
+          *:after {
+              box-sizing: inherit;
+          }
+  
+          html, body{
+              padding: 0;
+              margin: 0;
+              overflow-x: hidden;
+          }
+  
+          html {
+              box-sizing: border-box;
+          }
+  
+          body {
+              font: 100% sans-serif;
+          }
+  
+          .container {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            height: 100%;
+            height: 100vh;
+            width: 100% !important;
+            min-width: 100% !important;
+            margin: 0px !important;
+            padding: 0px !important;
+          }
+  
+          .content {
+            flex-grow: 1;
+            overflow: auto;
+          }
+          .footerHome {
+            flex-grow: 0;
+            height:25px;
+            min-height: 25px;
+            background: var(--Color1);
+            padding-left: 18px;
+            padding-top: 4px;
+            color: gray;
+          }                
+  
+          .scrollTopButton {
+            display: none;
+            opacity: 0.5;
+            position: fixed;
+            bottom: 15px;
+            right: 10px;
+            z-index: 999;
+            font-size: 0.8em;
+            border: none;
+            outline: none;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+          }
+          
+          .scrollTopButton:hover {
+            background-color: #555;
+          }
+          
+    
+
+  /* 	navbars first order css before !important */
+
+  .bar {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      background: var(--Color1);
+      padding: 20px;
+      margin: 0 0 20px 0;
+  }
+  .bar > * {
+      margin: 0 10px;
+  }
+  
+  /* 	search input  */
+  
+  .search {
+      flex: 1;
+      position: relative;
+      margin-top: 15px;
+  }
+  
+  .search input {
+      width: calc(100% - 295px);
+      height: 35px;
+      background-color: rgba(104, 103, 103, 0.5);
+      border: none;
+      font-size: 10pt;
+      color: white !important;
+      padding-left: 35px;
+      border-radius: 3px;
+      color: hsla(0, 0%, 100%, 0.2);
+  }
+  
+  /* 	icons */
+  
+  .icon {
+      width: 30px;
+      height: 30px;
+      background: #ccc;
+      border-radius: 50%;
+  }
+  
+  .close-icon {
+      border: 1px solid transparent;
+      background-color: transparent;
+      display: inline-block;
+      opacity: 0;
+      vertical-align: middle;
+      outline: 0;
+      cursor: pointer;
+  }
+  
+  .close-icon:after {
+      content: "X";
+      display: block;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background-color: #FA9595;
+      z-index:1;
+      /* right: 15px; */
+      bottom: 8px;
+      /* right: calc(100% - 295px); */
+      left: 9px;
+      margin: auto;
+      padding: 3px;
+      border-radius: 50%;
+      text-align: center;
+      color: white;
+      font-weight: normal;
+      font-size: 12px;
+      box-shadow: 0 0 2px #E50F0F;
+      cursor: pointer;
+  }
+  
+  .searchInputIcon{
+      background: transparent url(../img/searchIconNavbar.png) no-repeat scroll 7px 7px;
+      padding-left: 32px;
+      background-size: 28px;
+      outline: 0;
+  }
+  
+  .searchInputIcon:not(:valid) ~ .close-icon {
+      display: none;
+  }
+  
+  .search:not(:valid) ~ .close-icon {
+      display: none;
+  }
+  
+  .icon3{
+    opacity:0 !important;
+  }
+  
+  .iconParam{
+      position: absolute;
+      z-index: 2;
+      height: 40px;
+      width: 40px;
+      top: 32px;
+      right: 8px;
+      opacity: 0.5;
+  }
+  
+  .iconParam:hover{
+      opacity: 0.8;
+      cursor: pointer;
+  }
+  
+  .iconLogo{
+      position: absolute;
+      z-index: 2;
+      height: 40px;
+      width: 40px;
+      top: 32px;
+      left: 20px;
+  }
+  
+  .iconLogo:hover{
+      cursor: pointer;
+  }
+  
+  .divLogo{
+    padding-right: 30px;
+  }
+  
+  .titleSite {
+      font-weight: bold;
+      color: white;
+      padding-top: 15px;;
+  }
+  
+  .titleSite:hover{
+    cursor: pointer;
+  }
+  
+  /* 	navbars second order css after !important*/
+  
+  .bar-2 .titleSiteName {
+      order: 0;
+  }
+  .bar-2 .icon-3 {
+      order: 1;
+  }
+  
+  .icon-3 {
+      opacity: 0 !important;
+  }
+  
+  .no-flexbox .bar {
+      display: table;
+      border-spacing: 15px;
+      padding: 0;
+  }
+  .no-flexbox .bar > * {
+      display: table-cell;
+      vertical-align: middle;
+      white-space: nowrap;
+  }
+  .no-flexbox .titleSiteName {
+      width: 1px;
+  }
+  
+  @media (max-width: 650px) {
+      .bar {
+          flex-wrap: wrap;
+      }
+  
+      .icon {
+          order: 0 !important;
+      }
+  
+      .titleSiteName {
+          order: 2 !important;
+          width: 100%;
+          margin: 15px;
+      }
+  
+      .search {
+          order: 3 !important;
+          width: 100%;
+          /* width: calc(100% - 30px); */
+      }
+
+      .search input {
+        width: 100%;
+        /* width: calc(100% - 30px); */
+      }
+  
+      .iconParam{
+          height: 42px;
+          width: 42px;
+          top: 20px;
+          right: 18px;
+      }
+  
+      .iconLogo{
+          height: 40px;
+          width: 40px;
+          top: 18px;
+          left: 35px;
+      }
+
+      .divLogo{
+          cursor: pointer;
+      }
+
+
+
+
+  }
+

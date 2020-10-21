@@ -1,0 +1,443 @@
+
+/* RESET RULES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+:root {
+    --black: #1a1a1a;
+    --white: #fff;
+    --gray: #ccc;
+    --darkgreen: rgb(24, 119, 132);
+    --blue1: #e4ece5;
+    --blue2: #c0ccd1;
+    --lightbrown: antiquewhite;
+    --darkblack: rgba(0,0,0,0.8);
+    --minImgWidth: 280px; /* width rows auto calcul */
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;  
+    outline: none;
+    border: none;
+  }
+  
+  /* body, html {
+    overflow-x: hidden;
+  } */
+
+  button {
+    cursor: pointer;
+    background: none;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  ol,
+  ul {
+    list-style: none;
+  }
+  
+  a {
+    color: inherit;
+  }
+  
+  .gallery {
+    padding-top: 150px;
+  }
+  
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .containerGallery {
+    margin-top: 40px !important;
+  }
+
+  .imgFolder {
+    cursor: pointer;
+  }
+
+  .imgFolder:hover {
+    border: 1px solid black;
+  }
+
+  .divTotal2 {
+    position: absolute; 
+    z-index: 1;
+    left: 20px;
+    top: 110px;
+    color:grey;
+  }
+
+  .d-none {
+    display: none;
+  }
+  
+  
+  /* TOOLBAR
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    top: 35px;
+    right: 120px;
+  }
+  
+  .toolbar .search-wrapper {
+    position: relative;
+  }
+  
+  .toolbar input[type="search"] {
+    font-size: 1.1rem;
+    border: none;
+    border-bottom: 1px solid;
+    padding-bottom: 3px;
+  }
+  
+  .toolbar ::placeholder {
+    color: var(--gray);
+  }
+  
+  .toolbar .counter {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 155px) !important;
+    font-size: 0.9rem;
+    color: var(--gray);
+    z-index: 99 !important;
+  }
+
+  .toolbarRange {
+    position: fixed;
+    left: 0;
+    top: 105px !important;
+    font-size: 0.9rem;
+    color: var(--gray);
+    z-index: 99 !important;
+  }
+
+  .counterTotalDiv{
+    z-index: 1 !important;
+    position: absolute !important;
+    /* position: absolute !important; */
+    /* padding-top: 80px !important; */
+    background-color: red;
+    top: 10px;
+    left: 100px;
+  }
+
+  .counterNavbar {
+    color: white !important;
+  }
+  
+  .view-options {
+    display: flex;
+    align-items: center;
+  }
+  
+  .view-options li:not(:last-child) {
+    margin-right: 1.2rem;
+  }
+  
+  .view-options button {
+    padding: 2px;
+    border: 3px solid transparent;
+  }
+  
+  .view-options .active button {
+    border-color: var(--blue1);
+  }
+
+  .cancel{
+    margin-left: 40px;
+    padding-left: 40px;
+    display: none;
+  }
+  
+  
+  /* IMAGE LIST
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .image-list {
+    margin: 3rem 0;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  
+  .image-list li {
+    background: var(--blue2);
+    color: var(--darkblack);
+  }
+  
+  .image-list p:first-child {
+    font-weight: bold;
+    font-size: 1.15rem;
+  }
+  
+  .image-list p:last-child {
+    margin-top: 0.5rem;
+  }
+  
+  
+  /* GRID VIEW
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .grid-view {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(var(--minImgWidth), 1fr));
+    margin-top: 88px;
+  }
+  
+  .grid-view figcaption {
+    padding: 1rem;
+  }
+  
+  .figcaption{
+    font-size: 0.9em !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .figcaptionM{
+    font-size: 0.9em !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  /* LIST VIEW
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .list-view li + li {
+    margin-top: 1.5rem;
+  }
+  
+  .list-view figure {
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+  }
+
+  .list-view {
+    margin-top: 88px;
+  }
+  
+  
+  /* HEADER
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .div_header {
+    padding-right: 50px;
+    padding-left: 50px;
+    font-weight: bolder;
+  }
+
+  .div_header_right {
+    z-index: 1px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    /* padding-top: 5px; */
+    /* padding-bottom: 2vh; */
+    /* color: white; */
+    /* font-size: 0.7rem; */
+    margin: 0px;
+    padding: 0px;
+    padding-right: 35px;
+    /* padding-left: 50px; */
+    /* font-weight: bolder; */
+    color: var(--blue2);
+    text-decoration: none !important;
+  }
+
+  .div_header_right:hover {
+    color: var(--blue2);
+    text-decoration: none !important;
+  }
+
+  .div_header_right>a:link {
+    text-decoration: none !important;
+    color: var(--blue2);
+  }
+  
+  .div_header_right>a:visited {
+    text-decoration: none !important;
+    color: var(--blue2);
+  }
+  
+  .div_header_right>a:hover {
+    text-decoration: none !important;
+    color: var(--blue2);
+  }
+  
+  .div_header_right>a:active {
+    text-decoration: none !important;
+    color: var(--blue2);
+  }
+
+  header {
+    z-index: 1;
+    font-size: 1rem;
+    /* padding: 0 1.5rem; */
+    text-align: left;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    color: white;
+    /* max-width: 98%; */
+    /* margin-top: 40px; */
+
+    padding-top: 2vh;
+
+    padding-bottom: 2vh;
+    margin-bottom: 10px;
+
+
+    width: 100%;
+  }
+  
+  header span {
+    color: #e31b23;
+  }
+  
+  /* FOOTER
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .div_footer {
+    /* padding-right: 50px; */
+    /* padding-left: 50px; */
+    margin-top: 3px;
+    margin-bottom: 2px;
+  }
+
+  footer {
+    z-index: 1;
+    font-size: 1rem;
+    text-align: right;
+    padding-right: 50px !important;
+    background-color: var(--blue2);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    /* display: none; */
+  }
+  
+  footer span {
+    color: #e31b23;
+  }
+
+  /* MQ
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  @media screen and (max-width: 900px) {
+    .toolbar input[type="range"] {
+      display: none;
+    }
+    /* header{
+      background-color: green !important;
+    } */
+  }
+  
+  @media screen and (max-width: 700px) {
+    .grid-view li {
+      text-align: center;
+      padding: 0.5rem;
+    }
+    
+    .grid-view figcaption {
+      padding: 0.5rem 0 0;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .toolbar {
+        top: 20px;
+        right: 125px;
+    }
+
+    .divTotal2 {
+      left: 35px;
+      top: 105px;
+    }
+
+      .grid-view {
+        margin-top: 175px;
+      }
+
+      .list-view {
+        margin-top: 175px;
+      }
+
+      .image-list {
+        /* padding-left:15px !important; */
+        /* padding-right: 0px !important; */
+      }
+
+      .figcaption{
+        font-size: 0.85em !important;
+      }
+
+  }
+  
+/* 
+  –––––––––––––––––––––––––––––––––––––––––––––––––– 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+
+
+
+  /* //CSS */
+  /* HEADER
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .div_header {
+    font-size: 2vh !important;
+    /* color:red !important; */
+    /* background-color: green !important; */
+  }
+
+  .div_header_right {
+    /* font-size: 4vh !important; */
+        font-size: 32px !important;
+        margin: 10px;
+        padding: 10px;
+  }
+
+  header{
+    /* background-color: green !important; */
+    /* padding-bottom: 2vh; */
+    /* margin-bottom: 30px; */
+    /* height: 46px; */
+  }
+
+
+
+}
+
+/* 
+  –––––––––––––––––––––––––––––––––––––––––––––––––– 
+  ##Device = Mobile (Landscape)
+  ##Screen = ..This orientation media query. In to this orientation media query you can specify more about CSS code for landscape view.
+*/
+
+@media screen and (min-width:768px) and (max-width:1024px) and (orientation:landscape) {
+
+  .div_header {
+    font-size: 4vh !important;
+    /* color:red !important; */
+    /* background-color: green !important; */
+  }
+
+  .div_header_right {
+    font-size: 4vh !important;
+  }
+
+}
