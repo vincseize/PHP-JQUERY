@@ -7,9 +7,11 @@ $(document).ready(function(){
     const imageList = document.querySelector(".image-list");
     const searchInput = document.querySelector('input[type="search"]');
     const btns = document.querySelectorAll(".view-options button");
-    const photosCounter = document.querySelector(".toolbar .counter span");
+    // const photosCounter = document.querySelector(".toolbar .counter span");
+    const photosCounter = document.querySelector(".total2");
     const imageListItems = document.querySelectorAll(".image-list li");
-    const captions = document.querySelectorAll(".image-list figcaption p:first-child");
+    // const captions = document.querySelectorAll(".image-list figcaption p:first-child");
+    const captions = document.querySelectorAll(".figcaption");
     const myArray = [];
     let counter = 1;
     const active = "active";
@@ -39,9 +41,18 @@ $(document).ready(function(){
     }
     
     // SET THUMBNAIL VIEW - CHANGE CSS VARIABLE
-    rangeInput.addEventListener("input", function() {
-      document.documentElement.style.setProperty("--minImgWidth",`${this.value}px`);
-    });
+    // rangeInput.addEventListener("input", function() {
+    //   document.documentElement.style.setProperty("--minImgWidth",`${this.value}px`);
+    // });
+
+    try {
+      rangeInput.addEventListener("input", function() {
+        document.documentElement.style.setProperty("--minImgWidth",`${this.value}px`);
+      }, false);
+      } catch (error) {
+        // console.error(error);
+      }
+
     
     // SEARCH FUNCTIONALITY
     for (const caption of captions) {
@@ -54,11 +65,13 @@ $(document).ready(function(){
     searchInput.addEventListener("keyup", keyupHandler);
     
     function keyupHandler() {
+        // console.log('x');
       for (const item of imageListItems) {
         item.classList.add(dNone);
       }
       const text = this.value;
-      const filteredArray = myArray.filter(el => el.text.includes(text));
+      // const filteredArray = myArray.filter(el => el.text.includes(text)); // search exact case
+      const filteredArray = myArray.filter(el => el.text.toLowerCase().includes(text)); // search upper and lowercase
       if (filteredArray.length > 0) {
         for (const el of filteredArray) {
           document.querySelector(`.image-list li:nth-child(${el.id})`).classList.remove(dNone);
@@ -68,7 +81,7 @@ $(document).ready(function(){
       if (filteredArray.length == 0) {
         $(".cancel").css("display", "block");
       }
-      photosCounter.textContent = filteredArray.length;
+      photosCounter.textContent = filteredArray.length + ' / ';
 
     }
     
