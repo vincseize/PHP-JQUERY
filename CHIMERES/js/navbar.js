@@ -6,11 +6,13 @@ const sp = document.getElementById("searchInput");
 const imgF = document.getElementById("imgFolder");
 const iconParam = document.getElementById("iconParam");
 
+const href = $(location).attr('href');
+
 titleSiteName.addEventListener("click", function() {
-  refresh();
+  goHome();
 }, false);
 logo.addEventListener("click", function() {
-  refresh();
+  goHome();
 }, false);
 b.addEventListener("click", function() {
   hideClearButton();
@@ -52,14 +54,15 @@ function imgFolder(folder) {
   window.location = "indexGallery.php?g="+folder;
 }
 
-function refresh() {
+function goHome() {
+  // console.log('goHome');
   // b.style.opacity = 0;
   window.location = "index.php";
 }
 
 function reload() {
-  // b.style.opacity = 0;
-  window.location = "index.php";
+  // console.log('reload');
+  window.location = href;
 }
 
 function hideClearButton() {
