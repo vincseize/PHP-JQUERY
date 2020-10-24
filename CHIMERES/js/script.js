@@ -16,6 +16,7 @@ $(document).ready(function(){
     const listView = "list-view";
     const gridView = "grid-view";
     const dNone = "d-none";
+
     
     // SET VIEW
     for (const btn of btns) {

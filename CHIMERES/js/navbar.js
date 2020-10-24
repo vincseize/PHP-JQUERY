@@ -4,6 +4,7 @@ const b = document.getElementById("close-icon");
 const sp = document.getElementById("searchInput");
 
 const imgF = document.getElementById("imgFolder");
+const iconUpload = document.getElementById("iconUpload");
 const iconParam = document.getElementById("iconParam");
 
 const href = $(location).attr('href');
@@ -22,11 +23,11 @@ sp.addEventListener("input", function() {
 }, false);
 
 try {
-imgF.addEventListener("imgFolder", function() {
-  imgFolder();
-}, false);
-} catch (error) {
-  // console.error(error);
+  imgF.addEventListener("imgFolder", function() {
+    imgFolder();
+  }, false);
+  } catch (error) {
+    // console.error(error);
 }
 
 try {
@@ -35,7 +36,15 @@ try {
   }, false);
   } catch (error) {
     // console.error(error);
-  }
+}
+
+try {
+  iconUpload.addEventListener("click", function() {
+    upload();
+  }, false);
+  } catch (error) {
+    // console.error(error);
+}
 
 sp.addEventListener('input', evt => {
   const value = sp.value.trim()
@@ -46,8 +55,15 @@ sp.addEventListener('input', evt => {
   }
 })
 
+// Fcts
+
 function settings() {
   window.location = "login.php";
+}
+
+function upload() {
+  console.log('upload');
+  console.log(href);
 }
 
 function imgFolder(folder) {
@@ -74,11 +90,22 @@ function showClearButton() {
   b.style.opacity = 100;
 }
 
-// $(window).scroll(function() {
+function topFunction() {
+  window.location.href = "#top";
+}
+
+function toggleParamIcon() {
+  if(LOGGED==true){
+    $('#iconParam').css('opacity', LOGGED ? '1' : '0.8');
+  }
+}
+
+// Events
+
   window.addEventListener("scroll", function() { 
     
-    var scrollHeight = $(document).height();
-    var scrollPosition = $(window).height() + $(window).scrollTop();
+    let scrollHeight = $(document).height();
+    let scrollPosition = $(window).height() + $(window).scrollTop();
   
     if ($(this).scrollTop() > 0) {
       $('.header').fadeOut(1000);
@@ -108,25 +135,27 @@ function showClearButton() {
     }
 
 
-
 });
 
 
+// window.addEventListener("load", function() { 
+//     const iconParam = document.getElementById("iconParam");
+//     if(LOGGED==true){
+//       // console.log(LOGGED);
+//       // $('#iconParam').css('opacity', '1');
+//       $('#iconParam').css('opacity', LOGGED ? '1' : '0.8');
+//     }
+// });
 
-window.addEventListener("load", function() { 
+// ------------------------ Init
 
-    const iconParam = document.getElementById("iconParam");
-
-    if(LOGGED=='True'){
-      console.log(LOGGED);
-      iconParam.style.opacity = "1";
-
-    }
-
-});
-
-
-function topFunction() {
-  window.location.href = "#top";
+function init() {
+  toggleParamIcon();
 }
+
+init();
+
+
+
+
 

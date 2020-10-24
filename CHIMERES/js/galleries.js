@@ -19,6 +19,45 @@ $(document).ready(function(){
     const gridView = "grid-view";
     const dNone = "d-none";
     
+    // const iconEditG = document.querySelector(".iconEditG");
+    // const iconEditI = document.querySelector(".iconEditI");
+
+    const url_string = $(location).attr('href');
+    // const url = new URL(url_string);
+    // const gallery = url.searchParams.get("g");
+
+
+    function goEditGallery(gallery){
+      console.log(gallery);
+      window.location = "edit.php?g="+gallery;
+    }
+
+    function goEditImage(gallery,image){
+      console.log(image);
+      window.location = "edit.php?g="+gallery+"&i="+image;
+    }
+
+    function initEditGallery(){
+      $(".iconEditG").each(function(){
+        $(this).click(function() {
+          gallery = $(this).attr("data-gallery");
+          // console.log(gallery);
+          goEditGallery(gallery);
+        });
+      });
+    }
+
+    function initEditImage(){
+      $(".iconEditI").each(function(){
+        $(this).click(function() {
+          gallery = $(this).attr("data-gallery");
+          image = $(this).attr("data-image");
+          // console.log(gallery);
+          goEditImage(gallery,image);
+        });
+      });
+    }
+
     // SET VIEW
     for (const btn of btns) {
       btn.addEventListener("click", function() {
@@ -90,7 +129,15 @@ $(document).ready(function(){
       $("#CANCEL").hide();
     });
     
-    });
+// ---------------------- Init
+
+initEditGallery();
+initEditImage();
+
+
+});
+
+
     
     
  
