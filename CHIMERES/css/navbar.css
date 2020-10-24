@@ -187,6 +187,21 @@
     opacity:0 !important;
   }
   
+  .iconUpload{
+    position: absolute;
+    z-index: 2;
+    height: 34px;
+    width: 34px;
+    top: 34px;
+    right: 70px;
+    /* opacity: 0.5; */
+}
+
+.iconUpload:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
   .iconParam{
       position: absolute;
       z-index: 2;
@@ -198,7 +213,7 @@
   }
   
   .iconParam:hover{
-      opacity: 0.8;
+      /* opacity: 0.8; */
       cursor: pointer;
   }
   
@@ -221,7 +236,7 @@
   
   .titleSite {
       font-weight: bold;
-      color: white;
+      color: #008DA5;
       padding-top: 15px;;
   }
   
@@ -300,7 +315,13 @@
           cursor: pointer;
       }
 
+      .iconUpload{
+        height: 30px;
+        width: 30px;
+        top: 20px;
+        right: 78px;
 
+    }
 
 
   }

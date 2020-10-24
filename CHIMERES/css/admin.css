@@ -1,0 +1,115 @@
+
+    .loginTable{
+      max-width: 500px;
+    }
+
+    .editDiv{
+      /* position: absolute !important; */
+      margin-top: 23vh !important;
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+    }
+
+    .marginLoginEdit{
+      width: 80%;
+      margin: auto;
+      margin-top: 33vh;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .buttonForm{
+        cursor: pointer;
+        font-size: 1.5em;
+    }
+
+    .BTlogout{
+      width: auto !important;
+      z-index: 1;
+      position: absolute;
+      right: 25px;
+      margin: 5px !important;
+      top: 12px !important;
+    }
+
+    .BTlogin{
+        /* cursor: pointer;
+        font-size: 1.5em; */
+    }
+
+    .BTCancel{
+        background-color: darkgray !important;
+    }
+
+    .BTCancel:hover{
+        background-color: gray !important;
+    }
+
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+input[type=password], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+/* 
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+} */
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+input[type=button] {
+  background-color: darkred;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+}
+
+input[type=button]:hover {
+  background-color: red;
+}
+
+@media (max-width: 650px) {
+
+  .BTlogout{
+    font-size: 14px !important;
+      width: auto !important;
+      right: 25px;
+      margin: 5px !important;
+      top: 12px !important;
+    }
+
+}

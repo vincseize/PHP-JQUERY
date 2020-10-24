@@ -211,7 +211,38 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
+  .figcaptionP{
+    font-size: 0.9em !important;
+    /* width: 30px;
+    border: solid 1px black; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 5px;
+  }
+
+  .totImgSpan{
+    font-size:20px;
+    color:white;
+  }
   
+  .iconEdit{
+    position:absolute; 
+    z-index:3;
+    top: 0px; 
+    right: 0px;
+    width:25px;
+    height:25px;
+    opacity: 0.5;
+  }
+
+  .iconEdit:hover{
+      opacity: 1;
+      cursor: pointer;
+      border: solid 1px red;
+  }
+
   /* LIST VIEW
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   .list-view li + li {
@@ -381,6 +412,10 @@
       .figcaption{
         font-size: 0.85em !important;
       }
+
+      .iconEdit:hover{
+        border: solid 2px red;
+    }
 
   }
   
