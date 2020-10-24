@@ -26,18 +26,30 @@ function is_dir_empty($dir) {
     return $images;
   }
 
+  function getDossierName ($dirname) {
+    // $dirname = basename(dirname($folder.DIRECTORY_SEPARATOR.$images[0]) . PHP_EOL);
+
+    $dPath = preg_split("/\//", $dirname);
+    $dossierName = strval(end($dPath));
+    $dossierName = str_replace(PHP_EOL, '', $dossierName);
+    return $dossierName;
+  }
+
   function constructCardHomeFolder ($folder) {
     if (!is_dir_empty($folder)) {
 
       $folder = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $folder);
 
       $images = listImages ($folder);
+
       $dirname = basename(dirname($folder.DIRECTORY_SEPARATOR.$images[0]) . PHP_EOL);
 
-      $dPath = preg_split("/\//", $dirname);
-      $dossierName = strval(end($dPath));
-      $dossierName = str_replace(PHP_EOL, '', $dossierName);
+      // $dPath = preg_split("/\//", $dirname);
+      // $dossierName = strval(end($dPath));
+      // $dossierName = str_replace(PHP_EOL, '', $dossierName);
 
+      $dossierName = getDossierName($dirname);
+      
       $infos = readInfos($folder,$dossierName);
     
       echo "<li>";
@@ -72,13 +84,19 @@ function is_dir_empty($dir) {
   function gridFolder($dossier_images){
     if (!is_dir_empty($dossier_images)) {
       $images = listImages ($dossier_images);
+      
+
+
       foreach($images as $img){
+
+        $dirname = basename(dirname($dossier_images.DIRECTORY_SEPARATOR.$img) . PHP_EOL);
+
         echo "<li>";
 
         echo "<div style='position:relative;'>";
             echo "<figure>";
 if (isset($_SESSION['UserData']['Username'] )) {
-              echo "<img id='iconEditI' class='iconEdit iconEditI' data-gallery='".$dossier_images."' data-image='".$img."' src='img/icon_edit.png'>";
+              echo "<img id='iconEditI' class='iconEdit iconEditI' data-gallery='".$dirname."' data-image='".$img."' src='img/icon_edit.png'>";
 }
               echo "<img src='".$dossier_images.DIRECTORY_SEPARATOR.$img."' alt=''>";
               echo "<figcaption class='figcaption'>";

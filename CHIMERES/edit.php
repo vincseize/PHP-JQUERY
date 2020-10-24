@@ -4,9 +4,6 @@
 
 <?php 
 
-
-
-
   if(isset($_POST['Submit'])){
       $logins = array('root' => 'aaa','username1' => 'password1','username2' => 'password2');
       $Username = isset($_POST['Username']) ? $_POST['Username'] : '';
@@ -41,18 +38,12 @@
         <?php } } ?>
 
 
-
-        <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br><br><br>
-
-         -->
         <div class="marginLoginEdit editDiv">
+        <br>
           <span>
               edit
 
               <?php 
-
-// echo $fileName;
 
 if ($fileName == "edit.php"){
 
