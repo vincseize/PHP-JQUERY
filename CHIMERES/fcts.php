@@ -41,18 +41,30 @@ function is_dir_empty($dir) {
       $infos = readInfos($folder,$dossierName);
     
       echo "<li>";
-        echo "<figure>";
-          echo "<img id='imgFolder' ";
-          echo "class='imgFolder' src='".$folder.DIRECTORY_SEPARATOR.$images[0]."' ";
-          echo "alt='".$images[0]."' ";
-          echo "onclick='imgFolder(\"$dossierName\");'>";
-          echo "<figcaption class='figcaption'>";
-            echo "<p class='figcaptionP'>";
-            echo $infos;
-            echo "</p>";
-            // echo "<p><a href='#'>Photo by </a></p>";
-          echo "</figcaption>";
-        echo "</figure>";
+
+
+      echo "<div style='position:relative;'>";
+          echo "<figure>";
+
+          if (isset($_SESSION['UserData']['Username'] )) {
+              echo "<img id='iconEditG' class='iconEdit iconEditG' src='img/icon_edit.png' data-gallery='".$dossierName."'>";
+          }
+
+
+                echo "<img id='imgFolder' ";
+                echo "class='imgFolder' src='".$folder.DIRECTORY_SEPARATOR.$images[0]."' ";
+                echo "alt='".$images[0]."' ";
+                echo "onclick='imgFolder(\"$dossierName\");'>";
+                echo "<figcaption class='figcaption'>";
+                    echo "<p class='figcaptionP'>";
+                    echo $infos;
+                    echo "</p>";
+                    // echo "<p><a href='#'>Photo by </a></p>";
+              echo "</figcaption>";
+          echo "</figure>";
+
+        echo "</div>";
+
       echo "</li>";
     }
   }
@@ -62,13 +74,19 @@ function is_dir_empty($dir) {
       $images = listImages ($dossier_images);
       foreach($images as $img){
         echo "<li>";
-        echo "<figure>";
-          echo "<img src='".$dossier_images.DIRECTORY_SEPARATOR.$img."' alt=''>";
-          echo "<figcaption>";
-            echo "<p class='figcaptionM'>".$img."</p>";
-            // echo "<p><a href='#'>Photo by </a></p>";
-          echo "</figcaption>";
-        echo "</figure>";
+
+        echo "<div style='position:relative;'>";
+            echo "<figure>";
+if (isset($_SESSION['UserData']['Username'] )) {
+              echo "<img id='iconEditI' class='iconEdit iconEditI' data-gallery='".$dossier_images."' data-image='".$img."' src='img/icon_edit.png'>";
+}
+              echo "<img src='".$dossier_images.DIRECTORY_SEPARATOR.$img."' alt=''>";
+              echo "<figcaption class='figcaption'>";
+                echo "<p class='figcaptionM'>".$img."</p>";
+                // echo "<p><a href='#'>Photo by </a></p>";
+              echo "</figcaption>";
+            echo "</figure>";
+        echo "</div>";
       echo "</li>";
       }
     }
@@ -94,8 +112,15 @@ function is_dir_empty($dir) {
   }
 
   function readInfos($folder,$dossierName){
+    
+    $infos = "";
     $totImg = totImg($folder);
-    $infos = $dossierName . "<font color=white> | " . $totImg . "</font>";
+    
+    // $infos = $dossierName . "<font color=white> | " . $totImg . "</font>";
+    
+    $totImg = "<span class='totImgSpan'>" . $totImg . "</span>";
+    $infos .= $totImg.$dossierName;
+    // $infos = $dossierName.$totImg;
     $infosTxt = $folder.DIRECTORY_SEPARATOR."infos.txt";
     if (file_exists($infosTxt)) { 
         $myfile = fopen($infosTxt, "r"); // or die("Unable to open file!");
@@ -103,11 +128,11 @@ function is_dir_empty($dir) {
         // $infos = "";
         while(! feof($myfile))
         {
-            $infos .= "<p>" .fgets($myfile). "</p>";
+            $infos .= "<p class='figcaptionP'>" .fgets($myfile). "</p>";
         }
         fclose($myfile);
     } 
-    // else { $infos = $dossierName; }
+    // $infos .= $infos.$totImg;
     return $infos;
   }
 

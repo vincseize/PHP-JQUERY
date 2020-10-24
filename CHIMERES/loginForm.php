@@ -2,7 +2,7 @@
 
 
         <form action="" method="post" name="LoginForm" autocomplete="off">
-          <table cellpadding="5" cellspacing="1" class="loginTable">
+          <table cellpadding="5" cellspacing="1" class="loginTable marginLoginEdit">
             <?php if (isset($msg) ) {?>
             <tr>
               <td colspan="2" align="center" valign="top"><?php echo $msg;?></td>

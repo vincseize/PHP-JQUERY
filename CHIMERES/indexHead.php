@@ -3,11 +3,11 @@ session_start();
 
 if(isset($_SESSION['UserData']['Username'])){
   echo "<script>";
-  echo "const LOGGED = 'True';";
+        echo "const LOGGED = true;";
   echo "</script>";
 } else {
   echo "<script>";
-  echo "const LOGGED = 'False';";
+      echo "const LOGGED = false;";
   echo "</script>";
 }
 
@@ -19,6 +19,9 @@ if(isset($_SESSION['UserData']['Username'])){
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>BOOK</title>
+
     <link rel="icon" href="img/favicons/favicon-16.svg" type="image/svg+xml" />
 
     <!--  JS -->
@@ -31,38 +34,11 @@ if(isset($_SESSION['UserData']['Username'])){
     <link rel="preload" href="css/navbar.css" as="style">
     <link href="css/navbar.css" rel="stylesheet" type="text/css" />
 
+    <link rel="preload" href="css/admin.css" as="style">
+    <link href="css/admin.css" rel="stylesheet" type="text/css" />
+
+    <link rel="preload" href="css/galleries.css" as="style">
     <link href="css/galleries.css" rel="stylesheet" type="text/css" />
-
-
-
-    <style>
-
-        /* .scrollTopButton {
-          display: none;
-          position: fixed;
-          opacity: 0.5;
-          bottom: 15px;
-          right: 10px;
-          z-index: 999;
-          font-size: 0.8em;
-          border: none;
-          outline: none;
-          background-color: red;
-          color: white;
-          cursor: pointer;
-          padding: 15px;
-          border-radius: 4px;
-        }
-
-        .scrollTopButton:hover {
-          background-color: #555;
-        } */
-
-</style>
-
-
-
-    <title>BOOK</title>
   
 </head>
 

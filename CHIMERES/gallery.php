@@ -27,11 +27,7 @@
 
             <ol class="image-list grid-view">
                   <?php
-
-                //   gridFolder('img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$thisGallery);
                   gridFolder('img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$_GET['g']);
-                //   gridFolders($directories);
-
                   ?>
             </ol>
 

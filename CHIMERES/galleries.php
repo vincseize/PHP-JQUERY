@@ -27,10 +27,7 @@
 
             <ol class="image-list grid-view">
                   <?php
-
-                  // gridFolder('img/galleries/bininie');
                   gridFolders($directories);
-
                   ?>
             </ol>
 

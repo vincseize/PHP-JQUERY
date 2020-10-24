@@ -4,6 +4,9 @@
 
 <?php 
 
+
+
+
   if(isset($_POST['Submit'])){
       $logins = array('root' => 'aaa','username1' => 'password1','username2' => 'password2');
       $Username = isset($_POST['Username']) ? $_POST['Username'] : '';
@@ -28,21 +31,53 @@
         require 'indexNavbar.php';
         ?>
 
-        <?php if (isset($_SESSION['UserData']['Username'] )) {?>
-                <input class="BTlogout buttonForm" id="BTlogout" type="button" onclick="location.href='logout.php'" value="Logout"/>
-        <?php } ?>
-
-        <?php 
-          // echo $fileName;
+        <?php if (isset($_SESSION['UserData']['Username'] )) {
+          if (!isset($_GET['g'] )) {
           
-          if (!isset($_SESSION['UserData']['Username']) && $fileName == "login.php") {
-            require 'loginForm.php';
-          } 
-        ?>
+          ?>
+           
+                <input class="BTlogout buttonForm" id="BTlogout" type="button" onclick="location.href='logout.php'" value="Logout"/>
+
+        <?php } } ?>
+
+
+
+        <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br>
+
+         -->
+        <div class="marginLoginEdit editDiv">
+          <span>
+              edit
+
+              <?php 
+
+// echo $fileName;
+
+if ($fileName == "edit.php"){
+
+              if (isset($_GET['g'])) {
+                  $folder = $_GET['g']; 
+                  echo $folder; 
+              }
+              if (isset($_GET['i'])) {
+                  $image = $_GET['i']; 
+                  echo $image; 
+              }
+}
+              ?>
+          <span>
+        </div>
+
+
 
     </div>
 
+<style>
 
+
+
+</style>
 
 </body>
 
