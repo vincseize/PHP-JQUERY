@@ -1,8 +1,3 @@
-
-<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
-<!-- <script type="text/javascript" src="js/galleries.js"></script> -->
-<!-- <link href="css/galleries.css" rel="stylesheet" type="text/css" /> -->
-
 <section class="gallery">
 
         <div class="container containerGallery">

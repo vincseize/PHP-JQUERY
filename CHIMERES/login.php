@@ -5,16 +5,14 @@
 <?php 
 
   if(isset($_POST['Submit'])){
-      $logins = array('root' => 'aaa','username1' => 'password1','username2' => 'password2');
+      $logins = array('root' => 'normandus','admin' => 'aaa','username2' => 'password2');
       $Username = isset($_POST['Username']) ? $_POST['Username'] : '';
       $Password = isset($_POST['Password']) ? $_POST['Password'] : '';
       if (isset($logins[$Username]) && $logins[$Username] == $Password){
-          /* Success: Set session variables and redirect to Protected page  */
           $_SESSION['UserData']['Username']=$logins[$Username];
           header("location:index.php");
           exit;
       } else {
-      /*Unsuccessful attempt: Set error message */
       $msg="<span style='color:red'>Invalid Login</span>";
       }
   }

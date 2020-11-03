@@ -12,7 +12,7 @@ $totImg = totImg($dossier_images.DIRECTORY_SEPARATOR.$dossier_gallery);
         ?>
 
         <div class="divTotal2">
-            <b><?php echo $dossier_gallery; ?> | Total</b> <span class="total2"></span> <?php echo $totImg; ?>
+            <b>GALLERY : <?php echo $dossier_gallery; ?> | Total</b> <span class="total2"></span> <?php echo $totImg; ?>
         </div>
 
         <div class="content">
@@ -25,10 +25,16 @@ $totImg = totImg($dossier_images.DIRECTORY_SEPARATOR.$dossier_gallery);
         </div>
     </div>
 
-    <button onclick="topFunction()" id="scrollTopButton" class="scrollTopButton" title="Go to top">Top</button>
+    <?php if ($total_items > 1 ) { ;?>
+        <button onclick="topFunction()" id="scrollTopButton" class="scrollTopButton" title="Go to top">Top</button>
+    <?php } ?>
 
 </body>
 
 <script type="text/javascript" src="js/navbar.js"></script>
+
+
+
+
  
 </html>

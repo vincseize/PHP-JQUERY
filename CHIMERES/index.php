@@ -26,10 +26,13 @@ require 'indexHead.php';
     </div>
   </div>
 
-  <button onclick="topFunction()" id="scrollTopButton" class="scrollTopButton" title="Go to top">Top</button>
+  <?php if ($total_items > 1 ) { ;?>
+      <button onclick="topFunction()" id="scrollTopButton" class="scrollTopButton" title="Go to top">Top</button>
+  <?php } ?>
 
 </body>
 
 <script type="text/javascript" src="js/navbar.js"></script>
+
 
 </html>

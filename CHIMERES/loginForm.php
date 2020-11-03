@@ -1,6 +1,3 @@
-
-
-
         <form action="" method="post" name="LoginForm" autocomplete="off">
           <table cellpadding="5" cellspacing="1" class="loginTable marginLoginEdit">
             <?php if (isset($msg) ) {?>
@@ -35,7 +32,7 @@
               <?php if (!isset($_SESSION['UserData']['Username'] )) {?>
                 <input class="BTlogin buttonForm" id="BTlogin" name="Submit" type="submit" value="Login"></td>
               <?php } ?>
-
+              </td>
             </tr>
           </table>
         </form>
