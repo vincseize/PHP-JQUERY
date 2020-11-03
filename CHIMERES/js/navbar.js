@@ -5,6 +5,7 @@ const sp = document.getElementById("searchInput");
 
 const imgF = document.getElementById("imgFolder");
 const iconUpload = document.getElementById("iconUpload");
+const iconAdd = document.getElementById("iconAdd");
 const iconParam = document.getElementById("iconParam");
 
 const href = $(location).attr('href');
@@ -46,6 +47,14 @@ try {
     // console.error(error);
 }
 
+try {
+  iconAdd.addEventListener("click", function() {
+    addCategorie();
+  }, false);
+  } catch (error) {
+    // console.error(error);
+}
+
 sp.addEventListener('input', evt => {
   const value = sp.value.trim()
   if (value) {
@@ -59,6 +68,11 @@ sp.addEventListener('input', evt => {
 
 function settings() {
   window.location = "login.php";
+}
+
+function addCategorie(){
+  console.log('categorie add');
+  window.location = "edit.php?g=new&add=gallerie";
 }
 
 function upload() {

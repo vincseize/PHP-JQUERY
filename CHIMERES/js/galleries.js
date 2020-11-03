@@ -21,42 +21,192 @@ $(document).ready(function(){
     
     // const iconEditG = document.querySelector(".iconEditG");
     // const iconEditI = document.querySelector(".iconEditI");
+    // const iconDeleteI = document.querySelector(".iconDeleteI");
+    
 
     const url_string = $(location).attr('href');
     // const url = new URL(url_string);
     // const gallery = url.searchParams.get("g");
 
+    const BTAddGallery = document.getElementById("BTAddGallery");
+    const BTEditGallery = document.getElementById("BTEditGallery");
+    const inputG = document.getElementById("GalleryNameAdd");
+    const GalleryNameAddInfos = document.getElementById("GalleryNameAddInfos");
+    // const oldGalleryName = document.getElementById("oldGalleryName");
+    const minLengthG = 1;
+    const maxLengthG = 16;
+    
+    try {
+      $(inputG).bind("change paste keyup", function() {
+      // $("#GalleryNameAdd").bind("change paste keyup", function() {
+        var value = $(this).val();
+        // console.log(value);
+        if (value.length < minLengthG){
+            // $(GalleryNameAddInfos).text("Name is short");
+            $(BTAddGallery).attr("style", "display:none");
+            // $(BTAddGallery).hide();
+        }
+        if (value.length > maxLengthG){
+            $(GalleryNameAddInfos).text("Name is long");
+            $(BTAddGallery).attr("style", "display:none");
+            // $(BTAddGallery).hide();
+        } 
+        if ((value.length >= minLengthG) && (value.length < maxLengthG)){
+            // $(GalleryNameAddInfos).text("Name is valid");
+            // $(BTAddGallery).removeAttr("style").hide();
+            $(BTAddGallery).attr("style", "display:block");
+        }
+    });
+  } catch (error) {
+    // console.error(error);
+  }
+
+    try {
+      BTAddGallery.addEventListener("click", function() {
+        addGalleryFolder();
+      }, false);
+    } catch (error) {
+        // console.error(error);
+    }
+
+    try {
+      BTEditGallery.addEventListener("click", function() {
+        editGalleryFolder();
+      }, false);
+    } catch (error) {
+        // console.error(error);
+    }
+
+    function cleanGalleryName(gallery){
+      // gallery = gallery.replace(/[^a-zA-Z ]/g, "");
+      // gallery = gallery.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+      gallery = gallery.replace(/[`~!@#$%^&*()|+\=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+      return gallery;
+    }
+
+    function addGalleryFolder(){
+      // console.log('addGalleryFolder');
+      gallery = document.getElementById("GalleryNameAdd").value;
+      // gallery = gallery.replace(/[^a-zA-Z ]/g, "");
+      gallery = cleanGalleryName(gallery);
+      if(gallery.length === 0) {
+        alert('At Least one Character!');
+        // window.location = "edit.php?g="+folder;
+      } else {
+      // console.log(gallery);
+      // window.location = "edit.php?g="+gallery;
+
+        $.ajax({
+            url: "createFolder.php",                        
+            type: "GET",
+            data : 'folder=' + gallery,
+            success: function(msg){
+                alert(msg);
+                if(msg='Gallery Already Exist'){
+                  // alert('gae');
+                  window.location = "edit.php?g="+gallery;
+                } 
+                if(msg='Gallery Created'){
+                  // alert('gae');
+                  window.location = "indexGallery.php?g="+gallery;;
+                } 
+                // Gallery Created
+                // else {window.location = "indexGallery.php?g="+gallery;}
+                // indexGallery.php?g=Clem
+
+            },
+            error : function(msg, statut, erreur){
+              alert(msg);
+              // window.location = "edit.php?g=new&add="+gallery;
+            },
+            complete : function(msg, statut){
+              // if(msg='Gallery Already Exist'){
+              //   // alert('gae');
+              //   window.location = "edit.php?g=new&add="+gallery;
+              // } else {window.location = "edit.php?g="+gallery;}
+              
+            }
+        });
+      }
+
+
+    }
+
+    function editGalleryFolder(){
+      // console.log('editGalleryFolder');
+      gallery = document.getElementById("newGalleryName").value;
+      folder = document.getElementById("oldGalleryName").value;
+      if(gallery.length === 0) {
+        alert('At Least one Character!');
+        window.location = "edit.php?g="+folder;
+      } else {
+
+
+        // gallery = gallery.replace(/[^a-zA-Z ]/g, "");
+        gallery = cleanGalleryName(gallery);
+        // console.log(gallery);
+        // window.location = "edit.php?g="+gallery;
+
+        $.ajax({
+            url: "createFolder.php",                        
+            type: "GET",
+            // data : 'u=' + gallery,
+            data: {'oldFolderName': folder, 'u': gallery},
+            // oldGalleryName
+            success: function(msg){
+                // alert("Gallery Updated");
+                alert(msg);
+            },
+            error : function(msg, statut, erreur){
+              alert(msg);
+              // alert(msg);alert(msg);
+            },
+            complete : function(msg, statut){
+              window.location = "edit.php?g="+gallery;
+            }
+        });
+
+      }
+
+    }
 
     function goEditGallery(gallery){
-      console.log(gallery);
+      // console.log(gallery);
       window.location = "edit.php?g="+gallery;
     }
 
     function goEditImage(gallery,image){
-      console.log(image);
       window.location = "edit.php?g="+gallery+"&i="+image;
     }
 
-    function initEditGallery(){
+    function hidePopup(){
+      $('.cd-popup').removeClass('is-visible');
+    }
+
+    function initEditGalleriesImages(){
       $(".iconEditG").each(function(){
         $(this).click(function() {
+          hidePopup();
+          // $('.cd-popup_DelImg').removeClass('is-visible');
           gallery = $(this).attr("data-gallery");
           // console.log(gallery);
           goEditGallery(gallery);
         });
       });
-    }
 
-    function initEditImage(){
       $(".iconEditI").each(function(){
         $(this).click(function() {
+          hidePopup();
+          // $('.cd-popup_DelImg').removeClass('is-visible');
           gallery = $(this).attr("data-gallery");
           image = $(this).attr("data-image");
           // console.log(gallery);
           goEditImage(gallery,image);
         });
       });
+
     }
+
 
     // SET VIEW
     for (const btn of btns) {
@@ -131,8 +281,9 @@ $(document).ready(function(){
     
 // ---------------------- Init
 
-initEditGallery();
-initEditImage();
+initEditGalleriesImages();
+// initEditGallery();
+// initEditImage();
 
 
 });
