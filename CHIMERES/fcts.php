@@ -5,6 +5,7 @@
 $PATH_GALLERIES = "img" . DIRECTORY_SEPARATOR . "galleries";
 $ICON_DEFAULT_GALLERY = "___default_icon.jpg";
 $ICON_GALLERY = "___icon.jpg";
+$THUMBNAILS_FOLDER = "thumbnails";
 
 // function commpressIMAGICK($src) 
 // {
@@ -220,17 +221,19 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
 
   function gridFolders($directories){
     global $ICON_DEFAULT_GALLERY;
+    global $THUMBNAILS_FOLDER;
     foreach($directories as $folder){
       if (!file_exists($folder.DIRECTORY_SEPARATOR.$ICON_DEFAULT_GALLERY)) {   
         $dirname = basename($folder);
         createBlankImage($dirname);
+      }
+
+      if (!file_exists($folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER)) {
+        mkdir($folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER, 0755, true);
         // echo $folder;
         // echo "<br>";
-        // echo $dirname;
-        // echo "<br>";
-        // echo basename($folder);
-        // exit;
-      }
+    }
+
       $card = constructCardHomeFolder($folder);
     }
   }
