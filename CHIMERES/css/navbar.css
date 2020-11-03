@@ -108,15 +108,20 @@
   
   /* 	search input  */
   
+  .searchHeight {
+    height: 40px !important;
+  }
+
   .search {
       flex: 1;
       position: relative;
       margin-top: 15px;
+      height: 40px !important;
   }
   
   .search input {
       width: calc(100% - 295px);
-      height: 35px;
+      height: 40px !important;
       background-color: rgba(104, 103, 103, 0.5);
       border: none;
       font-size: 10pt;
@@ -202,12 +207,27 @@
     cursor: pointer;
 }
 
+.iconAdd{
+    position: absolute;
+    z-index: 2;
+    height: 34px;
+    width: 34px;
+    top: 34px;
+    right: 70px;
+    /* opacity: 0.5; */
+}
+
+.iconAdd:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
   .iconParam{
       position: absolute;
       z-index: 2;
       height: 40px;
       width: 40px;
-      top: 32px;
+      top: 30px;
       right: 8px;
       opacity: 0.5;
   }
@@ -300,7 +320,7 @@
       .iconParam{
           height: 42px;
           width: 42px;
-          top: 20px;
+          top: 15px;
           right: 18px;
       }
   
@@ -316,13 +336,18 @@
       }
 
       .iconUpload{
-        height: 30px;
-        width: 30px;
-        top: 20px;
-        right: 78px;
+            height: 30px;
+            width: 30px;
+            top: 20px;
+            right: 78px;
+        }
 
-    }
-
+        .iconAdd{
+            height: 30px;
+            width: 30px;
+            top: 20px;
+            right: 78px;
+        }
 
   }
 
