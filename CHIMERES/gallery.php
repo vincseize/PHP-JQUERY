@@ -28,7 +28,7 @@
                       if (isset($_SESSION['UserData']['Username'] )) {
                         require 'uploadForm.php';
                       } 
-
+                      checkFirst_iconGallery($_GET['g']);
                       gridFolder('img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$_GET['g']);
                 ?>
             </ol>

@@ -15,7 +15,7 @@ if ( !empty($_GET['folder']) )
 
     if (!file_exists($PATH_GALLERIES.DIRECTORY_SEPARATOR.$folder)) { 
         mkdir($PATH_GALLERIES. DIRECTORY_SEPARATOR .$folder, 0755);
-        createBlankImage($folder);
+        create_defaultImgGallery($folder);
         echo "Gallery Created";
         exit();
     }

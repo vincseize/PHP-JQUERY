@@ -45,31 +45,31 @@
               <?php 
 
 
-                  function rrmdir($dir) {
-                    if (is_dir($dir)) {
-                      $objects = scandir($dir);
-                      foreach ($objects as $object) {
-                        if ($object != "." && $object != "..") {
-                          if (filetype($dir."/".$object) == "dir") 
-                            rrmdir($dir."/".$object); 
-                          else unlink   ($dir."/".$object);
-                        }
-                      }
-                      reset($objects);
-                      rmdir($dir);
-                    }
-                  }
+                  // function rrmdir($dir) {
+                  //   if (is_dir($dir)) {
+                  //     $objects = scandir($dir);
+                  //     foreach ($objects as $object) {
+                  //       if ($object != "." && $object != "..") {
+                  //         if (filetype($dir."/".$object) == "dir") 
+                  //           rrmdir($dir."/".$object); 
+                  //         else unlink   ($dir."/".$object);
+                  //       }
+                  //     }
+                  //     reset($objects);
+                  //     rmdir($dir);
+                  //   }
+                  // }
 
-                  function deleteFiles($files){
-                      foreach ($files as $file) {
-                        if (file_exists($file)) {
-                            unlink($file);
-                        } else {
-                            // File not found.
-                            echo "File not found > ".$file;
-                        }
-                      }
-                  }
+                  // function deleteFiles($files){
+                  //     foreach ($files as $file) {
+                  //       if (file_exists($file)) {
+                  //           unlink($file);
+                  //       } else {
+                  //           // File not found.
+                  //           echo "File not found > ".$file;
+                  //       }
+                  //     }
+                  // }
 
                   function deleteFolders($folders,$dg){
                     
