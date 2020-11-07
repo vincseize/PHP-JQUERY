@@ -35,7 +35,10 @@ $(document).ready(function(){
     // const oldGalleryName = document.getElementById("oldGalleryName");
     const minLengthG = 1;
     const maxLengthG = 16;
-    
+
+    const imgGridGallery = document.querySelector(".imgGridGallery");
+
+
     try {
       $(inputG).bind("change paste keyup", function() {
       // $("#GalleryNameAdd").bind("change paste keyup", function() {
@@ -184,6 +187,18 @@ $(document).ready(function(){
     }
 
     function initEditGalleriesImages(){
+
+
+      // function imgGridGallery_GO(){
+        $(".imgGridGallery").each(function(){
+          $(this).click(function() {
+            gallery = $(this).attr("data-gallery");
+            img = $(this).attr("data-image");
+            let url_player = "img/galleryPlayer/index.php?g="+gallery+'&i='+img;
+            window.location = url_player;
+          });
+        });
+
       $(".iconEditG").each(function(){
         $(this).click(function() {
           hidePopup();
