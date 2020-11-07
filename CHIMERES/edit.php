@@ -32,6 +32,8 @@
           if (!isset($_GET['g'] )) {
           
           ?>
+
+
            
                 <input class="BTlogout buttonForm" id="BTlogout" type="button" onclick="location.href='logout.php'" value="Logout"/>
 
@@ -44,37 +46,12 @@
 
               <?php 
 
-
-                  // function rrmdir($dir) {
-                  //   if (is_dir($dir)) {
-                  //     $objects = scandir($dir);
-                  //     foreach ($objects as $object) {
-                  //       if ($object != "." && $object != "..") {
-                  //         if (filetype($dir."/".$object) == "dir") 
-                  //           rrmdir($dir."/".$object); 
-                  //         else unlink   ($dir."/".$object);
-                  //       }
-                  //     }
-                  //     reset($objects);
-                  //     rmdir($dir);
-                  //   }
-                  // }
-
-                  // function deleteFiles($files){
-                  //     foreach ($files as $file) {
-                  //       if (file_exists($file)) {
-                  //           unlink($file);
-                  //       } else {
-                  //           // File not found.
-                  //           echo "File not found > ".$file;
-                  //       }
-                  //     }
-                  // }
-
                   function deleteFolders($folders,$dg){
-                    
+                    global $PATH_GALLERIES;
+
                     foreach ($folders as $folder) {
-                      $folder = 'img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$dg;
+                      // $folder = 'img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$dg;
+                      $folder = $PATH_GALLERIES.DIRECTORY_SEPARATOR.$dg;
                       
                       if (file_exists($folder)) {
                         $dirname = basename($folder);
@@ -124,17 +101,64 @@
                           echo "<input type='text' id='newGalleryName' name='newGalleryName' required ";
                           echo " minlength='1' maxlength='32' size='24' value='".$gallery."'>";
                           echo "</div>";
-                          echo "<input type='button' id='BTEditGallery' value='CONFIRM New Name' classDES='backEdit'>";
+                          echo "<input type='button' id='BTEditGallery' value='CONFIRM New Name'>";
                       }
                       if (isset($_GET['i']) && !isset($_GET['d']) && isset($_GET['i'])) {
+                          $gallery = $_GET['g']; 
                           $image = $_GET['i']; 
-                          echo "EDIT image : ".$image;
+                          $img = $PATH_GALLERIES . DIRECTORY_SEPARATOR . $gallery . DIRECTORY_SEPARATOR .$image;
+                          $icon = $PATH_GALLERIES . DIRECTORY_SEPARATOR . $gallery . DIRECTORY_SEPARATOR . $ICON_GALLERY;
+                          $styleBorder = "";
+
+                          $result_images = array();
+                          $result_images = compare_imgs($img,$icon,$result_images);
+                          if (!empty($result_images)) {
+                            $styleBorder = "border:2px solid black;";
+                          }
+                          // print_r($result_images);
+
+                          echo "<b>EDIT image :</b><br>".$image;
+                          echo "<br><br>";
+
+                          echo "<div>";
+
+                            echo "<img id='imgFolder' ";
+                            echo "class='imgFolder' src='".$img."?nocache=".time()."' ";
+                            echo "alt='".$image."' ";         
+                            echo " style='max-height:45vh;".$styleBorder."'" ;
+                            echo " >";
+                            if (empty($result_images)) {
+                              $urlOK = "edit.php?g=".$gallery."&i=".$image."&icon=1";
+                              echo "<input type='button' id='BTIconGalleryChoose' value='CHOOSE AS GALLERY ICON' ";
+                              echo "onclick=\"location.href='".$urlOK."'\"";
+                              echo " class='BTIconGalleryChoose'" ;
+                              echo " >";
+                            }
+                          echo "</div>";
+
+                          echo "<br>";
                       }
 
+                      if (isset($_GET['icon'])) {
+                        $urlOK = "edit.php?g=".$gallery."&i=".$image;
+                        $msg = "ICON MODIFIED";
+                        $gallery = $_GET['g']; 
+                        $image = $_GET['i']; 
+                        changeIconThumbnails($gallery,$image);
+                        echo ("<script LANGUAGE='JavaScript'>
+                        window.alert('".$msg."');
+                        window.location.href='".$urlOK."';
+                        </script>");
+
+                      } 
+
+
                       if (isset($_GET['g']) && !isset($_GET['i']) && isset($_GET['d'])) {
-                        // $gallery = $_GET['g']; 
+                        $gallery = $_GET['g']; 
                         $image = $_GET['d']; 
-                        $imagePath = 'img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$_GET['g'].DIRECTORY_SEPARATOR.$image;
+                        // $imagePath = 'img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$_GET['g'].DIRECTORY_SEPARATOR.$image;
+                        $imagePath = $PATH_GALLERIES . DIRECTORY_SEPARATOR.$gallery.DIRECTORY_SEPARATOR.$image;
+                        
                         array_push($files,$imagePath);
                         // print_r($files);
                         deleteFiles($files);
@@ -145,6 +169,8 @@
                         $url = "index.php";
                         require 'addGalleryForm.php';
                       } 
+
+
 
 
                       echo "<br><br>";

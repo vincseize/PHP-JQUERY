@@ -43,7 +43,7 @@ if ($_GET['g']) {
         // echo $imageFileName;
         // exit;
 
-        $target_file_comp = $target_dir .DIRECTORY_SEPARATOR . $imageFileName .".".$imageFileType;
+        $target_file_comp = $target_dir .DIRECTORY_SEPARATOR . $imageFileName .DIRECTORY_SEPARATOR.$imageFileType;
 
         $uploadOk = 1;
 

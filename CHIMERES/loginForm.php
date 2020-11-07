@@ -10,7 +10,7 @@
             </tr> -->
             <tr>
               <!-- <td align="right" valign="top">Username</td> -->
-              <td><input name="Username" type="text" class="Input" value="root" autocomplete="new-password" placeholder="Login"></td>
+              <td><input name="Username" type="text" class="Input" value="admin" autocomplete="new-password" placeholder="Login"></td>
             </tr>
             <tr>
               <!-- <td align="right">Password</td> -->

@@ -28,7 +28,7 @@ function compare_imgs($img1,$img2,$result_images){
 function checkFirst_iconGallery($gallery){
 
     global $PATH_GALLERIES;
-    global $THUMBNAILS_FOLDER;
+    // global $THUMBNAILS_FOLDER;
     global $ARRAY_AUTH_FORMATS;
     global $ICON_DEFAULT_GALLERY;
     global $ICON_GALLERY;
@@ -36,7 +36,7 @@ function checkFirst_iconGallery($gallery){
     // $gallery = "juliette";
 
     $dir = $PATH_GALLERIES. DIRECTORY_SEPARATOR . $gallery;
-    $dirThumbnails = $PATH_GALLERIES. DIRECTORY_SEPARATOR . $gallery. DIRECTORY_SEPARATOR . $THUMBNAILS_FOLDER;
+    // $dirThumbnails = $PATH_GALLERIES. DIRECTORY_SEPARATOR . $gallery. DIRECTORY_SEPARATOR . $THUMBNAILS_FOLDER;
     // print_r($dirThumbnails);
     $images = glob($dir . DIRECTORY_SEPARATOR ."*.{".$ARRAY_AUTH_FORMATS."}", GLOB_BRACE);
     $result_images = array();
@@ -56,7 +56,7 @@ function checkFirst_iconGallery($gallery){
       $listImages = listImages($dir,false);
       $listImages = array_diff($listImages, array($ICON_DEFAULT_GALLERY, $ICON_GALLERY));
       // print_r($listImages);
-      if(sizeof($listImages)>=1){
+      if(sizeof($listImages)==1){
         $iconToDo = reset($listImages);
         // print_r($listImages);
         // create thumbnail
@@ -65,22 +65,56 @@ function checkFirst_iconGallery($gallery){
         createThumbnails($dir,$listImages);
         // print_r($dir);
 
-        $new = $dirThumbnails . DIRECTORY_SEPARATOR . $iconToDo;
-        $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_GALLERY;
-        copy($new, $old);
-        $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
-        copy($new, $old);
+        // $new = $dirThumbnails . DIRECTORY_SEPARATOR . $iconToDo;
+        // $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_GALLERY;
+        // copy($new, $old);
+        // $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
+        // copy($new, $old);
 
-        $new = $dir . DIRECTORY_SEPARATOR . $iconToDo;
-        $old = $dir . DIRECTORY_SEPARATOR . $ICON_GALLERY;
-        copy($new, $old);
-        $old = $dir . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
-        copy($new, $old);
+        // $new = $dir . DIRECTORY_SEPARATOR . $iconToDo;
+        // $old = $dir . DIRECTORY_SEPARATOR . $ICON_GALLERY;
+        // copy($new, $old);
+        // $old = $dir . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
+        // copy($new, $old);
+
+        changeIconThumbnails($gallery,$iconToDo);
 
       }
     }
 
     // exit;
+}
+
+function changeIconThumbnails($gallery,$iconToDo){
+
+  global $PATH_GALLERIES;
+  global $THUMBNAILS_FOLDER;
+  // global $ARRAY_AUTH_FORMATS;
+  global $ICON_DEFAULT_GALLERY;
+  global $ICON_GALLERY;
+
+
+  $dir = $PATH_GALLERIES. DIRECTORY_SEPARATOR . $gallery;
+  $dirThumbnails = $PATH_GALLERIES. DIRECTORY_SEPARATOR . $gallery. DIRECTORY_SEPARATOR . $THUMBNAILS_FOLDER;
+
+  $new = $dirThumbnails . DIRECTORY_SEPARATOR . $iconToDo;
+  $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_GALLERY;
+  // copy($new, $old);
+  makeThumb($new, $old);
+  $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
+  copy($new, $old);
+  // makeThumb($new, $old);
+
+  // resampled
+
+  $new = $dir . DIRECTORY_SEPARATOR . $iconToDo;
+  $old = $dir . DIRECTORY_SEPARATOR . $ICON_GALLERY;
+  // copy($new, $old);
+  makeThumb($new, $old);
+  $old = $dir . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
+  // copy($new, $old);
+  makeThumb($new, $old);
+
 }
 
 function rrmdir($dir) {
@@ -158,9 +192,10 @@ function is_dir_empty($dir) {
   function listImages($folder,$withDefaultIcon,$by="alphabetical") {
       global $ICON_GALLERY;
       global $ICON_DEFAULT_GALLERY;
+      global $ARRAY_AUTH_FORMATS;
 
       $images = array();
-      foreach(glob($folder.DIRECTORY_SEPARATOR.'*.{jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}',GLOB_BRACE) as $file){
+      foreach(glob($folder.DIRECTORY_SEPARATOR.'*.{'.$ARRAY_AUTH_FORMATS.'}',GLOB_BRACE) as $file){
         if($withDefaultIcon==true){
           $images[] =  basename($file);
         }
@@ -251,6 +286,8 @@ function is_dir_empty($dir) {
       $dossierName = getDossierName($dirname);
       
       $infos = readInfos($folder,$dossierName);
+
+      
     
       echo "<li>";
 
@@ -265,7 +302,7 @@ function is_dir_empty($dir) {
               echo "<button id='iconDeleteG' class='iconDelete iconDeleteG' data-gallery='".$dirname."'><b>X</b></button>";
           }
 
-                echo "<img id='imgFolder' ";
+                echo "<img id='imgFolder'";
                 // echo "class='imgFolder' src='".$folder.DIRECTORY_SEPARATOR.$images[0]."' ";
                 echo "class='imgFolder' src='".$imagesIconGallery."?nocache=".time()."' ";
                 // echo "alt='".$images[0]."' ";
@@ -302,6 +339,7 @@ function is_dir_empty($dir) {
       foreach($images as $img){
         $imgName = $img;
         $dirname = basename(dirname($dossier_images.DIRECTORY_SEPARATOR.$img) . PHP_EOL);
+        $url_player = "http://127.0.0.1/CHIMERES/img/galleryPlayer/g=".$dirname;
 
         echo "<li>";
 
@@ -313,13 +351,18 @@ if (isset($_SESSION['UserData']['Username']) && $img!=$ICON_DEFAULT_GALLERY && $
 }
 $styleBorder = " ";
 $styleCaption = " ";
+$noCache = "";
 if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
   $imgName = "Gallery Icon";
   $styleBorder =" style='border:2px solid black;'";
   $styleCaption = " style='color:white;background-color:black;'";
+  $noCache = "?nocache=".time();
 }
 
-              echo "<img src='".$dossier_images.DIRECTORY_SEPARATOR.$img."?nocache=".time()."' alt='' ".$styleBorder.">";
+              echo "<img class='imgGridGallery' src='".$dossier_images.DIRECTORY_SEPARATOR.$img.$noCache."' alt='' ".$styleBorder." ";
+              echo " data-gallery='".$dirname."' ";
+              echo " data-image='".$imgName."' ";
+              echo " >";
               echo "<figcaption class='figcaption' ".$styleCaption.">";
                 echo "<p class='figcaptionM'  ".$styleCaption.">".$imgName."</p>";
                 // echo "<p><a href='#'>Photo by </a></p>";
@@ -360,12 +403,9 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
   function totImg($folder){
     global $ICON_GALLERY;
     global $ICON_DEFAULT_GALLERY;
-    $imagecount = count(glob($folder.DIRECTORY_SEPARATOR.'*.{jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}',GLOB_BRACE));
-    
+    global $ARRAY_AUTH_FORMATS;
 
-
-    
-
+    $imagecount = count(glob($folder.DIRECTORY_SEPARATOR.'*.{'.$ARRAY_AUTH_FORMATS.'}',GLOB_BRACE));
 
     // create icon gallery default
     $dirname = basename($folder);
@@ -380,14 +420,10 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
       create_IconGallery($dirname,$arrayImages[0]);
     }
 
-
-
-
-
     
     // count IMGs
     $arrayImages = array();
-    foreach (glob($folder.DIRECTORY_SEPARATOR.'*.{jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}', GLOB_BRACE) as $filename) { 
+    foreach (glob($folder.DIRECTORY_SEPARATOR.'*.{'.$ARRAY_AUTH_FORMATS.'}', GLOB_BRACE) as $filename) { 
         if (!strstr($filename, $ICON_DEFAULT_GALLERY) && !strstr($filename, $ICON_GALLERY)) {
           array_push($arrayImages,$filename);
         }
@@ -406,7 +442,7 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
     $thumbnail_img_path = $folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER.DIRECTORY_SEPARATOR.$img;
     // $thumb_width = 100;
 
-    $thumbnails_folder = $folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER;
+    // $thumbnails_folder = $folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER;
     // for debug
     // rrmdir($thumbnails_folder);
     // mkdir($thumbnails_folder, 0755);
@@ -423,24 +459,6 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
     }
   
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -526,188 +544,6 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // function makeThumbDES2($src, $dest, $thumb_width){
-
-
-  //   echo "makeThumbDES2";
-  //   echo "<br>";
-  //   echo $src;
-  //   echo "<br>";
-  //   echo $dest;
-  //   echo "<br>";
-  //   echo $thumb_width;
-  //   echo "<br>";
-    
-
-  //   $what = getimagesize($src);
-  //   // $file_name = basename($src);
-  //   print "MIME ".$what['mime'];
-
-
-
-  //   switch(strtolower($what['mime']))
-  //   {
-  //       case 'image/png':
-  //               $img = imagecreatefrompng($src);
-  //               $new = imagecreatetruecolor($what[0],$what[1]);
-  //               imagecopy($new,$img,0,0,0,0,$what[0],$what[1]);
-  //               // header('Content-Type: image/png');
-  //               imagepng($new,$dest,9);
-  //               imagedestroy($new);
-  //           break;
-  //       case 'image/jpeg':
-  //               $img = imagecreatefromjpeg($src);
-  //               $new = imagecreatetruecolor($what[0],$what[1]);
-  //               imagecopy($new,$img,0,0,0,0,$what[0],$what[1]);
-  //               // header('Content-Type: image/jpeg');   
-  //               imagejpeg($new,$dest);
-  //               imagedestroy($new);
-  //           break;
-  //       case 'image/gif':
-  //             $img = imagecreatefromgif($src);
-  //             $new = imagecreatetruecolor($what[0],$what[1]);
-  //             imagecopy($new,$img,0,0,0,0,$what[0],$what[1]);
-  //             // header('Content-Type: image/jpeg');   
-  //             imagegif($new,$dest);
-  //             imagedestroy($new);
-  //             break;
-  //       // default: die();
-  //   }
-
-
-
-
-
-
-
-
-  //   exit;
-
-  // }
-
-
-    // function makeThumbDES($src, $dest, $thumb_width) 
-    // {
-
-
-    //   echo "makeThumbDES";
-    //   echo "<br>";
-
-    //   echo $src;
-    //   echo "<br>";
-    //   echo $dest;
-    //   echo "<br>";
-    //   echo $thumb_width;
-
-
-    //     // files only
-    //     if(!is_file($src)){return;}
-    //     // array[]
-    //     $path_parts = pathinfo($src);   
-    //     if(!$path_parts['extension']){return;}
-    //     $ext = strtolower($path_parts['extension']);
-    //     // write thumb with this name.ext
-    //     $fname = $path_parts['filename'].'.'.$ext; 
-    //     // init
-    //     $source_image = false;
-    //     switch(true)
-    //     {
-    //         case $ext === 'jpg' || $ext === 'jpeg':
-    //             $source_image = imagecreatefromjpeg($src);
-    //             break;
-    //         case $ext === 'png':
-    //             $source_image = imagecreatefrompng($src);
-    //             break;
-    //         case $ext === 'gif':
-    //             $source_image = imagecreatefromgif($src);
-    //             break;
-    //     }   
-
-    //     echo "<br>";
-    //     echo $ext;
-
-    //     // creates the thumbnail
-    //     if($source_image)
-    //     {
-    //         $width = imagesx($source_image);
-    //         $height = imagesy($source_image);
-    //         /* set height of thumbnail relative to width */
-    //         $thumb_height = floor($height * ($thumb_width / $width));
-    //         /* create a tmp image */
-    //         $tmp_img = imagecreatetruecolor($thumb_width, $thumb_height);
-    //         /* copy source image at a resized size */
-    //         if(imagecopyresampled($tmp_img, $source_image, 0, 0, 0, 0, $thumb_width, $thumb_height, $width, $height))
-    //         {
-    //             // write thumbnail
-    //             switch(true)
-    //             {
-    //                 case $ext === 'jpg' || $ext === 'jpeg':
-    //                     imagejpeg( $tmp_img, "{$dest}{$fname}" );
-    //                     break;
-    //                 case $ext === 'png':
-    //                     imagepng( $tmp_img, "{$dest}{$fname}" );
-    //                     break;
-    //                 case $ext === 'gif':
-    //                     imagegif( $tmp_img, "{$dest}{$fname}" );
-    //                     break;
-    //             }
-    //         }
-    //         unset($tmp_img);
-    //         echo $dest.$fname.'<br>';
-    //     }
-
-    //     exit;
-    // }
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function create_IconGallery($folder,$default_icon){
     global $PATH_GALLERIES;
     global $ICON_GALLERY;
@@ -747,6 +583,8 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
   }
 
   function create_defaultImgGallery($folder){
+    // echo "create_defaultImgGallery";
+    // exit;
     
     global $PATH_GALLERIES;
     global $ICON_DEFAULT_GALLERY;
@@ -788,17 +626,24 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
     }
   }
 
-  // function drawBorder($img, $color, $border = 1) 
-  // {
-  //     $x1 = 0; 
-  //     $y1 = 0; 
-  //     $x2 = ImageSX($img) - 1; 
-  //     $y2 = ImageSY($img) - 1; 
-
-  //     for($i = 0; $i < $border; $i++) 
-  //     { 
-  //         ImageRectangle($img, $x1++, $y1++, $x2--, $y2--, $color); 
-  //     } 
-  // }
-
   ?>
+
+  <script>
+
+// $(document).ready(function(){
+
+//     const imgGridGallery = document.querySelector(".imgGridGallery");
+//     try {
+//       imgGridGallery.addEventListener("click", function() {
+//         let dirname = 'test';
+//         let url_player = "http://127.0.0.1/CHIMERES/img/galleryPlayer/g="+dirname;
+//         console.log('imgGridGallery');
+//       }, false);
+//     } catch (error) {
+//         console.error(error);
+//     }
+
+
+//   });
+
+  </script>
