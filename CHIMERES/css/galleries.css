@@ -76,6 +76,19 @@
   .d-none {
     display: none;
   }
+
+  .BTIconGalleryChoose{
+    background-color: darkgreen !important;
+  }  
+  
+  .BTIconGalleryChoose:hover{
+    background-color: green !important;
+  }
+
+  .imgGridGallery:hover{
+    cursor: pointer;
+    border: solid 1px black;
+  }
   
   
   /* TOOLBAR
