@@ -92,14 +92,3 @@ WARNING: Potential ... todo
 
 todo
 [Full changelog](https://github.com/buggedcom/phpvideotoolkit-v2/blob/master/CHANGELOG.md)
-
-## Todo
-
-- [ ] upload online
-- [ ] add infos folder, images
-- [ ] delete empty folder
-- [ ] div popup bug display block begore none
-- [ ] new icon if file icon deleted
-- [ ] close imageSlider button
-- [ ] progress bar tests formats
-- [ ] github todo
