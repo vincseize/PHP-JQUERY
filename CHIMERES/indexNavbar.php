@@ -38,7 +38,8 @@ if (!isset($_SESSION['UserData']['Username'] ) && $fileName == "edit.php") {
             <img id="iconAdd" class="iconAdd" src="img/icon_add.png">
         <?php } ?>
 
-        <?php if (isset($_SESSION['UserData']['Username'] ) && $fileName != "edit.php" && $fileName != "index.php") {?>
+        <?php if (isset($_SESSION['UserData']['Username'] ) && $fileName != "edit.php" && $fileName != "index.php" && isset($_GET["g"])) 
+        {?>
             <img id="iconUpload" class="iconUpload" src="img/icon_upload.png">
         <?php } ?>
     </div>
