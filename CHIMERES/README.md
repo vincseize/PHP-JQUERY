@@ -82,7 +82,10 @@ See LICENSE.md for more details.
 
 ## Documentation
 
-Todo.
+- todo
+- uploadForm/index.php : require('UploadHandler.php');
+send $gallery from uploadForm/js/demo.js button, url: 'server/php/index.php?g='+gallery
+- path uploadForm file upload : uploadForm/UploadHandler.php ->public function __construct
 
 ## Latest Changes
 
