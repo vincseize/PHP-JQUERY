@@ -9,8 +9,9 @@ BOOKFOLIO also provides FFmpeg-PHP emulation in pure PHP so you wouldn't need to
 ### Table of Contents
 
 - [Usage](#usage)
-- [Configuring BOOKFOLIO](#configuring-phpvideotoolkit)
-- [BOOKFOLIO Output Formats](#phpvideotoolkit-output-formats)
+- [Install BOOKFOLIO](#install-bookfolio)
+- [BOOKFOLIO Output Formats](#bookfolio-output-formats)
+- [Configuration](#configuration)
 - [Resizing Video and Images](#resizing-video-and-images)
 - [License](#license)
 - [Documentation](#documentation)
@@ -21,17 +22,26 @@ BOOKFOLIO also provides FFmpeg-PHP emulation in pure PHP so you wouldn't need to
 Whilst the extensive documentation covers just about everything (to be honest there are only a few pages in the documentation as I'm too busy to write too much of it - but the examples below are pretty good), here are a few examples of what you can do.
 - take a look at /uploadForm/README.md
 
-### Configuring BOOK2
+### Install BOOKFOLIO
 
-- take a look at /uploadForm/README.md
 - php GD required
 - FFMPEG required
+- BLUEIMP :
+- take a look at /BlueImp/README.md
+- chmod -R 777 /BlueImp/server/php/files (check that), normally done in php.ini
+- remove or rename .htaccessDES /BlueImp/server/php/files/.htaccess on Linux Server ! IMPORTANT
+- PHPVIDEOTOOLKIT-V2 :
 - install phpvideotoolkit-v2 in root folder.
 - -> /phpvideotoolkit-v2
-
 ```bash 
 composer updade
 ```
+- -> replace /phpvideotoolkit-v2 files, with my
+
+### Configuration
+- login/password $logins array in login.php
+- ini.php
+- post_max_size etc..., /BlueImp/server/phph/php.ini
 
 ### BOOKFOLIO Output Formats
 
@@ -71,6 +81,7 @@ To check _Audio_, _Image_, _Video_
 ### Resizing Video and Images
 
 Todo doc
+- blueImp side folder for upload, and copy files in 'real' galleries
 
 ## License
 

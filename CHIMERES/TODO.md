@@ -1,9 +1,11 @@
 # BOOKFOLIO V2
-Gallery crud without database
+Portfolio Galleries crud without database
 
 ### Column Name
-- [ ] upload online
-- [ ] height div YES NO
+- [ ] drag and drop, and navbar css
+- [ ] delete img when del upload img too
+- [ ] store log pass to session js
+- [ ] height div YES NO on phone
 - [ ] sauvagarde choix log pass cookies
 - [ ] add infos folder, images
 - [ ] delete empty folder
@@ -18,9 +20,23 @@ Gallery crud without database
 - [ ] folder delete only root
 - [ ] download zip
 - [ ] back button css top , better placement
+- [ ] conf in json, for php and jquery
+- [ ] deleted from upload, delete in gallery too
+- [ ] upload gallery dir with timestamp in localsession
+- [ ] disk space left
+- [ ] gallery slider direct on good image clicked !!!
+- [ ] search on Upper and lower
+- [ ] search in gallery images too
+- [ ] search on infos too
+- [ ] size button navbar on iphone xav
 
 ### Completed Column ✓
 - [x] hide upload icon if not gallery
+- [x] upload form navbar css
+- [x] upload online
+- [x] $session _username (username@mail.com) added to upload folder name
+- [x] on login clear BlueImp/uploaded folder_name
+- [x] total GALLERIES :
 
 
 
