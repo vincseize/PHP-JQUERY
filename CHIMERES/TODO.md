@@ -29,6 +29,7 @@ Portfolio Galleries crud without database
 - [ ] search in gallery images too
 - [ ] search on infos too
 - [ ] size button navbar on iphone xav
+- [ ] loader
 
 ### Completed Column ✓
 - [x] hide upload icon if not gallery
