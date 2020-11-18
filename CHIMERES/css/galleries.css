@@ -257,7 +257,7 @@
     right: 0px;
     width:25px;
     height:25px;
-    opacity: 0.5;
+    opacity: 0.6;
   }
 
   .iconEdit:hover{
@@ -273,7 +273,7 @@
     left: 0px;
     width:25px;
     height:25px;
-    opacity: 0.5;
+    opacity: 0.6;
     border: solid 2px white;
     background-color: darkgray;
   }
@@ -460,8 +460,13 @@
         width:35px;
         height:35px;
         font-weight: bold;
-    }
+      }
 
+      .iconDelete{
+        width:35px;
+        height:35px;
+        font-weight: bold;
+      }
 
 
   }
@@ -546,7 +551,7 @@
   top: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(94, 110, 141, 0.9);
+  background-color: rgba(94, 110, 141, 0.8);
   opacity: 0;
   display: none;
   visibility: hidden;
@@ -564,7 +569,8 @@
 
 .cd-popup-container {
   position: relative;
-  top: 33vh;
+  top: 30vh !important;
+  /* position: relative; */
   width: 90%;
   max-width: 400px;
   margin: 4em auto;
@@ -663,5 +669,11 @@
 @media only screen and (min-width: 1170px) {
   .cd-popup-container {
     margin: 8em auto;
+  }
+}
+
+@media (max-width: 650px) {
+  .cd-popup-container {
+    top: 100px !important;
   }
 }
