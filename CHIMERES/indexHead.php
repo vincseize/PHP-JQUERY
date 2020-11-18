@@ -1,15 +1,8 @@
 <?php 
 session_start(); 
 
-if(isset($_SESSION['UserData']['Username'])){
-  echo "<script>";
-        echo "const LOGGED = true;";
-  echo "</script>";
-} else {
-  echo "<script>";
-      echo "const LOGGED = false;";
-  echo "</script>";
-}
+require 'ini.php';
+
 
 ?>
 
@@ -21,7 +14,7 @@ if(isset($_SESSION['UserData']['Username'])){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- <meta http-equiv="Pragma" content="no-cache"> -->
 
-    <title>BOOK</title>
+    <title><?php echo $_SESSION["TITLE_SITE"];?></title>
 
     <link rel="icon" href="img/favicons/favicon-16.svg" type="image/svg+xml" />
 
@@ -59,8 +52,8 @@ if(isset($_SESSION['UserData']['Username'])){
 <?php
 
     require_once 'fcts.php';
-    $nameGallerie = "Emily BluntxxxAAAAAAA";
-    $nameGallerie = basename(__DIR__) ;
+    // $nameGallerie = "Emily BluntxxxAAAAAAA";
+    // $nameGallerie = basename(__DIR__) ;
     $dossier_images = 'img/galleries';
     $directories = listFolders_FirstLevel($dossier_images);
     $total_items = countDirectories_FirstLevel($dossier_images);

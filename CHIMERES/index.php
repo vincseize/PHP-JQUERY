@@ -13,7 +13,7 @@ require 'indexHead.php';
     ?>
 
     <div class="divTotal2">
-      <b>Total</b> <span class="total2"></span> <?php echo $total_items; ?>
+      <b>Total Galleries | </b> <span class="total2"></span> <?php echo $total_items; ?>
     </div>
 
     <div class="content">

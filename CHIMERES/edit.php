@@ -1,25 +1,18 @@
 <?php
+
   require 'indexHead.php';
-?>
+  require 'session.php';
 
-<?php 
 
-  // if(isset($_POST['Submit'])){
-  //     $logins = array('root' => 'aaa','username1' => 'password1','username2' => 'password2');
-  //     $Username = isset($_POST['Username']) ? $_POST['Username'] : '';
-  //     $Password = isset($_POST['Password']) ? $_POST['Password'] : '';
-  //     if (isset($logins[$Username]) && $logins[$Username] == $Password){
-  //         /* Success: Set session variables and redirect to Protected page  */
-  //         $_SESSION['UserData']['Username']=$logins[$Username];
-  //         header("location:index.php");
-  //         exit;
-  //     } else {
-  //     /*Unsuccessful attempt: Set error message */
-  //     $msg="<span style='color:red'>Invalid Login</span>";
-  //     }
+  // if(!isset($_SESSION['UserData']['Username']))
+  // {
+  //     $_SESSION['UserData']['Username']=$logins[$Username];
+  //     header("location:index.php");
+  //     exit;
   // }
 
 ?>
+
 
 <body>
     <div class="container">
@@ -28,16 +21,21 @@
         require 'indexNavbar.php';
         ?>
 
-        <?php if (isset($_SESSION['UserData']['Username'] )) {
-          if (!isset($_GET['g'] )) {
-          
+        <?php 
+        if (isset($_SESSION['UserData']['Username'] )) {
+          if (isset($_GET['g'] )) {
+              $_SESSION["g"] = $_GET['g'];
+          }
+        }
+//               echo $_SESSION["g"];
+// exit;
           ?>
 
 
            
                 <input class="BTlogout buttonForm" id="BTlogout" type="button" onclick="location.href='logout.php'" value="Logout"/>
 
-        <?php } } ?>
+      
 
 
         <div class="marginLoginEdit editDiv">
@@ -47,11 +45,11 @@
               <?php 
 
                   function deleteFolders($folders,$dg){
-                    global $PATH_GALLERIES;
+                    // global $_SESSION["PATH_GALLERIES"];
 
                     foreach ($folders as $folder) {
                       // $folder = 'img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$dg;
-                      $folder = $PATH_GALLERIES.DIRECTORY_SEPARATOR.$dg;
+                      $folder = $_SESSION["PATH_GALLERIES"].DIRECTORY_SEPARATOR.$dg;
                       
                       if (file_exists($folder)) {
                         $dirname = basename($folder);
@@ -106,8 +104,8 @@
                       if (isset($_GET['i']) && !isset($_GET['d']) && isset($_GET['i'])) {
                           $gallery = $_GET['g']; 
                           $image = $_GET['i']; 
-                          $img = $PATH_GALLERIES . DIRECTORY_SEPARATOR . $gallery . DIRECTORY_SEPARATOR .$image;
-                          $icon = $PATH_GALLERIES . DIRECTORY_SEPARATOR . $gallery . DIRECTORY_SEPARATOR . $ICON_GALLERY;
+                          $img = $_SESSION["PATH_GALLERIES"] . DIRECTORY_SEPARATOR . $gallery . DIRECTORY_SEPARATOR .$image;
+                          $icon = $_SESSION["PATH_GALLERIES"] . DIRECTORY_SEPARATOR . $gallery . DIRECTORY_SEPARATOR . $_SESSION["ICON_GALLERY"];
                           $styleBorder = "";
 
                           $result_images = array();
@@ -154,12 +152,15 @@
 
 
                       if (isset($_GET['g']) && !isset($_GET['i']) && isset($_GET['d'])) {
+                        $files = [];
                         $gallery = $_GET['g']; 
                         $image = $_GET['d']; 
                         // $imagePath = 'img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$_GET['g'].DIRECTORY_SEPARATOR.$image;
-                        $imagePath = $PATH_GALLERIES . DIRECTORY_SEPARATOR.$gallery.DIRECTORY_SEPARATOR.$image;
+                        $imagePath = $_SESSION["PATH_GALLERIES"] . DIRECTORY_SEPARATOR.$gallery.DIRECTORY_SEPARATOR.$image;
+                        $imagePathThumb = $_SESSION["PATH_GALLERIES"] . DIRECTORY_SEPARATOR.$gallery.DIRECTORY_SEPARATOR.'thumbnails'.DIRECTORY_SEPARATOR.$image;
                         
-                        array_push($files,$imagePath);
+                        array_push($files,$imagePath,$imagePathThumb);
+
                         // print_r($files);
                         deleteFiles($files);
                         echo "DELETED OK | ".$image." "; 

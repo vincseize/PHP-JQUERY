@@ -10,7 +10,7 @@
             </tr> -->
             <tr>
               <!-- <td align="right" valign="top">Username</td> -->
-              <td><input name="Username" type="text" class="Input" value="admin" autocomplete="new-password" placeholder="Login"></td>
+              <td><input id="Username" name="Username" type="text" class="Input" autocomplete="new-password" placeholder="Login" value=""></td>
             </tr>
             <tr>
               <!-- <td align="right">Password</td> -->
@@ -18,7 +18,10 @@
                     <!-- <div style="display:none">
                         <input type="password" tabindex="-1"/>
                     </div> -->
-                    <input name="Password" type="text" class="Input" autocomplete="new-password" placeholder="Password" value="">
+                    <input id="Password" name="Password" type="text" class="Input" autocomplete="off" placeholder="Password" value="">
+                    <br><br>
+                    <input id="rememberChkBox" type="checkbox"> &nbsp; Remember Me
+                    <br><br>
                 </td>
             </tr>
             <tr>
@@ -36,3 +39,49 @@
             </tr>
           </table>
         </form>
+
+
+<script>
+
+// console.log(localStorage.getItem("username"));
+// console.log(localStorage.getItem("password"));
+
+jQuery(document).ready(function($){
+
+  if ("rememberMe" in localStorage) {
+    if(localStorage.getItem('rememberMe')=='true'){
+      $('#rememberChkBox').prop('checked', true);
+      // alert('true');
+    }
+  }
+
+  if ("username" in localStorage) {
+    // document.getElementById("#Username").val(localStorage.getItem('username'));
+    $('#Username').val(localStorage.getItem('username'));
+  }
+  if ("password" in localStorage) {
+    // document.getElementById("#Password").val(localStorage.getItem('password'));
+    $('#Password').val(localStorage.getItem('password'));
+  }
+
+  $('.BTlogin').on('click', function(event){
+
+    let username = document.getElementById("Username").value;
+    let password = document.getElementById("Password").value;
+
+  if ($('#rememberChkBox').is(':checked')) {
+    localStorage.setItem('username',username);
+    localStorage.setItem('password',password);
+    localStorage.setItem('rememberMe','true');
+  } else {
+    localStorage.clear();
+    localStorage.setItem('username','');
+    localStorage.setItem('password','');
+  }
+
+  });
+
+
+});
+
+</script>

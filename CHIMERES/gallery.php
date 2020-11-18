@@ -22,12 +22,10 @@
 
             <ol class="image-list grid-view">
 
-            <!-- <a href="#0" class="iconDeleteI">View Pop-up</a> -->
-
                 <?php 
-                      if (isset($_SESSION['UserData']['Username'] )) {
-                        require 'uploadForm.php';
-                      } 
+                      // if (isset($_SESSION['UserData']['Username'] )) {
+                      //   require 'uploadForm.php';
+                      // } 
                       checkFirst_iconGallery($_GET['g']);
                       gridFolder('img'.DIRECTORY_SEPARATOR.'galleries'.DIRECTORY_SEPARATOR.$_GET['g']);
                 ?>
@@ -58,6 +56,7 @@ jQuery(document).ready(function($){
       console.log('closePopup');
       $('#cd-popup_DelImg').css('display','none');
       $('#cd-popup_DelGallery').css('display','none');
+      $('*[data-image]').css("border","none");
 			$(this).removeClass('is-visible');
   }
 
@@ -69,35 +68,17 @@ jQuery(document).ready(function($){
       // window.location = "edit.php?g="+gallery+"&d="+image;
       $("#btPopupYES_img").attr("href", url);
       $("#span_del_img").html(image);
-      
   }
 
-  //open popup Confirm
-  // cd-popup_DelImg-triggerDES
 	$('.iconDeleteI').on('click', function(event){
     event.preventDefault();
+    let gallery = $(this).attr('data-gallery');
+    let image = $(this).attr('data-image');
+    $('*[data-image="'+image+'"]').css("border","red solid 4px");
     $('#cd-popup_DelImg').css('display','block');
     $('#cd-popup_DelImg').addClass('is-visible');
-    // send href to yes button
-
-    gallery = $(this).attr("data-gallery");
-    image = $(this).attr("data-image");
-    // console.log(gallery);
-    console.log(image);
     goDeleteImage(gallery,image);
-    
-
   });
-  
-
-
-
-
-
-
-
-
-
 	
 	//close popup Confirm
 	$('.cd-popup_DelImg').on('click', function(event){
@@ -112,26 +93,6 @@ jQuery(document).ready(function($){
         closePopup();
 	    }
     });
-
-  // //close popup Confirm when clicking NO button
-  // $('#btPopupNO_img').on('click', function(event){
-  //     // console.log('NO');
-  //     closePopup();
-  // });
-  
-  // // close Confirm when clicking YES button
-  // $('#btPopupYES_img').on('click', function(event){
-  //     // console.log('YES');
-  //     // console.log($(this));
-  //     closePopup();
-  // });
-
-  // // close Confirm when clicking X (close) button
-  // $('.cd-popup-close').on('click', function(event){
-  //     // console.log('YES');
-  //     // console.log($(this));
-  //     closePopup();
-  // });
 
   $('.closePopup').on('click', function(event){
       // console.log('NO');

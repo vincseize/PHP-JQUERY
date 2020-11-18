@@ -2,7 +2,7 @@
 Portfolio Galleries crud without database
 
 ### Column Name
-- [ ] BUGS: delete folder gallery (with Filezilla too)
+- [ ] BUGS: + add gallery disapear, delete folder gallery (with Filezilla too)
 - [ ] install ffmepg on server
 - [ ] default grid size en fct de width screen + sauv choice in localstorage
 - [ ] use sessionStorage instead <=> const LOGGED = true;

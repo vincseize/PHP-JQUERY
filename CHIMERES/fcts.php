@@ -1,16 +1,5 @@
 <?php
 
-$TUMBNAILS_COMPRESSION = 90;
-$TUMBNAILS_WIDTH = 480;
-
-$PATH_GALLERIES = "img" . DIRECTORY_SEPARATOR . "galleries";
-$ICON_DEFAULT_GALLERY = "___default_icon.jpg";
-$ICON_GALLERY = "___icon.jpg";
-$THUMBNAILS_FOLDER = "thumbnails";
-
-$ARRAY_AUTH_FORMATS = "jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF";
-
-
 function compare_imgs($img1,$img2,$result_images){
   
   $md5image1 = md5(file_get_contents($img1));
@@ -27,55 +16,25 @@ function compare_imgs($img1,$img2,$result_images){
 
 function checkFirst_iconGallery($gallery){
 
-    global $PATH_GALLERIES;
-    // global $THUMBNAILS_FOLDER;
-    global $ARRAY_AUTH_FORMATS;
-    global $ICON_DEFAULT_GALLERY;
-    global $ICON_GALLERY;
-    // $gallery = "zoob3";
-    // $gallery = "juliette";
+    $dir = $_SESSION["PATH_GALLERIES"]. DIRECTORY_SEPARATOR . $gallery;
 
-    $dir = $PATH_GALLERIES. DIRECTORY_SEPARATOR . $gallery;
-    // $dirThumbnails = $PATH_GALLERIES. DIRECTORY_SEPARATOR . $gallery. DIRECTORY_SEPARATOR . $THUMBNAILS_FOLDER;
-    // print_r($dirThumbnails);
-    $images = glob($dir . DIRECTORY_SEPARATOR ."*.{".$ARRAY_AUTH_FORMATS."}", GLOB_BRACE);
+    $images = glob($dir . DIRECTORY_SEPARATOR ."*.{".$_SESSION["ARRAY_AUTH_FORMATS"]."}", GLOB_BRACE);
     $result_images = array();
     foreach ($images as $img) {
-      if(basename($img)!=$ICON_GALLERY && basename($img)!=$ICON_DEFAULT_GALLERY){
-        // print $img;
-        // print "<br>";
-        $img2 = $dir . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY ;
+      if(basename($img)!=$_SESSION["ICON_GALLERY"] && basename($img)!=$_SESSION["ICON_DEFAULT_GALLERY"]){
+        $img2 = $dir . DIRECTORY_SEPARATOR . $_SESSION["ICON_DEFAULT_GALLERY"] ;
         $result_images = compare_imgs($img,$img2,$result_images);
-        // print "<br>";
       }
     }
     // print_r($result_images);
     if (empty($result_images)) {
-      // print_r($result_images);
-      // print "<br>";
       $listImages = listImages($dir,false);
-      $listImages = array_diff($listImages, array($ICON_DEFAULT_GALLERY, $ICON_GALLERY));
-      // print_r($listImages);
+      $listImages = array_diff($listImages, array($_SESSION["ICON_DEFAULT_GALLERY"], $_SESSION["ICON_GALLERY"]));
+
       if(sizeof($listImages)==1){
         $iconToDo = reset($listImages);
-        // print_r($listImages);
-        // create thumbnail
-        // create_thumbnail($dir,$iconToDo);
         create_IconGallery($gallery,$iconToDo);
         createThumbnails($dir,$listImages);
-        // print_r($dir);
-
-        // $new = $dirThumbnails . DIRECTORY_SEPARATOR . $iconToDo;
-        // $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_GALLERY;
-        // copy($new, $old);
-        // $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
-        // copy($new, $old);
-
-        // $new = $dir . DIRECTORY_SEPARATOR . $iconToDo;
-        // $old = $dir . DIRECTORY_SEPARATOR . $ICON_GALLERY;
-        // copy($new, $old);
-        // $old = $dir . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
-        // copy($new, $old);
 
         changeIconThumbnails($gallery,$iconToDo);
 
@@ -87,31 +46,25 @@ function checkFirst_iconGallery($gallery){
 
 function changeIconThumbnails($gallery,$iconToDo){
 
-  global $PATH_GALLERIES;
-  global $THUMBNAILS_FOLDER;
-  // global $ARRAY_AUTH_FORMATS;
-  global $ICON_DEFAULT_GALLERY;
-  global $ICON_GALLERY;
 
-
-  $dir = $PATH_GALLERIES. DIRECTORY_SEPARATOR . $gallery;
-  $dirThumbnails = $PATH_GALLERIES. DIRECTORY_SEPARATOR . $gallery. DIRECTORY_SEPARATOR . $THUMBNAILS_FOLDER;
+  $dir = $_SESSION["PATH_GALLERIES"]. DIRECTORY_SEPARATOR . $gallery;
+  $dirThumbnails = $_SESSION["PATH_GALLERIES"]. DIRECTORY_SEPARATOR . $gallery. DIRECTORY_SEPARATOR . $_SESSION["THUMBNAILS_FOLDER"];
 
   $new = $dirThumbnails . DIRECTORY_SEPARATOR . $iconToDo;
-  $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_GALLERY;
+  $old = $dirThumbnails . DIRECTORY_SEPARATOR . $_SESSION["ICON_GALLERY"];
   // copy($new, $old);
   makeThumb($new, $old);
-  $old = $dirThumbnails . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
+  $old = $dirThumbnails . DIRECTORY_SEPARATOR . $_SESSION["ICON_DEFAULT_GALLERY"];
   copy($new, $old);
   // makeThumb($new, $old);
 
   // resampled
 
   $new = $dir . DIRECTORY_SEPARATOR . $iconToDo;
-  $old = $dir . DIRECTORY_SEPARATOR . $ICON_GALLERY;
+  $old = $dir . DIRECTORY_SEPARATOR . $_SESSION["ICON_GALLERY"];
   // copy($new, $old);
   makeThumb($new, $old);
-  $old = $dir . DIRECTORY_SEPARATOR . $ICON_DEFAULT_GALLERY;
+  $old = $dir . DIRECTORY_SEPARATOR . $_SESSION["ICON_DEFAULT_GALLERY"];
   // copy($new, $old);
   makeThumb($new, $old);
 
@@ -190,17 +143,14 @@ function is_dir_empty($dir) {
   }
 
   function listImages($folder,$withDefaultIcon,$by="alphabetical") {
-      global $ICON_GALLERY;
-      global $ICON_DEFAULT_GALLERY;
-      global $ARRAY_AUTH_FORMATS;
 
       $images = array();
-      foreach(glob($folder.DIRECTORY_SEPARATOR.'*.{'.$ARRAY_AUTH_FORMATS.'}',GLOB_BRACE) as $file){
+      foreach(glob($folder.DIRECTORY_SEPARATOR.'*.{'.$_SESSION["ARRAY_AUTH_FORMATS"].'}',GLOB_BRACE) as $file){
         if($withDefaultIcon==true){
           $images[] =  basename($file);
         }
         if($withDefaultIcon==false){
-          if(basename($file)!=$ICON_DEFAULT_GALLERY){
+          if(basename($file)!=$_SESSION["ICON_DEFAULT_GALLERY"]){
             $images[] =  basename($file);
           }
         }
@@ -232,15 +182,10 @@ function is_dir_empty($dir) {
   }
 
   function orderImages($by,$images){
-    global $ICON_GALLERY;
-    global $ICON_DEFAULT_GALLERY;
-    
-    
-    // print_r($images);
-    // echo "<br>";
+
     if($by="alphabetical"){
-      unset($images[array_search($ICON_GALLERY, $images)]);
-      array_unshift($images, $ICON_GALLERY);
+      unset($images[array_search($_SESSION["ICON_GALLERY"], $images)]);
+      array_unshift($images, $_SESSION["ICON_GALLERY"]);
     }
 
     
@@ -261,7 +206,6 @@ function is_dir_empty($dir) {
 
   function constructCardHomeFolder ($folder) {
 
-    global $THUMBNAILS_FOLDER;
 
     if (is_dir_empty($folder)) {
       $dirname = basename($folder);
@@ -272,7 +216,7 @@ function is_dir_empty($dir) {
     if (!is_dir_empty($folder)) {
 
       $folder = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $folder);
-      $folderThumbnails = $folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER;
+      $folderThumbnails = $folder.DIRECTORY_SEPARATOR.$_SESSION["THUMBNAILS_FOLDER"];
 
       $images = listImages($folder,true);
       $imagesIconGallery = $folder.DIRECTORY_SEPARATOR.$images[0];
@@ -292,7 +236,7 @@ function is_dir_empty($dir) {
       echo "<li>";
 
 
-      echo "<div style='position:relative;'>";
+      echo "<div data-divGallery='".$dirname."' style='position:relative;'>";
           echo "<figure>";
 
           if (isset($_SESSION['UserData']['Username'] )) {
@@ -329,63 +273,84 @@ function is_dir_empty($dir) {
   }
 
   function gridFolder($dossier_images){
-    // $images = array();
-    global $ICON_DEFAULT_GALLERY;
-    global $ICON_GALLERY;
+
 
     if (!is_dir_empty($dossier_images)) {
       $images = listImages ($dossier_images,false);
 
       foreach($images as $img){
-        $imgName = $img;
-        $dirname = basename(dirname($dossier_images.DIRECTORY_SEPARATOR.$img) . PHP_EOL);
-        $url_player = "http://127.0.0.1/CHIMERES/img/galleryPlayer/g=".$dirname;
 
-        echo "<li>";
 
-        echo "<div style='position:relative;'>";
-            echo "<figure>";
-if (isset($_SESSION['UserData']['Username']) && $img!=$ICON_DEFAULT_GALLERY && $img!=$ICON_GALLERY) {
-    echo "<img id='iconEditI' class='iconEdit iconEditI' data-gallery='".$dirname."' data-image='".$img."' src='img/icon_edit.png'>";
-    echo "<button id='iconDeleteI' class='iconDelete iconDeleteI' data-gallery='".$dirname."' data-image='".$img."'><b>X</b></button>";
+if (!isset($_SESSION['UserData']['Username'])) {
+// $style_displayHide = "style='display:block'";
+if ($img==$_SESSION["ICON_DEFAULT_GALLERY"] || $img==$_SESSION["ICON_GALLERY"]) {
+// echo $img;
+// echo $_SESSION["ICON_GALLERY"];
+// $style_displayHide = " style='display:none'";
+continue;
 }
-$styleBorder = " ";
-$styleCaption = " ";
-$noCache = "";
-if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
-  $imgName = "Gallery Icon";
-  $styleBorder =" style='border:2px solid black;'";
-  $styleCaption = " style='color:white;background-color:black;'";
-  $noCache = "?nocache=".time();
 }
 
-              echo "<img class='imgGridGallery' src='".$dossier_images.DIRECTORY_SEPARATOR.$img.$noCache."' alt='' ".$styleBorder." ";
-              echo " data-gallery='".$dirname."' ";
-              echo " data-image='".$imgName."' ";
-              echo " >";
-              echo "<figcaption class='figcaption' ".$styleCaption.">";
-                echo "<p class='figcaptionM'  ".$styleCaption.">".$imgName."</p>";
-                // echo "<p><a href='#'>Photo by </a></p>";
-              echo "</figcaption>";
-            echo "</figure>";
-        echo "</div>";
-      echo "</li>";
-      }
-    }
+// echo $style_displayHide;
+
+                        $imgName = $img;
+                        $dirname = basename(dirname($dossier_images.DIRECTORY_SEPARATOR.$img) . PHP_EOL);
+                        // $url_player = "http://127.0.0.1/CHIMERES/img/galleryPlayer/g=".$dirname;
+
+                        echo "<li>";
+
+                        echo "<div style='position:relative;'>";
+                            echo "<figure>";
+                if (isset($_SESSION['UserData']['Username']) && $img!=$_SESSION["ICON_DEFAULT_GALLERY"] && $img!=$_SESSION["ICON_GALLERY"]) {
+                    echo "<img id='iconEditI' class='iconEdit iconEditI' data-gallery='".$dirname."' data-image='".$img."' src='img/icon_edit.png'>";
+                    echo "<button id='iconDeleteI' class='iconDelete iconDeleteI' data-gallery='".$dirname."' data-image='".$img."'><b>X</b></button>";
+                }
+
+                $styleBorder = " ";
+                $styleCaption = " ";
+                $noCache = "";
+
+                if ($img==$_SESSION["ICON_DEFAULT_GALLERY"] || $img==$_SESSION["ICON_GALLERY"]) {
+                  if (isset($_SESSION['UserData']['Username'] )) {
+                    $imgName = "Gallery Icon";
+                    $styleBorder =" style='border:2px solid black;'";
+                    $styleCaption = " style='color:white;background-color:black;'";
+                    $noCache = "?nocache=".time();
+                  }
+                }
+
+                              echo "<img class='imgGridGallery' src='".$dossier_images.DIRECTORY_SEPARATOR.$img.$noCache."' alt='' ".$styleBorder." ";
+                              echo " data-gallery='".$dirname."' ";
+                              echo " data-image='".$imgName."' ";
+                              echo " >";
+                              echo "<figcaption class='figcaption' ".$styleCaption.">";
+                                echo "<p class='figcaptionM'  ".$styleCaption.">".$imgName."</p>";
+                                // echo "<p><a href='#'>Photo by </a></p>";
+                              echo "</figcaption>";
+                            echo "</figure>";
+                        echo "</div>";
+                      echo "</li>";
+                      }
+                    }
+
+
+
+
+// }
+// }
 
   }
 
   function gridFolders($directories){
-    global $ICON_DEFAULT_GALLERY;
-    global $THUMBNAILS_FOLDER;
+
     foreach($directories as $folder){
-      if (!file_exists($folder.DIRECTORY_SEPARATOR.$ICON_DEFAULT_GALLERY)) {   
+      if (!file_exists($folder.DIRECTORY_SEPARATOR.$_SESSION["ICON_DEFAULT_GALLERY"])) {   
         $dirname = basename($folder);
         create_defaultImgGallery($dirname);
       }
 
-      if (!file_exists($folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER)) {
-        mkdir($folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER, 0755, true);
+      if (!file_exists($folder.DIRECTORY_SEPARATOR.$_SESSION["THUMBNAILS_FOLDER"])) {
+        mkdir($folder.DIRECTORY_SEPARATOR.$_SESSION["THUMBNAILS_FOLDER"], 0755, true);
       }
 
       $card = constructCardHomeFolder($folder);
@@ -401,21 +366,19 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
   }
 
   function totImg($folder){
-    global $ICON_GALLERY;
-    global $ICON_DEFAULT_GALLERY;
-    global $ARRAY_AUTH_FORMATS;
 
-    $imagecount = count(glob($folder.DIRECTORY_SEPARATOR.'*.{'.$ARRAY_AUTH_FORMATS.'}',GLOB_BRACE));
+
+    $imagecount = count(glob($folder.DIRECTORY_SEPARATOR.'*.{'.$_SESSION["ARRAY_AUTH_FORMATS"].'}',GLOB_BRACE));
 
     // create icon gallery default
     $dirname = basename($folder);
     $arrayImages = array();
-    if(!in_array($ICON_GALLERY,$arrayImages) && $imagecount>1){
+    if(!in_array($_SESSION["ICON_GALLERY"],$arrayImages) && $imagecount>1){
       $arrayImages = listImages($folder,false);
       create_IconGallery($dirname,$arrayImages[0]);
     }
 
-    if(!in_array($ICON_DEFAULT_GALLERY,$arrayImages) && $imagecount>1){
+    if(!in_array($_SESSION["ICON_DEFAULT_GALLERY"],$arrayImages) && $imagecount>1){
       $arrayImages = listImages($folder,false);
       create_IconGallery($dirname,$arrayImages[0]);
     }
@@ -423,8 +386,8 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
     
     // count IMGs
     $arrayImages = array();
-    foreach (glob($folder.DIRECTORY_SEPARATOR.'*.{'.$ARRAY_AUTH_FORMATS.'}', GLOB_BRACE) as $filename) { 
-        if (!strstr($filename, $ICON_DEFAULT_GALLERY) && !strstr($filename, $ICON_GALLERY)) {
+    foreach (glob($folder.DIRECTORY_SEPARATOR.'*.{'.$_SESSION["ARRAY_AUTH_FORMATS"].'}', GLOB_BRACE) as $filename) { 
+        if (!strstr($filename, $_SESSION["ICON_DEFAULT_GALLERY"]) && !strstr($filename, $_SESSION["ICON_GALLERY"])) {
           array_push($arrayImages,$filename);
         }
     }
@@ -435,14 +398,13 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
   }
 
   function create_thumbnail($folder,$img){
-    global $THUMBNAILS_FOLDER;
-    // global $PATH_GALLERIES;
+
 
     $img_path = $folder.DIRECTORY_SEPARATOR.$img;
-    $thumbnail_img_path = $folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER.DIRECTORY_SEPARATOR.$img;
+    $thumbnail_img_path = $folder.DIRECTORY_SEPARATOR.$_SESSION["THUMBNAILS_FOLDER"].DIRECTORY_SEPARATOR.$img;
     // $thumb_width = 100;
 
-    // $thumbnails_folder = $folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER;
+    // $thumbnails_folder = $folder.DIRECTORY_SEPARATOR.$_SESSION["THUMBNAILS_FOLDER"];
     // for debug
     // rrmdir($thumbnails_folder);
     // mkdir($thumbnails_folder, 0755);
@@ -481,9 +443,8 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
 
     function makeThumb($src, $dest) {
 
-      global $TUMBNAILS_WIDTH;
 
-      $thumb_width = $TUMBNAILS_WIDTH;
+      $thumb_width = $_SESSION["THUMBNAILS_WIDTH"];
 
       $what = getimagesize($src);
       $mime = $what['mime'];
@@ -545,12 +506,11 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
 
 
   function create_IconGallery($folder,$default_icon){
-    global $PATH_GALLERIES;
-    global $ICON_GALLERY;
 
-    $folder_path = $PATH_GALLERIES . DIRECTORY_SEPARATOR . $folder;
+
+    $folder_path = $_SESSION["PATH_GALLERIES"] . DIRECTORY_SEPARATOR . $folder;
     $new = $folder_path . DIRECTORY_SEPARATOR . $default_icon;
-    $old = $folder_path . DIRECTORY_SEPARATOR . $ICON_GALLERY;
+    $old = $folder_path . DIRECTORY_SEPARATOR . $_SESSION["ICON_GALLERY"];
     // echo $new;
     // echo "<br>";
     // echo $old;
@@ -583,17 +543,10 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
   }
 
   function create_defaultImgGallery($folder){
-    // echo "create_defaultImgGallery";
-    // exit;
-    
-    global $PATH_GALLERIES;
-    global $ICON_DEFAULT_GALLERY;
-    global $ICON_GALLERY;
-    global $THUMBNAILS_FOLDER;
-    global $THUMBNAILS_COMPRESSION;
 
-    $folder = $PATH_GALLERIES.DIRECTORY_SEPARATOR.$folder;
-    $folder_thumbnails = $folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER;
+
+    $folder = $_SESSION["PATH_GALLERIES"].DIRECTORY_SEPARATOR.$folder;
+    $folder_thumbnails = $folder.DIRECTORY_SEPARATOR.$_SESSION["THUMBNAILS_FOLDER"];
 
     $img = imagecreatetruecolor(640, 480);
     $bg = imagecolorallocate ( $img, 255, 255, 255 );
@@ -605,45 +558,120 @@ if ($img==$ICON_DEFAULT_GALLERY || $img==$ICON_GALLERY) {
 
     imagefilledrectangle($img,0,0,640,480,$bg);
 
-    imagejpeg($img,$folder.DIRECTORY_SEPARATOR.$ICON_DEFAULT_GALLERY,$THUMBNAILS_COMPRESSION);
+    imagejpeg($img,$folder.DIRECTORY_SEPARATOR.$_SESSION["ICON_DEFAULT_GALLERY"],$_SESSION["THUMBNAILS_COMPRESSION"]);
     sleep(1);
     // imagedestroy($img); // Libération de la mémoire
 
-    imagejpeg($img,$folder.DIRECTORY_SEPARATOR.$ICON_GALLERY,$THUMBNAILS_COMPRESSION);
+    imagejpeg($img,$folder.DIRECTORY_SEPARATOR.$_SESSION["ICON_GALLERY"],$_SESSION["THUMBNAILS_COMPRESSION"]);
     sleep(1);
     // imagedestroy($img);
 
     // sample comp
     // imagejpeg($img,"myimg.jpg",100);
 
-    if (!file_exists($folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER)) {
-      mkdir($folder.DIRECTORY_SEPARATOR.$THUMBNAILS_FOLDER, 0755, true);
+    if (!file_exists($folder.DIRECTORY_SEPARATOR.$_SESSION["THUMBNAILS_FOLDER"])) {
+      mkdir($folder.DIRECTORY_SEPARATOR.$_SESSION["THUMBNAILS_FOLDER"], 0755, true);
       sleep(1);
-      create_thumbnail($folder,$ICON_DEFAULT_GALLERY);
+      create_thumbnail($folder,$_SESSION["ICON_DEFAULT_GALLERY"]);
       sleep(1);
-      create_thumbnail($folder,$ICON_GALLERY);
+      create_thumbnail($folder,$_SESSION["ICON_GALLERY"]);
       sleep(1);
     }
   }
 
+  /**
+     * function will rename all dirs and files recursively
+     * @param type $start_dir 
+     * @param type $debug (set false if you don't want the function to echo)
+     */
+    function sanitize_recursive($start_dir, $debug = true) {
+      $str = "";
+      $files = array();
+      if (is_dir($start_dir)) {
+          $fh = opendir($start_dir);
+          while (($file = readdir($fh)) !== false) {
+              // skip hidden files and dirs and recursing if necessary
+              if (strpos($file, '.')=== 0) continue;
+
+              $filepath = $start_dir . '/' . $file;
+              if ( is_dir($filepath) ) {
+                  $newname = sanitize_file_name($filepath);
+                  $str.= "From $filepath\nTo $newname\n";
+                  rename($filepath, $newname);
+                  rename_recursive($newname);
+              } else {
+                  $newname = sanitize_file_name($filepath);
+                  $str.= "From $filepath\nTo $newname\n";
+                  rename($filepath, $newname);
+              }
+          }
+          closedir($fh);
+      }
+      if ($debug) {
+          echo $str;
+      }
+  }
+
+  /**
+   * function for modifing to a safe dir og filename
+   * Taken from from wordpress. 
+   * @param string $filename
+   * @return string $newname 
+   */
+  function sanitize_file_name( $filename ) {
+      // $filename_raw = $filename;
+      $special_chars = array("?", "[", "]", "\\", "=", "<", ">", ":", ";", ",", "'", "\"", "&", "$", "#", "*", "(", ")", "|", "~", "`", "!", "{", "}");
+      $filename = str_replace($special_chars, '', $filename);
+
+      $filename = str_replace(' ', '', $filename);
+      // $filename = str_replace('@', '', mb_convert_encoding($filename, 'iso-8859-1'));
+
+      $filename = preg_replace('/[\s-]+/', '-', $filename);
+      $filename = trim($filename, '.-_');
+
+      return $filename;
+  }
+
+  function rename_win($dir) {
+
+      $di = new RecursiveIteratorIterator(
+          new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
+          RecursiveIteratorIterator::LEAVES_ONLY
+      );
+      
+      foreach($di as $name => $fio) {
+          $newname = $fio->getPath() . DIRECTORY_SEPARATOR . strtolower( $fio->getFilename() );
+          // echo $newname, "\r\n";
+          rename($name, $newname); 
+      }
+
+   }
+
+   function getDirContents($dir, &$results = array()) {
+      $files = scandir($dir);
+  
+      foreach ($files as $key => $value) {
+          $path = realpath($dir . DIRECTORY_SEPARATOR . $value);
+          if (!is_dir($path)) {
+              // $results[] = $path;
+              rename_win($path,strtolower($path));
+          } else if ($value != "." && $value != "..") {
+              getDirContents($path, $results);
+              // $results[] = $path;
+              rename_win($path,strtolower($path));
+          }
+      }
+  
+      // return $results;
+  }
+
+  function ext_toLowerCase($file){
+     // Rename UPPER ext
+     $name = pathinfo($file, PATHINFO_FILENAME);
+     $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+     $newfile = $name.'.'.$ext;
+     return $newfile;
+  }
+
   ?>
 
-  <script>
-
-// $(document).ready(function(){
-
-//     const imgGridGallery = document.querySelector(".imgGridGallery");
-//     try {
-//       imgGridGallery.addEventListener("click", function() {
-//         let dirname = 'test';
-//         let url_player = "http://127.0.0.1/CHIMERES/img/galleryPlayer/g="+dirname;
-//         console.log('imgGridGallery');
-//       }, false);
-//     } catch (error) {
-//         console.error(error);
-//     }
-
-
-//   });
-
-  </script>

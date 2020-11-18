@@ -1,4 +1,5 @@
-# BOOKFOLIO V2...
+# BOOKFOLIO V2
+Portfolio Galleries crud without database
 
 ...is a set of PHP classes aimed to provide a modular, object oriented and accessible interface for interacting with videos and audio through FFmpeg.
 
