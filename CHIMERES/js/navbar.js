@@ -1,5 +1,5 @@
-const titleSiteName = document.getElementById("titleSiteName");
-const logo = document.getElementById("divLogo");
+// const titleSiteName = document.getElementById("titleSiteName");
+// const logo = document.getElementById("divLogo");
 const b = document.getElementById("close-icon");
 const sp = document.getElementById("searchInput");
 
@@ -10,12 +10,12 @@ const iconParam = document.getElementById("iconParam");
 
 const href = $(location).attr('href');
 
-titleSiteName.addEventListener("click", function() {
-  goHome();
-}, false);
-logo.addEventListener("click", function() {
-  goHome();
-}, false);
+// titleSiteName.addEventListener("click", function() {
+//   goHome();
+// }, false);
+// logo.addEventListener("click", function() {
+//   goHome();
+// }, false);
 b.addEventListener("click", function() {
   hideClearButton();
 }, false);
@@ -41,7 +41,11 @@ try {
 
 try {
   iconUpload.addEventListener("click", function() {
-    upload();
+    let url_string = window.location.href;
+    let url = new URL(url_string);
+    let gallery = url.searchParams.get("g");
+    window.location = "BlueImp/index.php?g="+gallery;
+    // window.location = "uploadForm/index.php?g="+gallery;
   }, false);
   } catch (error) {
     // console.error(error);
@@ -71,24 +75,29 @@ function settings() {
 }
 
 function addCategorie(){
-  console.log('categorie add');
+  // console.log('categorie add');
   window.location = "edit.php?g=new&add=gallerie";
 }
 
-function upload() {
-  console.log('upload');
-  console.log(href);
-}
+// function upload() {
+//   console.log('upload');
+//   console.log(href);
+// }
 
 function imgFolder(folder) {
   window.location = "indexGallery.php?g="+folder;
 }
 
-function goHome() {
-  // console.log('goHome');
-  // b.style.opacity = 0;
-  window.location = "index.php";
-}
+// function goHome() {
+//   console.log('goHome');
+//   // b.style.opacity = 0;
+//   let url_string = window.location.href;
+//   if(url_string.includes('BlueImp')){ 
+//     window.location = "../index.php";
+//   } else { 
+//     window.location = "index.php";
+//   }
+// }
 
 function reload() {
   // console.log('reload');

@@ -18,21 +18,14 @@ $(document).ready(function(){
     const listView = "list-view";
     const gridView = "grid-view";
     const dNone = "d-none";
-    
-    // const iconEditG = document.querySelector(".iconEditG");
-    // const iconEditI = document.querySelector(".iconEditI");
-    // const iconDeleteI = document.querySelector(".iconDeleteI");
-    
 
     const url_string = $(location).attr('href');
-    // const url = new URL(url_string);
-    // const gallery = url.searchParams.get("g");
 
     const BTAddGallery = document.getElementById("BTAddGallery");
     const BTEditGallery = document.getElementById("BTEditGallery");
     const inputG = document.getElementById("GalleryNameAdd");
     const GalleryNameAddInfos = document.getElementById("GalleryNameAddInfos");
-    // const oldGalleryName = document.getElementById("oldGalleryName");
+
     const minLengthG = 1;
     const maxLengthG = 16;
 
@@ -41,22 +34,15 @@ $(document).ready(function(){
 
     try {
       $(inputG).bind("change paste keyup", function() {
-      // $("#GalleryNameAdd").bind("change paste keyup", function() {
         var value = $(this).val();
-        // console.log(value);
         if (value.length < minLengthG){
-            // $(GalleryNameAddInfos).text("Name is short");
             $(BTAddGallery).attr("style", "display:none");
-            // $(BTAddGallery).hide();
         }
         if (value.length > maxLengthG){
             $(GalleryNameAddInfos).text("Name is long");
             $(BTAddGallery).attr("style", "display:none");
-            // $(BTAddGallery).hide();
         } 
         if ((value.length >= minLengthG) && (value.length < maxLengthG)){
-            // $(GalleryNameAddInfos).text("Name is valid");
-            // $(BTAddGallery).removeAttr("style").hide();
             $(BTAddGallery).attr("style", "display:block");
         }
     });
