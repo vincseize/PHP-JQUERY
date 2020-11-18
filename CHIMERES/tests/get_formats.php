@@ -7,16 +7,27 @@ namespace PHPVideoToolkit;
 
 // --------
 
-// $finfo = finfo_open(FILEINFO_MIME_TYPE);
+$fileToTest = "VinceNoVince.mp4";
+$fileToTest = "TEST.JPG";
+// $fileToTest = "IMG_XAV_3456_5184.JPG";
+// $fileToTest = "IMG_XAV_1728_2592.jpg";
 
-// echo finfo_file($finfo, "VinceNoVince.mp4");
-// finfo_close($finfo);
+
+echo $fileToTest;
+echo "<br>";
+
+$finfo = finfo_open(FILEINFO_MIME_TYPE);
+
+echo finfo_file($finfo, $fileToTest);
+finfo_close($finfo);
 
 // $finfo = finfo_open(FILEINFO_MIME_TYPE);
 // echo finfo_file($finfo, "file_example_MP4_480_1_5MG.mp4");
 // finfo_close($finfo);
 
-// echo "<br>";
+echo "<br>";
+
+exit;
 
 // --------
 
